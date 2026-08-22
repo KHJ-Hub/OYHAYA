@@ -1,1 +1,58 @@
-(()=>{const K='OYHAYA_EXCHANGE_CHECK_V1';let done={};try{done=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}const save=()=>localStorage.setItem(K,JSON.stringify(done));const key=(p,type,text)=>`${p}|${type}|${text}`;function render(box,p,type){if(!box||box.style.display==='none')return;const raw=box.dataset.raw||box.innerHTML;if(!box.dataset.raw)box.dataset.raw=raw;const temp=document.createElement('div');temp.innerHTML=raw;const title=temp.querySelector('b')?.textContent||'환전 필요';const lines=temp.innerHTML.replace(/^.*?<br>/,'').split('<br>').map(x=>{const d=document.createElement('div');d.innerHTML=x;return d.textContent.trim()}).filter(Boolean);if(!lines.length)return;box.innerHTML=`<b>${title}</b><div class="exchangeChecks">${lines.map((text,i)=>{const k=key(p,type,text),checked=!!done[k];return `<label class="exchangeCheck ${checked?'done':''}"><input type="checkbox" data-ek="${encodeURIComponent(k)}" ${checked?'checked':''}><span>${text}</span></label>`}).join('')}</div>`;box.querySelectorAll('input[data-ek]').forEach(cb=>cb.onchange=()=>{const k=decodeURIComponent(cb.dataset.ek);done[k]=cb.checked;if(!cb.checked)delete done[k];cb.closest('.exchangeCheck').classList.toggle('done',cb.checked);save()})}function update(){for(let p=1;p<=3;p++){render(document.getElementById('ex'+p),p,'bill');render(document.getElementById('coin'+p),p,'coin')}}const style=document.createElement('style');style.textContent='.exchangeChecks{display:grid;gap:7px;margin-top:8px}.exchangeCheck{display:flex;align-items:flex-start;gap:9px;background:rgba(255,255,255,.62);border:1px solid rgba(139,100,28,.14);border-radius:10px;padding:9px;transition:.15s}.exchangeCheck input{width:19px;height:19px;margin:0;accent-color:#76a91e;flex:0 0 auto}.exchangeCheck.done{opacity:.55;text-decoration:line-through;background:#f2f4ef}.exchangeCheck span{line-height:1.4}';document.head.appendChild(style);const obs=new MutationObserver(()=>requestAnimationFrame(update));obs.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['style']});document.addEventListener('click',e=>{if(e.target?.id==='finish')setTimeout(()=>{if(document.getElementById('summary')?.classList.contains('show')===false){done={};localStorage.removeItem(K)}},100)});update()})();
+(()=>{
+  const KEY='OYHAYA_EXCHANGE_CHECK_V2';
+  const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return{}}};
+  const write=s=>localStorage.setItem(KEY,JSON.stringify(s));
+  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const makeKey=(p,type,text)=>`${p}|${type}|${text.trim()}`;
+
+  const style=document.createElement('style');
+  style.textContent=`
+    .exchangeChecks{display:grid;gap:8px;margin-top:9px}
+    .exchangeCheck{display:flex;align-items:center;gap:10px;padding:10px;background:#fff;border:1px solid rgba(139,100,28,.18);border-radius:11px;cursor:pointer}
+    .exchangeCheck input[type="checkbox"]{-webkit-appearance:checkbox!important;appearance:auto!important;display:block!important;visibility:visible!important;opacity:1!important;width:20px!important;height:20px!important;min-width:20px!important;margin:0!important;accent-color:#76a91e}
+    .exchangeCheck span{line-height:1.4;flex:1}
+    .exchangeCheck.done{opacity:.55;background:#f2f4ef}
+    .exchangeCheck.done span{text-decoration:line-through}
+  `;
+  document.head.appendChild(style);
+
+  function parseLines(box){
+    const clone=box.cloneNode(true);
+    clone.querySelectorAll('.exchangeChecks').forEach(x=>x.remove());
+    const html=clone.innerHTML;
+    const parts=html.split(/<br\s*\/?\s*>/i).map(part=>{
+      const d=document.createElement('div'); d.innerHTML=part; return d.textContent.trim();
+    }).filter(Boolean);
+    return {title:parts[0]||'환전 필요',items:parts.slice(1)};
+  }
+
+  function enhance(box,p,type){
+    if(!box||box.style.display==='none'||box.querySelector('.exchangeChecks')) return;
+    const {title,items}=parseLines(box);
+    if(!items.length) return;
+    const state=read();
+    box.innerHTML=`<b>${esc(title)}</b><div class="exchangeChecks">${items.map(text=>{
+      const k=makeKey(p,type,text),checked=!!state[k];
+      return `<label class="exchangeCheck${checked?' done':''}"><input type="checkbox" data-key="${encodeURIComponent(k)}" ${checked?'checked':''}><span>${esc(text)}</span></label>`;
+    }).join('')}</div>`;
+    box.querySelectorAll('input[data-key]').forEach(cb=>{
+      cb.addEventListener('change',()=>{
+        const state=read(),k=decodeURIComponent(cb.dataset.key);
+        if(cb.checked) state[k]=true; else delete state[k];
+        write(state);
+        cb.closest('.exchangeCheck')?.classList.toggle('done',cb.checked);
+      });
+    });
+  }
+
+  function scan(){for(let p=1;p<=3;p++){enhance(document.getElementById('ex'+p),p,'bill');enhance(document.getElementById('coin'+p),p,'coin')}}
+
+  setInterval(scan,250);
+  new MutationObserver(scan).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['style']});
+  document.addEventListener('click',e=>{
+    const r=e.target.closest?.('[data-r]');
+    if(r){const p=r.dataset.r,state=read();Object.keys(state).filter(k=>k.startsWith(p+'|')).forEach(k=>delete state[k]);write(state)}
+    if(e.target?.id==='finish') setTimeout(()=>localStorage.removeItem(KEY),200);
+  },true);
+  scan();
+})();
