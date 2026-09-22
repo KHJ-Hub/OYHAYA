@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ff5c9d">
+<title>Find My Beauty Device</title>
+<style>
+:root{--pink:#ff5c9d;--pink2:#ff8db8;--ink:#241b22;--muted:#796f77;--bg:#fff8fb;--card:#fff;--line:#f0dbe4;--soft:#ffe9f1;--shadow:0 18px 45px rgba(91,42,66,.12)}
+*{box-sizing:border-box}
+html,body{margin:0;background:linear-gradient(180deg,#fff5f9 0,#fff 40%,#fff8fb 100%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Noto Sans SC","Noto Sans TC","Noto Sans JP",sans-serif}
+body{min-height:100vh}
+button{font:inherit}
+.shell{width:min(100%,520px);margin:auto;min-height:100vh;padding:20px 16px 32px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.03em}
+.logo{width:38px;height:38px;border-radius:14px;background:linear-gradient(135deg,var(--pink),#ffb4ce);display:grid;place-items:center;color:#fff;box-shadow:0 8px 22px rgba(255,92,157,.28)}
+.lang{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;color:var(--ink)}
+.card{background:rgba(255,255,255,.92);border:1px solid rgba(240,219,228,.9);border-radius:28px;padding:22px;box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+.hero{padding:28px 22px 24px;overflow:hidden;position:relative}
+.hero:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-76px;top:-72px;background:radial-gradient(circle,#ffd5e5 0,#ffeef5 55%,transparent 70%)}
+.kicker{display:inline-flex;align-items:center;gap:6px;background:var(--soft);color:#b32867;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800;position:relative;z-index:1}
+h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;position:relative;z-index:1}
+.sub{color:var(--muted);line-height:1.55;font-size:15px;position:relative;z-index:1}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 4px;position:relative;z-index:1}
+.pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 10px;font-size:12px;color:#5d5158}
+.primary{width:100%;border:0;border-radius:18px;padding:16px 18px;background:linear-gradient(135deg,var(--pink),#ff7fb2);color:#fff;font-weight:900;font-size:16px;box-shadow:0 12px 28px rgba(255,92,157,.28);cursor:pointer}
+.primary:disabled{opacity:.42;box-shadow:none}
+.secondary{width:100%;border:1px solid var(--line);border-radius:18px;padding:14px 18px;background:#fff;color:var(--ink);font-weight:800;cursor:pointer}
+.notice{font-size:11px;color:#8a8087;line-height:1.55;margin:12px 4px 0}
+.hidden{display:none!important}
+.progress-wrap{margin:8px 0 18px}
+.progress-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);margin-bottom:8px}
+.progress{height:8px;border-radius:999px;background:#f4e7ed;overflow:hidden}
+.progress>i{display:block;height:100%;width:20%;background:linear-gradient(90deg,var(--pink),#ff9fc2);border-radius:999px;transition:.25s}
+.qtitle{font-size:24px;line-height:1.25;letter-spacing:-.04em;margin:4px 0 7px}
+.qhint{color:var(--muted);font-size:13px;margin-bottom:18px}
+.options{display:grid;gap:10px}
+.option{width:100%;display:flex;align-items:center;gap:12px;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:18px;padding:14px 15px;cursor:pointer;transition:.18s}
+.option:hover{transform:translateY(-1px)}
+.option.active{border-color:var(--pink);background:#fff2f7;box-shadow:0 0 0 3px rgba(255,92,157,.08)}
+.icon{width:42px;height:42px;border-radius:14px;background:#fff4f8;display:grid;place-items:center;font-size:20px;flex:0 0 auto}
+.otxt b{display:block;font-size:15px}
+.otxt small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.nav{display:grid;grid-template-columns:1fr 1.5fr;gap:10px;margin-top:18px}
+.result-head{text-align:center;padding:10px 4px 18px}
+.spark{font-size:34px}
+.type{font-size:26px;font-weight:950;letter-spacing:-.045em;margin:8px 0}
+.type-sub{font-size:13px;color:var(--muted);line-height:1.5}
+.pick{padding:0;overflow:hidden}
+.pick-top{padding:18px 18px 14px;background:linear-gradient(135deg,#fff0f6,#fff)}
+.rank{font-size:11px;font-weight:900;color:#b32867;letter-spacing:.12em}
+.product{font-size:23px;font-weight:950;letter-spacing:-.045em;margin:6px 0 3px}
+.brandname{font-size:12px;color:var(--muted)}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.tag{font-size:11px;font-weight:800;padding:7px 9px;border-radius:999px;background:#fff;border:1px solid var(--line)}
+.reason{padding:18px}
+.reason h3{font-size:14px;margin:0 0 9px}
+.reason ul{padding:0;margin:0;list-style:none;display:grid;gap:8px}
+.reason li{font-size:13px;line-height:1.45;color:#544951;padding-left:20px;position:relative}
+.reason li:before{content:"✓";position:absolute;left:0;color:var(--pink);font-weight:900}
+.also{margin-top:14px;padding:18px}
+.compare-row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.compare-row b{font-size:17px}
+.staff{margin-top:14px;background:#241b22;color:#fff;border:0}
+.staff .label{font-size:11px;opacity:.68;letter-spacing:.12em;font-weight:800}
+.staff .staff-title{font-size:21px;font-weight:950;margin:8px 0 12px}
+.staff-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.staff-cell{padding:11px;border:1px solid rgba(255,255,255,.14);border-radius:14px}
+.staff-cell small{display:block;opacity:.62;font-size:10px;margin-bottom:4px}
+.staff-cell b{font-size:12px}
+.actions{display:grid;gap:10px;margin-top:14px}
+.foot{font-size:10.5px;color:#8c8288;line-height:1.55;margin:16px 4px 0;text-align:center}
+.langsheet{position:fixed;inset:0;background:rgba(20,12,17,.35);display:grid;align-items:end;z-index:10;padding:16px}
+.sheet{width:min(100%,520px);margin:auto;background:#fff;border-radius:26px;padding:16px;box-shadow:var(--shadow)}
+.sheet h3{margin:4px 4px 12px}
+.langopts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.langbtn{border:1px solid var(--line);background:#fff;border-radius:15px;padding:13px;font-weight:800}
+@media(min-width:700px){.shell{padding-top:34px}.card{border-radius:30px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar">
+    <div class="brand"><div class="logo">✦</div><span>BEAUTY DEVICE FINDER</span></div>
+    <button class="lang" id="langBtn">한국어 ▾</button>
+  </div>
+
+  <section id="home">
+    <div class="card hero">
+      <div class="kicker" data-i="kicker">매장 입점 제품 기준</div>
+      <h1 data-i="heroTitle">나에게 맞는<br>뷰티 디바이스 찾기</h1>
+      <div class="sub" data-i="heroSub">피부 고민과 홈케어 취향을 선택하면 매장에서 만나볼 수 있는 제품 중 잘 맞는 기기를 찾아드려요.</div>
+      <div class="hero-pills">
+        <span class="pill" data-i="pill1">약 30초</span>
+        <span class="pill" data-i="pill2">5 Questions</span>
+        <span class="pill" data-i="pill3">매장 입점 제품만 추천</span>
+      </div>
+      <div style="height:18px"></div>
+      <button class="primary" id="start" data-i="start">START ✨</button>
+    </div>
+    <div class="notice" data-i="notice">본 서비스는 고객이 선택한 고민과 사용 선호도를 바탕으로 제품 선택을 돕는 안내 서비스이며 의료적 피부 진단이 아닙니다.</div>
+  </section>
+
+  <section id="quiz" class="hidden">
+    <div class="progress-wrap">
+      <div class="progress-row"><span id="stepText">1 / 5</span><span data-i="quick">30초면 끝나요</span></div>
+      <div class="progress"><i id="bar"></i></div>
+    </div>
+    <div class="card">
+      <div id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="nav">
+        <button class="secondary" id="back" data-i="back">이전</button>
+        <button class="primary" id="next" data-i="next">다음</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="result" class="hidden">
+    <div class="result-head">
+      <div class="spark">✨</div>
+      <div class="type" id="resultType"></div>
+      <div class="type-sub" id="resultSub"></div>
+    </div>
+    <div class="card pick">
+      <div class="pick-top">
+        <div class="rank">MAIN PICK</div>
+        <div class="product" id="mainName"></div>
+        <div class="brandname" id="mainBrand"></div>
+        <div class="tags" id="mainTags"></div>
+      </div>
+      <div class="reason">
+        <h3 data-i="why">왜 잘 맞나요?</h3>
+        <ul id="mainReasons"></ul>
+      </div>
+    </div>
+
+    <div class="card also">
+      <div class="rank">ALSO MATCH</div>
+      <div class="compare-row" style="margin-top:7px">
+        <div><b id="alsoName"></b><div class="brandname" id="alsoBrand"></div></div>
+        <div class="tags" id="alsoTags" style="justify-content:flex-end;margin-top:0"></div>
+      </div>
+      <div class="type-sub" id="alsoReason" style="margin-top:12px"></div>
+    </div>
+
+    <div class="card staff">
+      <div class="label">SHOW TO STAFF</div>
+      <div class="staff-title">MY BEAUTY PICK</div>
+      <div class="staff-grid">
+        <div class="staff-cell"><small data-i="myConcern">MY CONCERN</small><b id="staffConcern"></b></div>
+        <div class="staff-cell"><small>MAIN PICK</small><b id="staffMain"></b></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="primary" id="share" data-i="share">결과 공유하기</button>
+      <button class="secondary" id="restart" data-i="restart">다시 찾기</button>
+    </div>
+    <div class="foot" data-i="footer">제품 사용 전 공식 사용법과 주의사항을 확인해주세요. 매장 재고 및 판매 여부는 현장 상황에 따라 달라질 수 있습니다.</div>
+  </section>
+</div>
+
+<div id="langSheet" class="langsheet hidden">
+  <div class="sheet">
+    <h3>Language</h3>
+    <div class="langopts">
+      <button class="langbtn" data-lang="ko">한국어</button>
+      <button class="langbtn" data-lang="en">English</button>
+      <button class="langbtn" data-lang="zh">繁體中文</button>
+      <button class="langbtn" data-lang="ja">日本語</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const I18N={
+ko:{kicker:"매장 입점 제품 기준",heroTitle:"나에게 맞는<br>뷰티 디바이스 찾기",heroSub:"피부 고민과 홈케어 취향을 선택하면 매장에서 만나볼 수 있는 제품 중 잘 맞는 기기를 찾아드려요.",pill1:"약 30초",pill2:"5 Questions",pill3:"매장 입점 제품만 추천",start:"START ✨",notice:"본 서비스는 고객이 선택한 고민과 사용 선호도를 바탕으로 제품 선택을 돕는 안내 서비스이며 의료적 피부 진단이 아닙니다.",quick:"30초면 끝나요",back:"이전",next:"다음",why:"왜 잘 맞나요?",myConcern:"MY CONCERN",share:"결과 공유하기",restart:"다시 찾기",footer:"제품 사용 전 공식 사용법과 주의사항을 확인해주세요. 매장 재고 및 판매 여부는 현장 상황에 따라 달라질 수 있습니다.",resultSub:"선택한 고민과 홈케어 취향을 바탕으로 매장 제품을 비교했어요.",also:"함께 비교해볼 만한 제품이에요.",shareText:"나의 뷰티 디바이스 추천 결과"},
+en:{kicker:"Based on products available in-store",heroTitle:"Find My<br>Beauty Device",heroSub:"Choose your skin concerns and home-care preferences to find devices available in this store that may suit you.",pill1:"About 30 sec",pill2:"5 Questions",pill3:"In-store products only",start:"START ✨",notice:"This service is a product-selection guide based on your answers and is not a medical skin diagnosis.",quick:"About 30 seconds",back:"Back",next:"Next",why:"Why this match?",myConcern:"MY CONCERN",share:"Share result",restart:"Start again",footer:"Please check each product's official instructions and precautions before use. Availability may change.",resultSub:"We compared in-store devices based on your concerns and home-care preferences.",also:"Another device worth comparing.",shareText:"My Beauty Device Finder result"},
+zh:{kicker:"依店內販售商品推薦",heroTitle:"找到適合我的<br>美容儀",heroSub:"選擇你的肌膚困擾與居家保養偏好，我們會從店內商品中推薦適合比較的美容儀。",pill1:"約30秒",pill2:"5個問題",pill3:"僅推薦店內商品",start:"開始 ✨",notice:"本服務僅依照你的回答提供商品選擇參考，並非醫療性肌膚診斷。",quick:"約30秒完成",back:"上一步",next:"下一步",why:"為什麼適合？",myConcern:"我的困擾",share:"分享結果",restart:"重新測試",footer:"使用前請確認各商品官方使用方法與注意事項。店內庫存與販售狀況可能變動。",resultSub:"我們依照你的肌膚困擾與居家保養偏好比較了店內美容儀。",also:"也可以一起比較這款。",shareText:"我的美容儀推薦結果"},
+ja:{kicker:"店頭取扱い商品からご案内",heroTitle:"私に合う<br>美容デバイスを探す",heroSub:"肌悩みとホームケアの好みを選ぶと、店頭で購入できる商品の中から比較しやすいデバイスをご案内します。",pill1:"約30秒",pill2:"5 Questions",pill3:"店頭商品だけを案内",start:"START ✨",notice:"本サービスは回答内容をもとに商品選びをサポートするもので、医療的な肌診断ではありません。",quick:"約30秒で完了",back:"戻る",next:"次へ",why:"おすすめの理由",myConcern:"MY CONCERN",share:"結果をシェア",restart:"もう一度",footer:"使用前に各商品の公式使用方法・注意事項をご確認ください。在庫・販売状況は店頭状況により変わる場合があります。",resultSub:"選択した悩みとホームケアの好みをもとに、店頭商品を比較しました。",also:"あわせて比較しやすい商品です。",shareText:"私のビューティーデバイス診断結果"}
+};
+
+const Q={
+ko:[
+ {title:"가장 신경 쓰이는 피부 고민은?",hint:"최대 2개까지 선택해주세요.",multi:2,opts:[
+  ["glow","💧","건조함·광채 부족","촉촉하고 윤기 나는 피부 표현"],
+  ["absorb","✨","스킨케어 흡수","평소 쓰는 화장품과 함께 관리"],
+  ["texture","🫧","모공·피부결","매끈한 피부결 관리"],
+  ["trouble","🌿","트러블·피부 컨디션","컨디션이 신경 쓰이는 부위"],
+  ["elastic","💗","탄력 저하","탄탄한 느낌의 홈케어"],
+  ["jaw","〰️","턱선·얼굴 라인","페이스라인 집중 관리"]
+ ]},
+ {title:"특히 관리하고 싶은 부위는?",hint:"가장 가까운 항목 하나를 골라주세요.",opts:[
+  ["whole","🙂","얼굴 전체","전체적인 홈케어"],
+  ["cheek","✨","볼·팔자 주변","중안부 중심 관리"],
+  ["jawarea","〰️","턱선","페이스라인 집중"],
+  ["eye","👀","눈가 주변","섬세한 부위 중심"],
+  ["spot","🌿","특정 부위","컨디션이 신경 쓰이는 곳"]
+ ]},
+ {title:"어떤 홈케어 스타일을 원하세요?",hint:"사용 방식에 가까운 것을 골라주세요.",opts:[
+  ["quick","⚡","간단하고 빠르게","부담 없이 자주 사용"],
+  ["target","🎯","한 가지 고민 집중","원하는 고민에 초점"],
+  ["all","🌈","한 기기로 다양하게","여러 기능을 한 번에"],
+  ["care","🧘","시간이 걸려도 집중 관리","루틴을 만들어 꼼꼼하게"]
+ ]},
+ {title:"뷰티 디바이스 사용 경험은?",hint:"정답은 없어요. 가장 가까운 항목을 골라주세요.",opts:[
+  ["beginner","🌱","처음이에요","쉽고 직관적인 사용을 선호"],
+  ["some","🙂","간단한 제품은 써봤어요","기본 사용법은 익숙해요"],
+  ["advanced","✨","여러 종류를 사용해봤어요","기능 비교도 괜찮아요"]
+ ]},
+ {title:"사용할 때 가장 중요하게 보는 것은?",hint:"마지막 질문이에요!",opts:[
+  ["easy","👌","사용 편의성","복잡하지 않은 루틴"],
+  ["multi","🌈","다양한 기능","한 기기로 여러 관리"],
+  ["focus","🎯","집중 관리","한 고민을 더 선명하게"],
+  ["gentle","☁️","부담 적은 사용감","편안한 사용 경험을 선호"]
+ ]}
+],
+en:[
+ {title:"What is your main skin concern?",hint:"Choose up to 2.",multi:2,opts:[["glow","💧","Dryness & dullness","For a hydrated-looking glow"],["absorb","✨","Skincare absorption","Use with your usual skincare"],["texture","🫧","Pores & texture","For smoother-looking skin"],["trouble","🌿","Trouble-prone condition","For areas that need extra care"],["elastic","💗","Loss of firmness","For a firmer-feeling routine"],["jaw","〰️","Jawline & facial contour","Focused facial-line care"]]},
+ {title:"Which area do you want to focus on?",hint:"Choose the closest option.",opts:[["whole","🙂","Whole face","Overall home care"],["cheek","✨","Cheeks & smile lines","Mid-face focus"],["jawarea","〰️","Jawline","Facial contour focus"],["eye","👀","Eye area","Delicate-area focus"],["spot","🌿","Specific area","A particular concern area"]]},
+ {title:"What kind of home-care routine do you want?",hint:"Choose the style closest to you.",opts:[["quick","⚡","Quick & simple","Easy to use often"],["target","🎯","One concern at a time","Focused routine"],["all","🌈","Many functions in one","Versatile device"],["care","🧘","More time, more focus","A thorough routine"]]},
+ {title:"How experienced are you with beauty devices?",hint:"Choose what feels closest.",opts:[["beginner","🌱","I'm new","Prefer simple, intuitive use"],["some","🙂","I've tried a few","Comfortable with basic devices"],["advanced","✨","I use several types","Comfortable comparing features"]]},
+ {title:"What matters most when using a device?",hint:"Last question!",opts:[["easy","👌","Ease of use","A simple routine"],["multi","🌈","Versatility","More functions in one device"],["focus","🎯","Focused care","A clear target concern"],["gentle","☁️","Comfortable feel","Prefer a gentler experience"]]}
+],
+zh:[
+ {title:"你最在意的肌膚困擾是？",hint:"最多選2項。",multi:2,opts:[["glow","💧","乾燥・缺乏光澤","想要水潤亮澤感"],["absorb","✨","保養品吸收","搭配日常保養品使用"],["texture","🫧","毛孔・膚質","想加強肌膚平滑感"],["trouble","🌿","痘痘・肌膚狀態","針對在意部位保養"],["elastic","💗","彈力不足","居家彈力保養"],["jaw","〰️","下顎線・臉部線條","集中輪廓管理"]]},
+ {title:"最想加強哪個部位？",hint:"請選最接近的一項。",opts:[["whole","🙂","全臉","整體居家保養"],["cheek","✨","臉頰・法令紋周圍","中臉保養"],["jawarea","〰️","下顎線","輪廓集中管理"],["eye","👀","眼周","細緻部位管理"],["spot","🌿","特定部位","針對在意區域"]]},
+ {title:"你喜歡哪種居家保養方式？",hint:"選擇最符合你的方式。",opts:[["quick","⚡","快速簡單","適合經常使用"],["target","🎯","集中一個困擾","針對單一需求"],["all","🌈","一機多用","希望功能多元"],["care","🧘","願意花時間仔細保養","建立完整保養流程"]]},
+ {title:"你使用美容儀的經驗？",hint:"請選最接近你的項目。",opts:[["beginner","🌱","第一次使用","偏好簡單直覺"],["some","🙂","用過簡單美容儀","熟悉基本操作"],["advanced","✨","使用過多種美容儀","可以比較多種功能"]]},
+ {title:"使用美容儀時最重視什麼？",hint:"最後一題！",opts:[["easy","👌","操作方便","不複雜的流程"],["multi","🌈","多功能","一台完成多種保養"],["focus","🎯","集中管理","針對單一困擾"],["gentle","☁️","舒適使用感","偏好較溫和的體驗"]]}
+],
+ja:[
+ {title:"一番気になる肌悩みは？",hint:"2つまで選べます。",multi:2,opts:[["glow","💧","乾燥・ツヤ不足","うるおい感とツヤを重視"],["absorb","✨","スキンケアなじみ","普段の化粧品と一緒にケア"],["texture","🫧","毛穴・キメ","なめらかな印象を目指す"],["trouble","🌿","肌コンディション","気になる部分をケア"],["elastic","💗","ハリ不足","ハリ感を意識したケア"],["jaw","〰️","フェイスライン","輪郭を集中的にケア"]]},
+ {title:"特にケアしたい部位は？",hint:"最も近いものを選んでください。",opts:[["whole","🙂","顔全体","全体的なホームケア"],["cheek","✨","頬・ほうれい線周り","中顔面を中心に"],["jawarea","〰️","フェイスライン","輪郭を集中ケア"],["eye","👀","目元","細かい部位を中心に"],["spot","🌿","特定の部位","気になる場所をケア"]]},
+ {title:"どんなホームケアが理想？",hint:"近いスタイルを選んでください。",opts:[["quick","⚡","簡単・スピーディー","気軽に続けたい"],["target","🎯","1つの悩みに集中","目的を絞ってケア"],["all","🌈","1台で多機能","いろいろ試したい"],["care","🧘","時間をかけて集中","丁寧なルーティン"]]},
+ {title:"美容デバイスの使用経験は？",hint:"一番近いものを選んでください。",opts:[["beginner","🌱","初めて","簡単で直感的な操作が好み"],["some","🙂","簡単なものは使ったことがある","基本操作には慣れている"],["advanced","✨","複数タイプを使ったことがある","機能比較もOK"]]},
+ {title:"使用時に一番重視することは？",hint:"最後の質問です！",opts:[["easy","👌","使いやすさ","複雑すぎないルーティン"],["multi","🌈","多機能","1台でいろいろケア"],["focus","🎯","集中ケア","悩みを絞って選びたい"],["gentle","☁️","やさしい使用感","快適な使用感を重視"]]}
+]};
+
+const products=[
+ {id:"x2",brand:"medicube AGE-R",name:"부스터 프로 X2",names:{en:"Booster Pro X2",zh:"Booster Pro X2",ja:"ブースタープロ X2"},v:{glow:4,absorb:5,texture:5,trouble:2,elastic:5,jaw:4,all:5,quick:3,target:3,beginner:3,easy:3,multi:5,focus:3,gentle:2,whole:5,cheek:4,jawarea:4,eye:2,spot:2},tags:["올인원","탄력","피부결"]},
+ {id:"mini",brand:"medicube AGE-R",name:"부스터 프로 미니 플러스",names:{en:"Booster Pro Mini Plus",zh:"Booster Pro Mini Plus",ja:"ブースタープロ ミニプラス"},v:{glow:4,absorb:4,texture:3,trouble:5,elastic:1,jaw:1,all:3,quick:5,target:4,beginner:5,easy:5,multi:2,focus:4,gentle:5,whole:4,cheek:3,jawarea:1,eye:2,spot:5},tags:["간편","컨디션","입문"]},
+ {id:"vroller",brand:"medicube AGE-R",name:"부스터 브이 롤러",names:{en:"Booster V Roller",zh:"Booster V Roller",ja:"ブースター V ローラー"},v:{glow:1,absorb:1,texture:1,trouble:0,elastic:5,jaw:5,all:2,quick:3,target:5,beginner:3,easy:3,multi:1,focus:5,gentle:2,whole:2,cheek:4,jawarea:5,eye:1,spot:2},tags:["페이스라인","EMS","집중"]},
+ {id:"glow",brand:"medicube AGE-R",name:"부스터 글로우",names:{en:"Booster Glow",zh:"Booster Glow",ja:"ブースターグロウ"},v:{glow:5,absorb:5,texture:3,trouble:3,elastic:2,jaw:0,all:2,quick:5,target:4,beginner:5,easy:5,multi:2,focus:3,gentle:5,whole:5,cheek:3,jawarea:0,eye:2,spot:2},tags:["광채","스킨케어","간편"]},
+ {id:"vsera",brand:"MOMMYCARE",name:"EMS 브이쎄라",names:{en:"EMS V-SERA",zh:"EMS V-SERA",ja:"EMS V-SERA"},v:{glow:0,absorb:1,texture:0,trouble:0,elastic:4,jaw:5,all:1,quick:4,target:5,beginner:4,easy:4,multi:1,focus:5,gentle:2,whole:2,cheek:4,jawarea:5,eye:0,spot:1},tags:["페이스라인","EMS","집중"]},
+ {id:"thome",brand:"THOME",name:"투앤티업",names:{en:"20TYUP",zh:"20TYUP",ja:"20TYUP"},v:{glow:2,absorb:2,texture:4,trouble:5,elastic:1,jaw:0,all:2,quick:5,target:5,beginner:5,easy:5,multi:1,focus:5,gentle:4,whole:2,cheek:2,jawarea:0,eye:0,spot:5},tags:["트러블","스팟","입문"]},
+ {id:"therma",brand:"LG Pra.L",name:"수퍼폼 써마샷 얼티밋",names:{en:"Superform Thermashot Ultimate",zh:"Superform Thermashot Ultimate",ja:"スーパーフォーム サーマショット アルティメット"},v:{glow:4,absorb:4,texture:5,trouble:1,elastic:5,jaw:4,all:5,quick:2,target:4,beginner:2,easy:2,multi:5,focus:4,gentle:1,whole:5,cheek:5,jawarea:4,eye:1,spot:2},tags:["탄력","피부결","올인원"]},
+ {id:"galvanic",brand:"LG Pra.L",name:"갈바닉 부스터",names:{en:"Galvanic Booster",zh:"Galvanic Booster",ja:"ガルバニック ブースター"},v:{glow:4,absorb:5,texture:2,trouble:1,elastic:1,jaw:0,all:1,quick:5,target:4,beginner:5,easy:5,multi:1,focus:3,gentle:5,whole:5,cheek:3,jawarea:0,eye:2,spot:2},tags:["스킨케어","간편","입문"]}
+];
+
+const labels={
+ko:{glow:"건조·광채",absorb:"스킨케어 흡수",texture:"모공·피부결",trouble:"트러블·컨디션",elastic:"탄력",jaw:"턱선·라인",whole:"얼굴 전체",cheek:"볼·팔자",jawarea:"턱선",eye:"눈가",spot:"특정 부위",quick:"간단한 루틴",target:"집중 관리",all:"다기능",care:"꼼꼼한 관리",beginner:"입문",some:"사용 경험 있음",advanced:"숙련",easy:"사용 편의",multi:"다양한 기능",focus:"집중 관리",gentle:"편안한 사용감"},
+en:{glow:"Dryness & glow",absorb:"Skincare absorption",texture:"Pores & texture",trouble:"Skin condition",elastic:"Firmness",jaw:"Jawline",whole:"Whole face",cheek:"Cheeks",jawarea:"Jawline",eye:"Eye area",spot:"Specific area",quick:"Quick routine",target:"Focused care",all:"Versatility",care:"Thorough routine",beginner:"Beginner",some:"Some experience",advanced:"Advanced",easy:"Ease of use",multi:"Versatility",focus:"Focused care",gentle:"Comfortable feel"},
+zh:{glow:"乾燥・光澤",absorb:"保養品吸收",texture:"毛孔・膚質",trouble:"肌膚狀態",elastic:"彈力",jaw:"下顎線",whole:"全臉",cheek:"臉頰",jawarea:"下顎線",eye:"眼周",spot:"特定部位",quick:"快速保養",target:"集中保養",all:"多功能",care:"仔細保養",beginner:"初次使用",some:"有使用經驗",advanced:"熟悉美容儀",easy:"操作方便",multi:"多功能",focus:"集中管理",gentle:"舒適使用感"},
+ja:{glow:"乾燥・ツヤ",absorb:"スキンケアなじみ",texture:"毛穴・キメ",trouble:"肌コンディション",elastic:"ハリ",jaw:"フェイスライン",whole:"顔全体",cheek:"頬",jawarea:"フェイスライン",eye:"目元",spot:"特定部位",quick:"簡単ルーティン",target:"集中ケア",all:"多機能",care:"丁寧なケア",beginner:"初心者",some:"使用経験あり",advanced:"経験豊富",easy:"使いやすさ",multi:"多機能",focus:"集中ケア",gentle:"やさしい使用感"}
+};
+
+let lang="ko", step=0;
+let answers=[[],null,null,null,null];
+const $=s=>document.querySelector(s);
+
+function t(k){return I18N[lang][k]||k}
+function setLang(l){
+ lang=l; localStorage.setItem("beauty-device-lang",l);
+ document.documentElement.lang=l==="zh"?"zh-Hant":l;
+ document.querySelectorAll("[data-i]").forEach(el=>el.innerHTML=t(el.dataset.i));
+ $("#langBtn").textContent=({ko:"한국어",en:"English",zh:"繁體中文",ja:"日本語"})[l]+" ▾";
+ $("#langSheet").classList.add("hidden");
+ if(!$("#quiz").classList.contains("hidden")) renderQ();
+ if(!$("#result").classList.contains("hidden")) showResult();
+}
+function show(id){["home","quiz","result"].forEach(x=>$("#"+x).classList.toggle("hidden",x!==id));window.scrollTo({top:0,behavior:"smooth"})}
+
+function renderQ(){
+ const q=Q[lang][step];
+ $("#stepText").textContent=(step+1)+" / 5";
+ $("#bar").style.width=((step+1)*20)+"%";
+ $("#question").innerHTML='<div class="qtitle">'+q.title+'</div><div class="qhint">'+q.hint+'</div>';
+ $("#options").innerHTML="";
+ q.opts.forEach(o=>{
+  const active=q.multi?answers[step].includes(o[0]):answers[step]===o[0];
+  const b=document.createElement("button"); b.className="option"+(active?" active":"");
+  b.innerHTML='<span class="icon">'+o[1]+'</span><span class="otxt"><b>'+o[2]+'</b><small>'+o[3]+'</small></span>';
+  b.onclick=()=>{
+   if(q.multi){
+    const a=answers[step]; const i=a.indexOf(o[0]);
+    if(i>=0)a.splice(i,1); else if(a.length<q.multi)a.push(o[0]);
+   }else answers[step]=o[0];
+   renderQ();
+  };
+  $("#options").appendChild(b);
+ });
+ $("#back").style.visibility=step===0?"hidden":"visible";
+ const valid=q.multi?answers[step].length>0:!!answers[step];
+ $("#next").disabled=!valid;
+ $("#next").textContent=step===4?(lang==="ko"?"결과 보기 ✨":lang==="en"?"See my result ✨":lang==="zh"?"查看結果 ✨":"結果を見る ✨"):t("next");
+}
+
+function scoreProduct(p){
+ let s=0;
+ answers[0].forEach((k,i)=>{s+=(p.v[k]||0)*(i===0?3:2.2)});
+ const area=answers[1]; if(area)s+=(p.v[area]||0)*1.6;
+ const style=answers[2]; if(style){
+   if(style==="all")s+=(p.v.all||0)*2.5;
+   if(style==="quick")s+=(p.v.quick||0)*2;
+   if(style==="target")s+=(p.v.target||0)*2.3;
+   if(style==="care")s+=(p.v.focus||0)*1.4+(p.v.all||0)*.7;
+ }
+ const exp=answers[3];
+ if(exp==="beginner")s+=(p.v.beginner||0)*1.8+(p.v.easy||0)*1.2;
+ if(exp==="advanced")s+=(p.v.multi||0)*.9+(p.v.focus||0)*.7;
+ const priority=answers[4]; if(priority)s+=(p.v[priority]||0)*2.2;
+ return s;
+}
+function pname(p){return (p.names&&p.names[lang])||p.name}
+function translatedTags(p){
+ const map={
+  ko:p.tags,
+  en:p.id==="x2"?["All-in-one","Firmness","Texture"]:p.id==="mini"?["Easy","Condition","Beginner"]:p.id==="vroller"?["Jawline","EMS","Focused"]:p.id==="glow"?["Glow","Skincare","Easy"]:p.id==="vsera"?["Jawline","EMS","Focused"]:p.id==="thome"?["Trouble care","Spot","Beginner"]:p.id==="therma"?["Firmness","Texture","All-in-one"]:["Skincare","Easy","Beginner"],
+  zh:p.id==="x2"?["多功能","彈力","膚質"]:p.id==="mini"?["簡單","肌膚狀態","入門"]:p.id==="vroller"?["下顎線","EMS","集中"]:p.id==="glow"?["光澤","保養","簡單"]:p.id==="vsera"?["下顎線","EMS","集中"]:p.id==="thome"?["肌膚狀態","局部","入門"]:p.id==="therma"?["彈力","膚質","多功能"]:["保養","簡單","入門"],
+  ja:p.id==="x2"?["多機能","ハリ","キメ"]:p.id==="mini"?["簡単","コンディション","初心者"]:p.id==="vroller"?["フェイスライン","EMS","集中"]:p.id==="glow"?["ツヤ","スキンケア","簡単"]:p.id==="vsera"?["フェイスライン","EMS","集中"]:p.id==="thome"?["コンディション","スポット","初心者"]:p.id==="therma"?["ハリ","キメ","多機能"]:["スキンケア","簡単","初心者"]
+ };
+ return map[lang];
+}
+function reasonLines(p){
+ const c=answers[0], area=answers[1], style=answers[2], exp=answers[3], pri=answers[4];
+ const top=c.slice().sort((a,b)=>(p.v[b]||0)-(p.v[a]||0))[0]||c[0];
+ if(lang==="ko") return [
+  "선택한 "+labels.ko[top]+" 고민과의 매칭 점수가 높았어요.",
+  labels.ko[area]+" 관리 선호와 "+labels.ko[style]+" 스타일을 함께 반영했어요.",
+  labels.ko[exp]+" · "+labels.ko[pri]+" 조건까지 종합해 비교했어요."
+ ];
+ if(lang==="en") return [
+  "It scored highly for your selected "+labels.en[top]+" concern.",
+  "Your "+labels.en[area]+" focus and "+labels.en[style]+" preference were included.",
+  "We also considered "+labels.en[exp]+" and "+labels.en[pri]+"."
+ ];
+ if(lang==="zh") return [
+  "在你選擇的「"+labels.zh[top]+"」需求中配對分數較高。",
+  "同時納入「"+labels.zh[area]+"」與「"+labels.zh[style]+"」偏好。",
+  "也綜合考量「"+labels.zh[exp]+"」與「"+labels.zh[pri]+"」。"
+ ];
+ return [
+  "選択した「"+labels.ja[top]+"」とのマッチ度が高い結果でした。",
+  "「"+labels.ja[area]+"」と「"+labels.ja[style]+"」の希望も反映しています。",
+  "「"+labels.ja[exp]+"」・「"+labels.ja[pri]+"」も含めて比較しました。"
+ ];
+}
+function resultType(){
+ const c=answers[0];
+ const l=labels[lang];
+ if(lang==="ko") return c.map(x=>l[x]).join(" + ")+" 집중형";
+ if(lang==="en") return c.map(x=>l[x]).join(" + ")+" Match";
+ if(lang==="zh") return c.map(x=>l[x]).join(" + ")+" 型";
+ return c.map(x=>l[x]).join(" + ")+" タイプ";
+}
+function showResult(){
+ const ranked=products.map(p=>({p,s:scoreProduct(p)})).sort((a,b)=>b.s-a.s);
+ const main=ranked[0].p, also=ranked[1].p;
+ $("#resultType").textContent=resultType();
+ $("#resultSub").textContent=t("resultSub");
+ $("#mainName").textContent=pname(main); $("#mainBrand").textContent=main.brand;
+ $("#mainTags").innerHTML=translatedTags(main).map(x=>'<span class="tag">'+x+'</span>').join("");
+ $("#mainReasons").innerHTML=reasonLines(main).map(x=>'<li>'+x+'</li>').join("");
+ $("#alsoName").textContent=pname(also); $("#alsoBrand").textContent=also.brand;
+ $("#alsoTags").innerHTML=translatedTags(also).slice(0,2).map(x=>'<span class="tag">'+x+'</span>').join("");
+ $("#alsoReason").textContent=t("also");
+ $("#staffConcern").textContent=answers[0].map(x=>labels[lang][x]).join(" · ");
+ $("#staffMain").textContent=pname(main);
+ show("result");
+ window.__mainPick=main;
+}
+
+$("#start").onclick=()=>{step=0;answers=[[],null,null,null,null];show("quiz");renderQ()};
+$("#next").onclick=()=>{if(step<4){step++;renderQ();window.scrollTo({top:0,behavior:"smooth"})}else showResult()};
+$("#back").onclick=()=>{if(step>0){step--;renderQ()}};
+$("#restart").onclick=()=>{step=0;answers=[[],null,null,null,null];show("home")};
+$("#share").onclick=async()=>{
+ const p=window.__mainPick;
+ const txt=t("shareText")+"\n"+resultType()+"\nMAIN PICK: "+pname(p);
+ if(navigator.share){try{await navigator.share({title:"Beauty Device Finder",text:txt})}catch(e){}}
+ else {try{await navigator.clipboard.writeText(txt);alert(lang==="ko"?"결과가 복사됐어요!":"Copied!")}catch(e){}}
+};
+$("#langBtn").onclick=()=>$("#langSheet").classList.remove("hidden");
+$("#langSheet").onclick=e=>{if(e.target.id==="langSheet")$("#langSheet").classList.add("hidden")};
+document.querySelectorAll(".langbtn").forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
+setLang(localStorage.getItem("beauty-device-lang")||"ko");
+</script>
+</body>
+</html>
