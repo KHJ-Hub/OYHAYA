@@ -4,6 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#ff5c9d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Beauty Finder">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" type="image/png" href="./icons/icon-192.png?v=4">
+<link rel="apple-touch-icon" href="./icons/icon-192.png?v=4">
+<link rel="manifest" href="./site.webmanifest?v=4">
+<link rel="preload" as="image" href="./icons/icon-192.png?v=4">
+<meta name="description" content="Find the beauty device that fits your skincare concerns and home-care preferences.">
+<link rel="canonical" href="https://khj-hub.github.io/OYHAYA/beauty-device/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Beauty Device Finder">
+<meta property="og:description" content="Find the beauty device that fits your skincare concerns and home-care preferences.">
+<meta property="og:url" content="https://khj-hub.github.io/OYHAYA/beauty-device/?v=6">
+<meta property="og:image" content="https://khj-hub.github.io/OYHAYA/beauty-device/social-preview.jpg?v=7">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Beauty Device Finder">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Beauty Device Finder">
+<meta name="twitter:description" content="Find the beauty device that fits your skincare concerns and home-care preferences.">
+<meta name="twitter:image" content="https://khj-hub.github.io/OYHAYA/beauty-device/social-preview.jpg?v=7">
 <title>Find My Beauty Device</title>
 <style>
 :root{--pink:#ff5c9d;--pink2:#ff8db8;--ink:#241b22;--muted:#796f77;--bg:#fff8fb;--card:#fff;--line:#f0dbe4;--soft:#ffe9f1;--shadow:0 18px 45px rgba(91,42,66,.12)}
@@ -13,8 +35,8 @@ body{min-height:100vh}
 button{font:inherit}
 .shell{width:min(100%,520px);margin:auto;min-height:100vh;padding:20px 16px 32px}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.03em}
-.logo{width:38px;height:38px;border-radius:14px;background:linear-gradient(135deg,var(--pink),#ffb4ce);display:grid;place-items:center;color:#fff;box-shadow:0 8px 22px rgba(255,92,157,.28)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.03em}.brandcopy{display:flex;flex-direction:column;line-height:1.08}.storename{margin-top:4px;font-size:11px;font-weight:600;letter-spacing:-.02em;color:#8a8087}
+.logo{width:38px;height:38px;border-radius:14px;overflow:hidden;background:#fff;display:grid;place-items:center;box-shadow:0 8px 22px rgba(255,92,157,.18)}.logo img{display:block;width:100%;height:100%;object-fit:contain}
 .lang{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;color:var(--ink)}
 .card{background:rgba(255,255,255,.92);border:1px solid rgba(240,219,228,.9);border-radius:28px;padding:22px;box-shadow:var(--shadow);backdrop-filter:blur(10px)}
 .hero{padding:28px 22px 24px;overflow:hidden;position:relative}
@@ -32,7 +54,7 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 .progress-wrap{margin:8px 0 18px}
 .progress-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);margin-bottom:8px}
 .progress{height:8px;border-radius:999px;background:#f4e7ed;overflow:hidden}
-.progress>i{display:block;height:100%;width:20%;background:linear-gradient(90deg,var(--pink),#ff9fc2);border-radius:999px;transition:.25s}
+.progress>i{display:block;height:100%;width:16.6667%;background:linear-gradient(90deg,var(--pink),#ff9fc2);border-radius:999px;transition:.25s}
 .qtitle{font-size:24px;line-height:1.25;letter-spacing:-.04em;margin:4px 0 7px}
 .qhint{color:var(--muted);font-size:13px;margin-bottom:18px}
 .options{display:grid;gap:10px}
@@ -48,7 +70,19 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 .type{font-size:26px;font-weight:950;letter-spacing:-.045em;margin:8px 0}
 .type-sub{font-size:13px;color:var(--muted);line-height:1.5}
 .pick{padding:0;overflow:hidden}
+.product-visual{padding:14px 14px 0;background:linear-gradient(160deg,#fff0f6,#fff)}
+.product-link{display:block;line-height:0;border-radius:22px;cursor:pointer}.product-link.product-select{position:relative}.product-link.product-select:after{content:"";position:absolute;inset:0;border-radius:22px}.product-photo{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;border-radius:22px;background:#fff;box-shadow:inset 0 0 0 1px rgba(240,219,228,.8)}
 .pick-top{padding:18px 18px 14px;background:linear-gradient(135deg,#fff0f6,#fff)}
+.price-row{display:flex;align-items:baseline;gap:7px;margin-top:10px;flex-wrap:wrap}
+.price-label{font-size:11px;color:var(--muted);font-weight:800}
+.price-value{font-size:18px;font-weight:950;letter-spacing:-.03em;color:var(--ink)}
+.price-note{font-size:10px;color:var(--muted)}
+.product-desc{font-size:13px;line-height:1.62;color:#5d5158;margin:12px 0 0}
+.care-guide{margin-top:15px;border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden}
+.guide-row{padding:13px 14px}
+.guide-row+.guide-row{border-top:1px solid var(--line)}
+.guide-label{display:block;font-size:10px;letter-spacing:.08em;color:#b32867;font-weight:900;margin-bottom:5px}
+.guide-row p{margin:0;font-size:12px;line-height:1.55;color:#5d5158}
 .rank{font-size:11px;font-weight:900;color:#b32867;letter-spacing:.12em}
 .product{font-size:23px;font-weight:950;letter-spacing:-.045em;margin:6px 0 3px}
 .brandname{font-size:12px;color:var(--muted)}
@@ -59,8 +93,14 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 .reason ul{padding:0;margin:0;list-style:none;display:grid;gap:8px}
 .reason li{font-size:13px;line-height:1.45;color:#544951;padding-left:20px;position:relative}
 .reason li:before{content:"✓";position:absolute;left:0;color:var(--pink);font-weight:900}
-.also{margin-top:14px;padding:18px}
-.compare-row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.also{margin-top:14px;padding:16px}
+.compare-row{display:grid;grid-template-columns:86px 1fr;gap:13px;align-items:center}
+.alt-photo{display:block;width:86px;height:104px;object-fit:contain;border-radius:16px;background:#fff4f8;border:1px solid var(--line)}
+.compare-copy{min-width:0}
+.compare-row b{font-size:17px}
+.compare-desc{font-size:12px;line-height:1.5;color:#5d5158;margin:8px 0 0}
+.compare-tip{font-size:11px;line-height:1.45;color:var(--muted);margin-top:8px}
+
 .compare-row b{font-size:17px}
 .staff{margin-top:14px;background:#241b22;color:#fff;border:0}
 .staff .label{font-size:11px;opacity:.68;letter-spacing:.12em;font-weight:800}
@@ -69,6 +109,23 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 .staff-cell{padding:11px;border:1px solid rgba(255,255,255,.14);border-radius:14px}
 .staff-cell small{display:block;opacity:.62;font-size:10px;margin-bottom:4px}
 .staff-cell b{font-size:12px}
+.guide-launch{margin-top:14px}
+.guide-modal{position:fixed;inset:0;background:rgba(20,12,17,.48);z-index:30;overflow:auto;padding:18px}
+.guide-panel{width:min(100%,760px);margin:0 auto;background:#fff8fb;border-radius:28px;padding:18px;box-shadow:var(--shadow)}
+.guide-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.guide-top h2{margin:0;font-size:22px}
+.guide-close{border:0;background:#fff;border-radius:999px;width:42px;height:42px;font-size:24px;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.guide-grid{display:grid;gap:14px}
+.product-guide-card{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.product-guide-photo{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;display:block}
+.product-guide-body{padding:16px}
+.product-guide-brand{font-size:11px;color:var(--muted);font-weight:700}
+.product-guide-name{font-size:21px;font-weight:950;letter-spacing:-.035em;margin:4px 0}
+.product-guide-price{font-size:14px;font-weight:900;margin:8px 0 12px}
+.product-guide-section{padding:11px 0;border-top:1px solid var(--line)}
+.product-guide-section b{display:block;font-size:10px;letter-spacing:.08em;color:#b32867;margin-bottom:5px}
+.product-guide-section p{margin:0;font-size:12px;line-height:1.55;color:#5d5158}
+.mode-list{display:grid;gap:7px;margin-top:8px}.mode-item{display:grid;grid-template-columns:minmax(92px,.8fr) 1.7fr;gap:9px;padding:9px 10px;border:1px solid #f4dce6;border-radius:13px;background:#fff7fa}.mode-name{font-size:11px;font-weight:900;line-height:1.35;color:#873455}.mode-desc{font-size:11.5px;line-height:1.5;color:#5d5158}.mode-note{font-size:10px;line-height:1.45;color:var(--muted);margin-top:8px}@media(max-width:380px){.mode-item{grid-template-columns:1fr}}
 .actions{display:grid;gap:10px;margin-top:14px}
 .foot{font-size:10.5px;color:#8c8288;line-height:1.55;margin:16px 4px 0;text-align:center}
 .langsheet{position:fixed;inset:0;background:rgba(20,12,17,.35);display:grid;align-items:end;z-index:10;padding:16px}
@@ -82,19 +139,18 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 <body>
 <div class="shell">
   <div class="topbar">
-    <div class="brand"><div class="logo">✦</div><span>BEAUTY DEVICE FINDER</span></div>
+    <div class="brand"><div class="logo"><img src="./icons/icon-192.png?v=4" alt="" aria-hidden="true"></div><div class="brandcopy"><span>BEAUTY DEVICE FINDER</span></div></div>
     <button class="lang" id="langBtn">한국어 ▾</button>
   </div>
 
   <section id="home">
     <div class="card hero">
-      <div class="kicker" data-i="kicker">매장 입점 제품 기준</div>
       <h1 data-i="heroTitle">나에게 맞는<br>뷰티 디바이스 찾기</h1>
-      <div class="sub" data-i="heroSub">피부 고민과 홈케어 취향을 선택하면 매장에서 만나볼 수 있는 제품 중 잘 맞는 기기를 찾아드려요.</div>
+      <div class="sub" data-i="heroSub">피부 고민과 홈케어 취향을 선택하면 나에게 잘 맞는 뷰티 디바이스를 찾아드려요.</div>
       <div class="hero-pills">
-        <span class="pill" data-i="pill1">약 30초</span>
-        <span class="pill" data-i="pill2">5 Questions</span>
-        <span class="pill" data-i="pill3">매장 입점 제품만 추천</span>
+        <span class="pill" data-i="pill1">약 40초</span>
+        <span class="pill" data-i="pill2">6 Questions</span>
+        <span class="pill" data-i="pill3">맞춤 제품 추천</span>
       </div>
       <div style="height:18px"></div>
       <button class="primary" id="start" data-i="start">START ✨</button>
@@ -104,7 +160,7 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 
   <section id="quiz" class="hidden">
     <div class="progress-wrap">
-      <div class="progress-row"><span id="stepText">1 / 5</span><span data-i="quick">30초면 끝나요</span></div>
+      <div class="progress-row"><span id="stepText">1 / 6</span><span data-i="quick">약 40초면 끝나요</span></div>
       <div class="progress"><i id="bar"></i></div>
     </div>
     <div class="card">
@@ -124,11 +180,20 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
       <div class="type-sub" id="resultSub"></div>
     </div>
     <div class="card pick">
+      <div class="product-visual"><a id="mainLink" class="product-link" href="#" target="_blank" rel="noopener noreferrer"><img class="product-photo" id="mainPhoto" alt="" referrerpolicy="no-referrer"></a></div>
       <div class="pick-top">
         <div class="rank">MAIN PICK</div>
-        <div class="product" id="mainName"></div>
+        <button class="product product-title-btn" id="mainName" type="button" style="border:0;background:transparent;padding:0;text-align:left;color:inherit"></button>
         <div class="brandname" id="mainBrand"></div>
         <div class="tags" id="mainTags"></div>
+        <div class="price-row"><span class="price-label" data-i="priceLabel">공식 정상가 · 2026.10.01</span><span class="price-value" id="mainPrice"></span></div>
+        <p class="product-desc" id="mainDesc"></p>
+        <div class="care-guide">
+          <div class="guide-row"><span class="guide-label" data-i="howUse">HOW TO USE</span><p id="mainHow"></p></div>
+          <div class="guide-row"><span class="guide-label" data-i="pairWith">PAIR WITH</span><p id="mainPair"></p></div>
+          <div class="guide-row"><span class="guide-label" data-i="fitTitle">BEST FOR</span><p id="mainFit"></p></div>
+        </div>
+        <button class="secondary" id="mainShop" type="button" style="margin-top:12px" data-i="shopOlive">올리브영에서 제품 보기 ↗</button>
       </div>
       <div class="reason">
         <h3 data-i="why">왜 잘 맞나요?</h3>
@@ -138,28 +203,42 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 
     <div class="card also">
       <div class="rank">ALSO MATCH</div>
-      <div class="compare-row" style="margin-top:7px">
-        <div><b id="alsoName"></b><div class="brandname" id="alsoBrand"></div></div>
-        <div class="tags" id="alsoTags" style="justify-content:flex-end;margin-top:0"></div>
+      <div class="compare-row" style="margin-top:10px">
+        <a id="alsoLink" class="product-link" href="#" target="_blank" rel="noopener noreferrer"><img class="alt-photo" id="alsoPhoto" alt="" referrerpolicy="no-referrer"></a>
+        <div class="compare-copy">
+          <button id="alsoName" type="button" style="border:0;background:transparent;padding:0;text-align:left;font:inherit;font-weight:800;color:inherit"></button><div class="brandname" id="alsoBrand"></div>
+          <div class="tags" id="alsoTags" style="margin-top:8px"></div>
+          <div class="price-row"><span class="price-label" data-i="priceLabel">공식 정상가 · 2026.10.01</span><span class="price-value" id="alsoPrice" style="font-size:15px"></span></div>
+          <p class="compare-desc" id="alsoDesc"></p>
+          <div class="compare-tip" id="alsoReason"></div>
+        </div>
       </div>
-      <div class="type-sub" id="alsoReason" style="margin-top:12px"></div>
     </div>
 
     <div class="card staff">
-      <div class="label">SHOW TO STAFF</div>
+      <div class="label">SHOW TO STAFF · 직원에게 보여주세요</div>
       <div class="staff-title">MY BEAUTY PICK</div>
       <div class="staff-grid">
-        <div class="staff-cell"><small data-i="myConcern">MY CONCERN</small><b id="staffConcern"></b></div>
-        <div class="staff-cell"><small>MAIN PICK</small><b id="staffMain"></b></div>
+        <div class="staff-cell"><small>피부 고민</small><b id="staffConcern"></b></div>
+        <div class="staff-cell"><small>추천 제품</small><b id="staffMain"></b></div>
       </div>
     </div>
 
     <div class="actions">
       <button class="primary" id="share" data-i="share">결과 공유하기</button>
+      <button class="secondary" id="guideBtn" data-i="guideAll">8개 제품 가이드 보기</button>
       <button class="secondary" id="restart" data-i="restart">다시 찾기</button>
     </div>
-    <div class="foot" data-i="footer">제품 사용 전 공식 사용법과 주의사항을 확인해주세요. 매장 재고 및 판매 여부는 현장 상황에 따라 달라질 수 있습니다.</div>
+    <div class="foot" data-i="priceFoot">가격은 2026.10.01 올리브영 공식 온라인몰에서 확인한 정상가 기준입니다. 확인이 어려운 제품은 ‘가격 확인’으로 표시하며, 행사·옵션·매장에 따라 실제 판매가는 달라질 수 있어요.</div><div class="foot" data-i="stockNotice">제품 정보·가격·재고는 실제 판매처 및 공식 상품 페이지에서 확인해주세요.</div><div class="foot" data-i="footer">제품 설명은 2026.10.01 기준 브랜드 공식 페이지 및 공식 사용 가이드를 바탕으로 요약했습니다. 제품 사용 전 동봉 사용설명서와 최신 공식 사용법·주의사항을 확인해주세요.</div>
   </section>
+</div>
+
+<div id="guideModal" class="guide-modal hidden">
+  <div class="guide-panel">
+    <div class="guide-top"><h2 data-i="guideTitle">PRODUCT GUIDE</h2><button class="guide-close" id="guideClose" aria-label="close">×</button></div>
+    <div class="notice" data-i="guideNotice" style="margin:0 0 12px">제품 이미지는 실제 올리브영 상품 이미지로만 표시합니다.</div>
+    <div class="guide-grid" id="guideGrid"></div>
+  </div>
 </div>
 
 <div id="langSheet" class="langsheet hidden">
@@ -168,18 +247,21 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
     <div class="langopts">
       <button class="langbtn" data-lang="ko">한국어</button>
       <button class="langbtn" data-lang="en">English</button>
+      <button class="langbtn" data-lang="zhs">简体中文</button>
       <button class="langbtn" data-lang="zh">繁體中文</button>
       <button class="langbtn" data-lang="ja">日本語</button>
     </div>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/opencc-js@1.4.2/dist/umd/full.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script>
 const I18N={
-ko:{kicker:"매장 입점 제품 기준",heroTitle:"나에게 맞는<br>뷰티 디바이스 찾기",heroSub:"피부 고민과 홈케어 취향을 선택하면 매장에서 만나볼 수 있는 제품 중 잘 맞는 기기를 찾아드려요.",pill1:"약 30초",pill2:"5 Questions",pill3:"매장 입점 제품만 추천",start:"START ✨",notice:"본 서비스는 고객이 선택한 고민과 사용 선호도를 바탕으로 제품 선택을 돕는 안내 서비스이며 의료적 피부 진단이 아닙니다.",quick:"30초면 끝나요",back:"이전",next:"다음",why:"왜 잘 맞나요?",myConcern:"MY CONCERN",share:"결과 공유하기",restart:"다시 찾기",footer:"제품 사용 전 공식 사용법과 주의사항을 확인해주세요. 매장 재고 및 판매 여부는 현장 상황에 따라 달라질 수 있습니다.",resultSub:"선택한 고민과 홈케어 취향을 바탕으로 매장 제품을 비교했어요.",also:"함께 비교해볼 만한 제품이에요.",shareText:"나의 뷰티 디바이스 추천 결과"},
-en:{kicker:"Based on products available in-store",heroTitle:"Find My<br>Beauty Device",heroSub:"Choose your skin concerns and home-care preferences to find devices available in this store that may suit you.",pill1:"About 30 sec",pill2:"5 Questions",pill3:"In-store products only",start:"START ✨",notice:"This service is a product-selection guide based on your answers and is not a medical skin diagnosis.",quick:"About 30 seconds",back:"Back",next:"Next",why:"Why this match?",myConcern:"MY CONCERN",share:"Share result",restart:"Start again",footer:"Please check each product's official instructions and precautions before use. Availability may change.",resultSub:"We compared in-store devices based on your concerns and home-care preferences.",also:"Another device worth comparing.",shareText:"My Beauty Device Finder result"},
-zh:{kicker:"依店內販售商品推薦",heroTitle:"找到適合我的<br>美容儀",heroSub:"選擇你的肌膚困擾與居家保養偏好，我們會從店內商品中推薦適合比較的美容儀。",pill1:"約30秒",pill2:"5個問題",pill3:"僅推薦店內商品",start:"開始 ✨",notice:"本服務僅依照你的回答提供商品選擇參考，並非醫療性肌膚診斷。",quick:"約30秒完成",back:"上一步",next:"下一步",why:"為什麼適合？",myConcern:"我的困擾",share:"分享結果",restart:"重新測試",footer:"使用前請確認各商品官方使用方法與注意事項。店內庫存與販售狀況可能變動。",resultSub:"我們依照你的肌膚困擾與居家保養偏好比較了店內美容儀。",also:"也可以一起比較這款。",shareText:"我的美容儀推薦結果"},
-ja:{kicker:"店頭取扱い商品からご案内",heroTitle:"私に合う<br>美容デバイスを探す",heroSub:"肌悩みとホームケアの好みを選ぶと、店頭で購入できる商品の中から比較しやすいデバイスをご案内します。",pill1:"約30秒",pill2:"5 Questions",pill3:"店頭商品だけを案内",start:"START ✨",notice:"本サービスは回答内容をもとに商品選びをサポートするもので、医療的な肌診断ではありません。",quick:"約30秒で完了",back:"戻る",next:"次へ",why:"おすすめの理由",myConcern:"MY CONCERN",share:"結果をシェア",restart:"もう一度",footer:"使用前に各商品の公式使用方法・注意事項をご確認ください。在庫・販売状況は店頭状況により変わる場合があります。",resultSub:"選択した悩みとホームケアの好みをもとに、店頭商品を比較しました。",also:"あわせて比較しやすい商品です。",shareText:"私のビューティーデバイス診断結果"}
+ko:{kicker:"",heroTitle:"나에게 맞는<br>뷰티 디바이스 찾기",heroSub:"피부 고민과 홈케어 취향을 선택하면 나에게 잘 맞는 뷰티 디바이스를 찾아드려요.",pill1:"약 40초",pill2:"6 Questions",pill3:"맞춤 제품 추천",start:"START ✨",notice:"본 서비스는 고객이 선택한 고민과 사용 선호도를 바탕으로 제품 선택을 돕는 안내 서비스이며 의료적 피부 진단이 아닙니다.",quick:"약 40초면 끝나요",back:"이전",next:"다음",why:"왜 잘 맞나요?",howUse:"HOW TO USE",pairWith:"PAIR WITH",modeTitle:"MODES / CARE · 모드·케어 기능",modeNote:"브랜드 공식 안내에서 확인 가능한 모드·관리 목적만 요약했으며, 사용감은 개인에 따라 다를 수 있어요.",fitTitle:"BEST FOR",priceLabel:"공식 정상가 · 2026.10.01",priceDate:"2026.10.01 기준",priceFoot:"가격은 2026.10.01 올리브영 공식 온라인몰에서 확인한 정상가 기준입니다. 확인이 어려운 제품은 ‘가격 확인’으로 표시하며, 행사·옵션·매장에 따라 실제 판매가는 달라질 수 있어요.",myConcern:"MY CONCERN",share:"결과 카드 공유하기",guideAll:"8개 제품 가이드 보기",guideTitle:"PRODUCT GUIDE",guideNotice:"제품 이미지는 실제 올리브영 상품 이미지로만 표시합니다.",shopOlive:"올리브영에서 제품 보기 ↗",restart:"다시 찾기",stockNotice:"제품 정보·가격·재고는 실제 판매처 및 공식 상품 페이지에서 확인해주세요.",footer:"제품 설명은 2026.10.01 기준 브랜드 공식 페이지 및 공식 사용 가이드를 바탕으로 요약했습니다. 제품 사용 전 동봉 사용설명서와 최신 공식 사용법·주의사항을 확인해주세요.",resultSub:"선택한 고민, 홈케어 취향과 예산을 바탕으로 제품을 비교했어요.",also:"함께 비교해볼 만한 제품이에요.",shareText:"나의 뷰티 디바이스 추천 결과"},
+en:{kicker:"",heroTitle:"Find My<br>Beauty Device",heroSub:"Choose your skin concerns and home-care preferences to find beauty devices that may suit you.",pill1:"About 40 sec",pill2:"6 Questions",pill3:"Personalized picks",start:"START ✨",notice:"This service is a product-selection guide based on your answers and is not a medical skin diagnosis.",quick:"About 40 seconds",back:"Back",next:"Next",why:"Why this match?",howUse:"HOW TO USE",pairWith:"PAIR WITH",modeTitle:"MODES / CARE",modeNote:"Only modes and care purposes verifiable from official brand guidance are summarized; experience may vary by user.",fitTitle:"BEST FOR",priceLabel:"Official regular price · 2026-10-01",priceDate:"as of 2026-10-01",priceFoot:"Prices are regular prices verified on Olive Young's official online store as of 2026-10-01. Items that could not be verified are marked Check price. Actual prices may vary by promotion, option or store.",myConcern:"MY CONCERN",share:"Share result card",guideAll:"View all 8 product guides",guideTitle:"PRODUCT GUIDE",guideNotice:"Only actual product images from Olive Young are shown.",shopOlive:"View on Olive Young ↗",restart:"Start again",stockNotice:"Please verify product information, price and stock with the actual retailer and official product page.",footer:"Product descriptions were summarized from official brand pages and official usage guides checked as of 2026-10-01. Before use, check the included manual and the latest official instructions and precautions.",resultSub:"We compared beauty devices based on your concerns, home-care preferences and budget.",also:"Another device worth comparing.",shareText:"My Beauty Device Finder result"},
+zh:{kicker:"",heroTitle:"找到適合我的<br>美容儀",heroSub:"選擇你的肌膚困擾與居家保養偏好，我們會推薦適合你比較的美容儀。",pill1:"約40秒",pill2:"6個問題",pill3:"個人化推薦",start:"開始 ✨",notice:"本服務僅依照你的回答提供商品選擇參考，並非醫療性肌膚診斷。",quick:"約40秒完成",back:"上一步",next:"下一步",why:"為什麼適合？",howUse:"使用方式",pairWith:"搭配質地",modeTitle:"模式 / 護理功能",modeNote:"僅摘要整理品牌官方說明中可確認的模式與護理目的；實際使用感受可能因人而異。",fitTitle:"適合這樣的你",priceLabel:"官方正常售價 · 2026.10.01",priceDate:"截至 2026.10.01",priceFoot:"價格以 2026.10.01 在 Olive Young 官方線上商城確認的正常售價為準；無法確認的商品標示為「價格確認」。實際價格可能因活動、選項或門市而不同。",myConcern:"我的困擾",share:"分享結果卡片",guideAll:"查看8款產品指南",guideTitle:"產品指南",guideNotice:"商品圖片僅使用 Olive Young 的實際商品圖片。",shopOlive:"在 Olive Young 查看商品 ↗",restart:"重新測試",stockNotice:"商品資訊、價格與庫存請以實際販售通路及官方商品頁面為準。",footer:"商品說明依 2026.10.01 查核時的品牌官方頁面與官方使用指南摘要整理。使用前請確認商品隨附說明書及最新官方使用方式與注意事項。",resultSub:"我們依照你的肌膚困擾、居家保養偏好與預算比較了美容儀。",also:"也可以一起比較這款。",shareText:"我的美容儀推薦結果"},
+ja:{kicker:"",heroTitle:"私に合う<br>美容デバイスを探す",heroSub:"肌悩みとホームケアの好みを選ぶと、あなたに合う美容デバイスをご案内します。",pill1:"約40秒",pill2:"6 Questions",pill3:"パーソナル提案",start:"START ✨",notice:"本サービスは回答内容をもとに商品選びをサポートするもので、医療的な肌診断ではありません。",quick:"約40秒で完了",back:"戻る",next:"次へ",why:"おすすめの理由",howUse:"使い方",pairWith:"一緒に使いやすいテクスチャー",modeTitle:"MODES / CARE · モード・ケア機能",modeNote:"ブランド公式案内で確認できるモードとケア目的のみ要約しており、使用感には個人差があります。",fitTitle:"こんな方におすすめ",priceLabel:"公式通常価格 · 2026.10.01",priceDate:"2026.10.01時点",priceFoot:"価格は2026.10.01にOlive Young公式オンラインストアで確認した通常価格を基準に表示しています。確認できない商品は「価格確認」と表示し、実際の価格はキャンペーン・オプション・店舗により異なる場合があります。",myConcern:"MY CONCERN",share:"結果カードをシェア",guideAll:"8商品のガイドを見る",guideTitle:"PRODUCT GUIDE",guideNotice:"商品画像は Olive Young の実際の商品画像のみを使用しています。",shopOlive:"Olive Youngで商品を見る ↗",restart:"もう一度",stockNotice:"商品情報・価格・在庫は、実際の販売元および公式商品ページでご確認ください。",footer:"商品説明は2026.10.01時点で確認したブランド公式ページ・公式使用ガイドをもとに要約しています。使用前に同梱の取扱説明書と最新の公式使用方法・注意事項をご確認ください。",resultSub:"選択した悩み・ホームケアの好み・予算をもとに、美容デバイスを比較しました。",also:"あわせて比較しやすい商品です。",shareText:"私のビューティーデバイス診断結果"}
 };
 
 const Q={
@@ -210,11 +292,18 @@ ko:[
   ["some","🙂","간단한 제품은 써봤어요","기본 사용법은 익숙해요"],
   ["advanced","✨","여러 종류를 사용해봤어요","기능 비교도 괜찮아요"]
  ]},
- {title:"사용할 때 가장 중요하게 보는 것은?",hint:"마지막 질문이에요!",opts:[
+ {title:"사용할 때 가장 중요하게 보는 것은?",hint:"사용 기준에 가장 가까운 항목을 골라주세요.",opts:[
   ["easy","👌","사용 편의성","복잡하지 않은 루틴"],
   ["multi","🌈","다양한 기능","한 기기로 여러 관리"],
   ["focus","🎯","집중 관리","한 고민을 더 선명하게"],
   ["gentle","☁️","부담 적은 사용감","편안한 사용 경험을 선호"]
+ ]},
+ {title:"구매할 때 생각하는 예산은?",hint:"대략적인 기준만 골라주세요. 추천 순위에 반영돼요.",opts:[
+  ["budget15","💗","15만 원 이하","부담 적게 시작하고 싶어요"],
+  ["budget30","✨","15~30만 원","가격과 기능의 균형"],
+  ["budget50","🌟","30~50만 원","기능을 더 중요하게 봐요"],
+  ["budget50p","💎","50만 원 이상","예산보다 기능 우선"],
+  ["budgetAny","🤍","가격은 상관없어요","나에게 가장 잘 맞는 제품 우선"]
  ]}
 ],
 en:[
@@ -222,51 +311,367 @@ en:[
  {title:"Which area do you want to focus on?",hint:"Choose the closest option.",opts:[["whole","🙂","Whole face","Overall home care"],["cheek","✨","Cheeks & smile lines","Mid-face focus"],["jawarea","〰️","Jawline","Facial contour focus"],["eye","👀","Eye area","Delicate-area focus"],["spot","🌿","Specific area","A particular concern area"]]},
  {title:"What kind of home-care routine do you want?",hint:"Choose the style closest to you.",opts:[["quick","⚡","Quick & simple","Easy to use often"],["target","🎯","One concern at a time","Focused routine"],["all","🌈","Many functions in one","Versatile device"],["care","🧘","More time, more focus","A thorough routine"]]},
  {title:"How experienced are you with beauty devices?",hint:"Choose what feels closest.",opts:[["beginner","🌱","I'm new","Prefer simple, intuitive use"],["some","🙂","I've tried a few","Comfortable with basic devices"],["advanced","✨","I use several types","Comfortable comparing features"]]},
- {title:"What matters most when using a device?",hint:"Last question!",opts:[["easy","👌","Ease of use","A simple routine"],["multi","🌈","Versatility","More functions in one device"],["focus","🎯","Focused care","A clear target concern"],["gentle","☁️","Comfortable feel","Prefer a gentler experience"]]}
+ {title:"What matters most when using a device?",hint:"Choose the closest option.",opts:[["easy","👌","Ease of use","A simple routine"],["multi","🌈","Versatility","More functions in one device"],["focus","🎯","Focused care","A clear target concern"],["gentle","☁️","Comfortable feel","Prefer a gentler experience"]]},
+ {title:"What budget are you considering?",hint:"Choose a rough range. It will influence the recommendation ranking.",opts:[["budget15","💗","Under ₩150,000","Keep the starting cost low"],["budget30","✨","₩150,000–₩300,000","Balance price and features"],["budget50","🌟","₩300,000–₩500,000","Features matter more"],["budget50p","💎","₩500,000+","Prioritize features over price"],["budgetAny","🤍","No budget limit","Prioritize the best overall match"]]}
 ],
 zh:[
  {title:"你最在意的肌膚困擾是？",hint:"最多選2項。",multi:2,opts:[["glow","💧","乾燥・缺乏光澤","想要水潤亮澤感"],["absorb","✨","保養品吸收","搭配日常保養品使用"],["texture","🫧","毛孔・膚質","想加強肌膚平滑感"],["trouble","🌿","痘痘・肌膚狀態","針對在意部位保養"],["elastic","💗","彈力不足","居家彈力保養"],["jaw","〰️","下顎線・臉部線條","集中輪廓管理"]]},
  {title:"最想加強哪個部位？",hint:"請選最接近的一項。",opts:[["whole","🙂","全臉","整體居家保養"],["cheek","✨","臉頰・法令紋周圍","中臉保養"],["jawarea","〰️","下顎線","輪廓集中管理"],["eye","👀","眼周","細緻部位管理"],["spot","🌿","特定部位","針對在意區域"]]},
  {title:"你喜歡哪種居家保養方式？",hint:"選擇最符合你的方式。",opts:[["quick","⚡","快速簡單","適合經常使用"],["target","🎯","集中一個困擾","針對單一需求"],["all","🌈","一機多用","希望功能多元"],["care","🧘","願意花時間仔細保養","建立完整保養流程"]]},
  {title:"你使用美容儀的經驗？",hint:"請選最接近你的項目。",opts:[["beginner","🌱","第一次使用","偏好簡單直覺"],["some","🙂","用過簡單美容儀","熟悉基本操作"],["advanced","✨","使用過多種美容儀","可以比較多種功能"]]},
- {title:"使用美容儀時最重視什麼？",hint:"最後一題！",opts:[["easy","👌","操作方便","不複雜的流程"],["multi","🌈","多功能","一台完成多種保養"],["focus","🎯","集中管理","針對單一困擾"],["gentle","☁️","舒適使用感","偏好較溫和的體驗"]]}
+ {title:"使用美容儀時最重視什麼？",hint:"請選最接近的一項。",opts:[["easy","👌","操作方便","不複雜的流程"],["multi","🌈","多功能","一台完成多種保養"],["focus","🎯","集中管理","針對單一困擾"],["gentle","☁️","舒適使用感","偏好較溫和的體驗"]]},
+ {title:"購買時考慮的預算大約是？",hint:"選擇大致範圍即可，會反映在推薦排序中。",opts:[["budget15","💗","15萬韓元以下","想以較低負擔開始"],["budget30","✨","15–30萬韓元","兼顧價格與功能"],["budget50","🌟","30–50萬韓元","更重視功能"],["budget50p","💎","50萬韓元以上","功能優先於價格"],["budgetAny","🤍","預算不限","優先選最適合我的產品"]]}
 ],
 ja:[
  {title:"一番気になる肌悩みは？",hint:"2つまで選べます。",multi:2,opts:[["glow","💧","乾燥・ツヤ不足","うるおい感とツヤを重視"],["absorb","✨","スキンケアなじみ","普段の化粧品と一緒にケア"],["texture","🫧","毛穴・キメ","なめらかな印象を目指す"],["trouble","🌿","肌コンディション","気になる部分をケア"],["elastic","💗","ハリ不足","ハリ感を意識したケア"],["jaw","〰️","フェイスライン","輪郭を集中的にケア"]]},
  {title:"特にケアしたい部位は？",hint:"最も近いものを選んでください。",opts:[["whole","🙂","顔全体","全体的なホームケア"],["cheek","✨","頬・ほうれい線周り","中顔面を中心に"],["jawarea","〰️","フェイスライン","輪郭を集中ケア"],["eye","👀","目元","細かい部位を中心に"],["spot","🌿","特定の部位","気になる場所をケア"]]},
  {title:"どんなホームケアが理想？",hint:"近いスタイルを選んでください。",opts:[["quick","⚡","簡単・スピーディー","気軽に続けたい"],["target","🎯","1つの悩みに集中","目的を絞ってケア"],["all","🌈","1台で多機能","いろいろ試したい"],["care","🧘","時間をかけて集中","丁寧なルーティン"]]},
  {title:"美容デバイスの使用経験は？",hint:"一番近いものを選んでください。",opts:[["beginner","🌱","初めて","簡単で直感的な操作が好み"],["some","🙂","簡単なものは使ったことがある","基本操作には慣れている"],["advanced","✨","複数タイプを使ったことがある","機能比較もOK"]]},
- {title:"使用時に一番重視することは？",hint:"最後の質問です！",opts:[["easy","👌","使いやすさ","複雑すぎないルーティン"],["multi","🌈","多機能","1台でいろいろケア"],["focus","🎯","集中ケア","悩みを絞って選びたい"],["gentle","☁️","やさしい使用感","快適な使用感を重視"]]}
+ {title:"使用時に一番重視することは？",hint:"一番近いものを選んでください。",opts:[["easy","👌","使いやすさ","複雑すぎないルーティン"],["multi","🌈","多機能","1台でいろいろケア"],["focus","🎯","集中ケア","悩みを絞って選びたい"],["gentle","☁️","やさしい使用感","快適な使用感を重視"]]},
+ {title:"購入時に考えている予算は？",hint:"おおよその範囲を選んでください。おすすめ順位に反映します。",opts:[["budget15","💗","15万ウォン以下","負担を抑えて始めたい"],["budget30","✨","15〜30万ウォン","価格と機能のバランス"],["budget50","🌟","30〜50万ウォン","機能をより重視"],["budget50p","💎","50万ウォン以上","価格より機能を優先"],["budgetAny","🤍","予算は気にしない","自分に一番合う商品を優先"]]}
 ]};
 
 const products=[
- {id:"x2",brand:"medicube AGE-R",name:"부스터 프로 X2",names:{en:"Booster Pro X2",zh:"Booster Pro X2",ja:"ブースタープロ X2"},v:{glow:4,absorb:5,texture:5,trouble:2,elastic:5,jaw:4,all:5,quick:3,target:3,beginner:3,easy:3,multi:5,focus:3,gentle:2,whole:5,cheek:4,jawarea:4,eye:2,spot:2},tags:["올인원","탄력","피부결"]},
- {id:"mini",brand:"medicube AGE-R",name:"부스터 프로 미니 플러스",names:{en:"Booster Pro Mini Plus",zh:"Booster Pro Mini Plus",ja:"ブースタープロ ミニプラス"},v:{glow:4,absorb:4,texture:3,trouble:5,elastic:1,jaw:1,all:3,quick:5,target:4,beginner:5,easy:5,multi:2,focus:4,gentle:5,whole:4,cheek:3,jawarea:1,eye:2,spot:5},tags:["간편","컨디션","입문"]},
- {id:"vroller",brand:"medicube AGE-R",name:"부스터 브이 롤러",names:{en:"Booster V Roller",zh:"Booster V Roller",ja:"ブースター V ローラー"},v:{glow:1,absorb:1,texture:1,trouble:0,elastic:5,jaw:5,all:2,quick:3,target:5,beginner:3,easy:3,multi:1,focus:5,gentle:2,whole:2,cheek:4,jawarea:5,eye:1,spot:2},tags:["페이스라인","EMS","집중"]},
- {id:"glow",brand:"medicube AGE-R",name:"부스터 글로우",names:{en:"Booster Glow",zh:"Booster Glow",ja:"ブースターグロウ"},v:{glow:5,absorb:5,texture:3,trouble:3,elastic:2,jaw:0,all:2,quick:5,target:4,beginner:5,easy:5,multi:2,focus:3,gentle:5,whole:5,cheek:3,jawarea:0,eye:2,spot:2},tags:["광채","스킨케어","간편"]},
- {id:"vsera",brand:"MOMMYCARE",name:"EMS 브이쎄라",names:{en:"EMS V-SERA",zh:"EMS V-SERA",ja:"EMS V-SERA"},v:{glow:0,absorb:1,texture:0,trouble:0,elastic:4,jaw:5,all:1,quick:4,target:5,beginner:4,easy:4,multi:1,focus:5,gentle:2,whole:2,cheek:4,jawarea:5,eye:0,spot:1},tags:["페이스라인","EMS","집중"]},
- {id:"thome",brand:"THOME",name:"투앤티업",names:{en:"20TYUP",zh:"20TYUP",ja:"20TYUP"},v:{glow:2,absorb:2,texture:4,trouble:5,elastic:1,jaw:0,all:2,quick:5,target:5,beginner:5,easy:5,multi:1,focus:5,gentle:4,whole:2,cheek:2,jawarea:0,eye:0,spot:5},tags:["트러블","스팟","입문"]},
- {id:"therma",brand:"LG Pra.L",name:"수퍼폼 써마샷 얼티밋",names:{en:"Superform Thermashot Ultimate",zh:"Superform Thermashot Ultimate",ja:"スーパーフォーム サーマショット アルティメット"},v:{glow:4,absorb:4,texture:5,trouble:1,elastic:5,jaw:4,all:5,quick:2,target:4,beginner:2,easy:2,multi:5,focus:4,gentle:1,whole:5,cheek:5,jawarea:4,eye:1,spot:2},tags:["탄력","피부결","올인원"]},
- {id:"galvanic",brand:"LG Pra.L",name:"갈바닉 부스터",names:{en:"Galvanic Booster",zh:"Galvanic Booster",ja:"ガルバニック ブースター"},v:{glow:4,absorb:5,texture:2,trouble:1,elastic:1,jaw:0,all:1,quick:5,target:4,beginner:5,easy:5,multi:1,focus:3,gentle:5,whole:5,cheek:3,jawarea:0,eye:2,spot:2},tags:["스킨케어","간편","입문"]}
+ {id:"x2",price:"375,000원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0025/A00000025174506ko.jpg?l=ko",brand:"medicube AGE-R",name:"부스터 프로 X2",names:{en:"Booster Pro X2",zh:"Booster Pro X2",ja:"ブースタープロ X2"},v:{glow:4,absorb:5,texture:5,trouble:2,elastic:5,jaw:4,all:5,quick:3,target:3,beginner:3,easy:3,multi:5,focus:3,gentle:2,whole:5,cheek:4,jawarea:4,eye:2,spot:2},tags:["올인원","탄력","피부결"]},
+ {id:"mini",price:"126,000원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0023/A00000023790172ko.jpg?l=ko",brand:"medicube AGE-R",name:"부스터 프로 미니 플러스",names:{en:"Booster Pro Mini Plus",zh:"Booster Pro Mini Plus",ja:"ブースタープロ ミニプラス"},v:{glow:4,absorb:4,texture:3,trouble:5,elastic:1,jaw:1,all:3,quick:5,target:4,beginner:5,easy:5,multi:2,focus:4,gentle:5,whole:4,cheek:3,jawarea:1,eye:2,spot:5},tags:["간편","컨디션","입문"]},
+ {id:"vroller",price:"CHECK",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0024/A00000024757319ko.jpg?l=ko",brand:"medicube AGE-R",name:"부스터 브이 롤러",names:{en:"Booster V Roller",zh:"Booster V Roller",ja:"ブースター V ローラー"},v:{glow:1,absorb:1,texture:1,trouble:0,elastic:5,jaw:5,all:2,quick:3,target:5,beginner:3,easy:3,multi:1,focus:5,gentle:2,whole:2,cheek:4,jawarea:5,eye:1,spot:2},tags:["페이스라인","EMS","집중"]},
+ {id:"glow",price:"388,500원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0025/A00000025287513ko.jpg?l=ko",brand:"medicube AGE-R",name:"부스터 글로우",names:{en:"Booster Glow",zh:"Booster Glow",ja:"ブースターグロウ"},v:{glow:5,absorb:5,texture:3,trouble:3,elastic:2,jaw:0,all:2,quick:5,target:4,beginner:5,easy:5,multi:2,focus:3,gentle:5,whole:5,cheek:3,jawarea:0,eye:2,spot:2},tags:["광채","스킨케어","간편"]},
+ {id:"vsera",price:"109,000원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0024/A00000024879740ko.jpg?l=ko",brand:"MOMMYCARE",name:"EMS 브이쎄라",names:{en:"EMS V-SERA",zh:"EMS V-SERA",ja:"EMS V-SERA"},v:{glow:0,absorb:1,texture:0,trouble:0,elastic:4,jaw:5,all:1,quick:4,target:5,beginner:4,easy:4,multi:1,focus:5,gentle:2,whole:2,cheek:4,jawarea:5,eye:0,spot:1},tags:["페이스라인","EMS","집중"]},
+ {id:"thome",price:"599,000원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0025/A00000025297522ko.jpg?l=ko",brand:"THOME",name:"더 글로우 시그니처",names:{en:"The Glow Signature",zh:"The Glow Signature",ja:"The Glow Signature"},v:{glow:5,absorb:4,texture:3,trouble:1,elastic:2,jaw:0,all:2,quick:2,target:2,beginner:3,easy:3,multi:2,focus:2,gentle:3,whole:5,cheek:3,jawarea:0,eye:1,spot:1},tags:["물방울초음파","스킨케어","앰플"]},
+ {id:"therma",price:"599,000원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0024/A00000024433522ko.jpg?l=ko",brand:"LG Pra.L",name:"수퍼폼 써마샷 얼티밋",names:{en:"Superform Thermashot Ultimate",zh:"Superform Thermashot Ultimate",ja:"スーパーフォーム サーマショット アルティメット"},v:{glow:4,absorb:4,texture:5,trouble:1,elastic:5,jaw:4,all:5,quick:2,target:4,beginner:2,easy:2,multi:5,focus:4,gentle:1,whole:5,cheek:5,jawarea:4,eye:1,spot:2},tags:["탄력","피부결","올인원"]},
+ {id:"galvanic",price:"108,000원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0023/A00000023910340ko.jpg?l=ko",brand:"LG Pra.L",name:"갈바닉 부스터",names:{en:"Galvanic Booster",zh:"Galvanic Booster",ja:"ガルバニック ブースター"},v:{glow:4,absorb:5,texture:2,trouble:1,elastic:1,jaw:0,all:1,quick:5,target:4,beginner:5,easy:5,multi:1,focus:3,gentle:5,whole:5,cheek:3,jawarea:0,eye:2,spot:2},tags:["스킨케어","간편","입문"]}
 ];
 
-const labels={
-ko:{glow:"건조·광채",absorb:"스킨케어 흡수",texture:"모공·피부결",trouble:"트러블·컨디션",elastic:"탄력",jaw:"턱선·라인",whole:"얼굴 전체",cheek:"볼·팔자",jawarea:"턱선",eye:"눈가",spot:"특정 부위",quick:"간단한 루틴",target:"집중 관리",all:"다기능",care:"꼼꼼한 관리",beginner:"입문",some:"사용 경험 있음",advanced:"숙련",easy:"사용 편의",multi:"다양한 기능",focus:"집중 관리",gentle:"편안한 사용감"},
-en:{glow:"Dryness & glow",absorb:"Skincare absorption",texture:"Pores & texture",trouble:"Skin condition",elastic:"Firmness",jaw:"Jawline",whole:"Whole face",cheek:"Cheeks",jawarea:"Jawline",eye:"Eye area",spot:"Specific area",quick:"Quick routine",target:"Focused care",all:"Versatility",care:"Thorough routine",beginner:"Beginner",some:"Some experience",advanced:"Advanced",easy:"Ease of use",multi:"Versatility",focus:"Focused care",gentle:"Comfortable feel"},
-zh:{glow:"乾燥・光澤",absorb:"保養品吸收",texture:"毛孔・膚質",trouble:"肌膚狀態",elastic:"彈力",jaw:"下顎線",whole:"全臉",cheek:"臉頰",jawarea:"下顎線",eye:"眼周",spot:"特定部位",quick:"快速保養",target:"集中保養",all:"多功能",care:"仔細保養",beginner:"初次使用",some:"有使用經驗",advanced:"熟悉美容儀",easy:"操作方便",multi:"多功能",focus:"集中管理",gentle:"舒適使用感"},
-ja:{glow:"乾燥・ツヤ",absorb:"スキンケアなじみ",texture:"毛穴・キメ",trouble:"肌コンディション",elastic:"ハリ",jaw:"フェイスライン",whole:"顔全体",cheek:"頬",jawarea:"フェイスライン",eye:"目元",spot:"特定部位",quick:"簡単ルーティン",target:"集中ケア",all:"多機能",care:"丁寧なケア",beginner:"初心者",some:"使用経験あり",advanced:"経験豊富",easy:"使いやすさ",multi:"多機能",focus:"集中ケア",gentle:"やさしい使用感"}
+
+const PRODUCT_URLS={
+ x2:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000251745",
+ mini:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000237901",
+ vroller:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000247573",
+ glow:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000252875",
+ vsera:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000248797",
+ thome:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000252975",
+ therma:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000244335",
+ galvanic:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000239103"
 };
 
+const productDescriptions={
+ko:{
+ x2:"광채·피부결·탄력 등 여러 고민을 부스터·미세전류·EMS 등 여러 모드로 관리하는 멀티 기능형 디바이스예요.",
+ mini:"기초 제품과 함께 사용하는 컴팩트한 가정용 피부 미용기기로, 간편한 데일리 스킨케어를 원하는 고객이 비교하기 좋아요.",
+ vroller:"부스터 프로 미니 플러스와 결합해 중주파(EMS) 롤링 케어를 하는 제품으로, 페이스라인·탄력 관리에 초점을 둔 타입이에요.",
+ glow:"1·3·10MHz 물방울 초음파를 활용하고 수분감 있는 기초 제품과 함께 사용하는 홈케어 디바이스예요.",
+ vsera:"EMS를 활용한 얼굴선 중심 홈케어 디바이스예요. 브랜드 공식몰에서는 그린 콜라겐 부스팅젤을 디바이스와 함께 쓰는 보조 제품으로 안내하고 있어요.",
+ thome:"물방울 초음파 기술을 적용한 THOME 홈 뷰티 디바이스로, 브랜드가 안내하는 부스트 앰플과 함께 스킨케어 루틴에 사용하는 타입이에요.",
+ therma:"RF(고주파)·EP·EMS·MC를 모드별로 활용해 광채·탄력·모공·하관·눈가/입가 등 여러 고민을 관리하는 멀티 디바이스예요.",
+ galvanic:"갈바닉 기술을 활용해 기초 제품과 함께 사용하는 컴팩트한 스킨케어 디바이스예요."
+},
+en:{
+ x2:"A multi-function device combining modes for glow, texture, firmness and facial-contour care using booster, microcurrent and EMS technologies.",
+ mini:"A compact home beauty device used with basic skincare, suited to customers who want a simple daily routine.",
+ vroller:"An EMS rolling device used with Booster Pro Mini Plus, focused on facial-contour and firmness care.",
+ glow:"A home-care device using 1, 3 and 10 MHz microdroplet ultrasound and designed to be used with hydrating skincare.",
+ vsera:"An EMS beauty device focused on facial-contour home care. The official brand store also presents Green Collagen Boosting Gel as a companion item for device care.",
+ thome:"A THOME home beauty device using microdroplet ultrasound, designed for a skincare routine with the brand’s Boost Ampoules.",
+ therma:"A multi-mode device using RF, EP, EMS and MC technologies for glow, firmness, pores, jawline and targeted eye/lip-area care.",
+ galvanic:"A compact skincare device using galvanic technology together with basic skincare products."
+},
+zh:{
+ x2:"結合 Booster、微電流與 EMS 等多種模式，針對光澤、膚質、彈力與臉部線條等需求進行居家保養的多功能美容儀。",
+ mini:"搭配基礎保養品使用的輕巧家用美容儀，適合想要簡單日常保養流程的顧客。",
+ vroller:"需與 Booster Pro Mini Plus 結合使用的中頻 EMS 滾輪型美容儀，主打臉部線條與彈力保養。",
+ glow:"運用 1、3、10MHz 水滴超音波技術，搭配含水量充足的保養品使用的居家美容儀。",
+ vsera:"以 EMS 進行臉部線條居家保養的美容儀；品牌官方商城也將 Green Collagen Boosting Gel 列為可搭配美容儀使用的保養品。",
+ thome:"採用水滴超音波技術的 THOME 居家美容儀，可搭配品牌提供的 Boost Ampoule 納入日常保養流程。",
+ therma:"依模式搭配 RF、EP、EMS、MC 技術，針對光澤、彈力、毛孔、下顎線與眼唇周等多種需求進行保養。",
+ galvanic:"運用 Galvanic 技術並搭配基礎保養品使用的輕巧型保養美容儀。"
+},
+ja:{
+ x2:"Booster・微弱電流・EMSなど複数のモードを組み合わせ、ツヤ・キメ・ハリ・フェイスラインなどをケアする多機能デバイスです。",
+ mini:"基礎化粧品と一緒に使うコンパクトな家庭用美容機器で、シンプルなデイリーケアを求める方に比較しやすいタイプです。",
+ vroller:"Booster Pro Mini Plusと組み合わせて使う中周波EMSローラーで、フェイスラインとハリのケアに重点を置いたタイプです。",
+ glow:"1・3・10MHzの水滴超音波を活用し、水分感のあるスキンケアと一緒に使うホームケアデバイスです。",
+ vsera:"EMSを使ったフェイスライン中心のホームケアデバイスです。ブランド公式ストアではGreen Collagen Boosting Gelをデバイスケアの併用アイテムとして案内しています。",
+ thome:"水滴超音波技術を採用したTHOMEのホーム美容デバイスで、ブランドが案内するBoost Ampouleと一緒にスキンケアルーティンで使用するタイプです。",
+ therma:"RF・EP・EMS・MCをモード別に活用し、ツヤ・ハリ・毛穴・フェイスライン・目元/口元など複数の悩みをケアする多機能デバイスです。",
+ galvanic:"ガルバニック技術を使い、基礎化粧品と一緒に使用するコンパクトなスキンケアデバイスです。"
+}
+};
+
+const productGuides={
+ ko:{
+  x2:{how:"세안 후 에어샷 X2는 건조한 피부에 먼저 사용하고, 이후 기초 제품을 바른 뒤 부스터·MC·더마샷·듀얼 모드를 사용해요. 마스크 모드는 반드시 마스크팩과 함께 사용해요.",pair:"부스터 모드는 가벼운 세럼·앰플부터 사용한 뒤 점도 있는 크림·젤 제형을 이어서 사용해요."},
+  mini:{how:"기초 제품을 바른 뒤 피부에 밀착해 사용해요. 처음에는 낮은 단계부터 시작하고 피부 상태에 맞춰 강도와 사용 시간을 조절해 주세요.",pair:"평소 사용하는 수분감 있는 기초 제품과 함께 사용해요."},
+  vroller:{how:"부스터 프로 미니 플러스와 결합한 뒤 전도성 있는 젤을 충분히 바르고 원하는 부위를 롤링해요. 브랜드는 하루 1~3회, 1회 약 5분 사용을 안내해요.",pair:"중주파 전달을 위해 전도성 있는 제형이 필요하며, 브랜드는 전용 젤 사용을 권장해요."},
+  glow:{how:"수분감 있는 제형을 충분히 바른 뒤 피부 위를 부드럽게 롤링해요. 사용 중 뻑뻑해지면 제품을 덧발라 촉촉함을 유지하고, 하루 1~3회 범위에서 피부 상태에 맞춰 조절해요.",pair:"젤 크림, 점성이 있는 앰플, 마스크팩처럼 수분감이 충분한 제형과 함께 사용해요."},
+  vsera:{how:"EMS를 활용하는 디바이스로, 얼굴선 관리가 필요한 부위에 사용하고 강도·사용 방법은 제품에 동봉된 설명서 기준으로 조절해 주세요.",pair:"브랜드 공식몰에서는 그린 콜라겐 부스팅젤을 디바이스와 함께 쓰는 보조 제품으로 안내하고 있어요. 실제 사용 제형은 동봉 설명서와 최신 공식 안내를 확인해 주세요."},
+  thome:{how:"세안 후 피부를 정돈하고 함께 사용할 스킨케어를 바른 뒤 사용해요. 정확한 사용 시간·횟수·부위와 단계 설정은 제품 동봉 설명서 및 최신 공식 사용 가이드를 확인해 주세요.",pair:"브랜드는 더 글로우 시그니처와 함께 톰 부스트 앰플 6종 키트·개별 부스트 앰플을 안내하고 있어요. 구성품과 사용할 제형은 구매 옵션 및 최신 공식 안내를 확인해 주세요."},
+  therma:{how:"세안 후 토너 패드로 피부를 정돈하고 기초 제품을 바른 뒤 모드를 선택해요. GLOW·FIRM·JAW는 매일 1회 5분, PORE·EYE는 매일 1회 3분으로 안내돼요.",pair:"기초 제품과 함께 사용하고, 헤드가 뻑뻑하면 제품을 추가로 도포해요. 브랜드의 글래스라이크 스킨케어 라인과 함께 사용할 수 있어요."},
+  galvanic:{how:"기초 제품을 바른 뒤 하단 전극에 손가락을 대고 헤드를 원하는 부위에 접촉해요. 공식 사용 안내는 고민 부위당 약 1분, 여러 부위를 연속 사용할 때는 총 3분 이내를 안내해요.",pair:"기초 제품을 적정량 도포한 상태에서 사용해요. 흡수·컨투어·부스터 방식 중 고민에 맞는 사용법을 선택할 수 있어요."}
+ },
+ en:{
+  x2:{how:"After cleansing, use Air Shot X2 first on dry skin. Then apply skincare and use Booster, MC, Derma Shot or Dual modes. Mask mode must be used with a sheet mask.",pair:"For Booster mode, start with a light serum or ampoule, then follow with a richer cream or gel texture."},
+  mini:{how:"Apply basic skincare, then keep the device in contact with the skin. Start at a low level and adjust intensity and usage time to your skin condition.",pair:"Use it with your usual hydrating basic skincare."},
+  vroller:{how:"Attach it to Booster Pro Mini Plus, apply enough conductive gel and roll over the target area. The brand recommends 1–3 sessions a day, about 5 minutes per session.",pair:"A conductive medium is required for the mid-frequency current, and the brand recommends its dedicated gel."},
+  glow:{how:"Apply enough hydrating product and glide the device gently. Reapply if the skin starts to feel dry, and adjust within 1–3 sessions a day based on skin condition.",pair:"Use with hydrating gel creams, viscous ampoules or sheet masks."},
+  vsera:{how:"This is an EMS device for facial-contour-focused care. Adjust intensity and usage method according to the manual included with the product.",pair:"The official brand store presents Green Collagen Boosting Gel as a companion item for device care. Check the included manual and latest official guidance for the appropriate texture."},
+  thome:{how:"After cleansing, prep the skin and apply the skincare you plan to use with the device. Check the included manual and latest official guide for exact session time, frequency, treatment area and level settings.",pair:"THOME lists a six-type Boost Ampoule kit and individual Boost Ampoules alongside The Glow Signature. Check your purchase option and the latest official guidance for the included items and compatible texture."},
+  therma:{how:"After cleansing, prep the skin with a toner pad and apply basic skincare. GLOW/FIRM/JAW are guided for once daily, 5 minutes; PORE/EYE for once daily, 3 minutes.",pair:"Use with basic skincare and add more product if the head no longer glides comfortably. It can also be paired with the brand's Glasslike skincare line."},
+  galvanic:{how:"Apply basic skincare, touch the lower electrode with your finger and place the head on the target area. Official guidance recommends about 1 minute per concern area and no more than 3 minutes total when treating multiple areas consecutively.",pair:"Use with an appropriate amount of basic skincare. Choose Absorption, Contour or Booster technique according to your concern."}
+ },
+ zh:{
+  x2:{how:"潔面後先在乾燥肌膚上使用 Air Shot X2，再塗抹保養品使用 Booster、MC、Derma Shot 或 Dual 模式；Mask 模式必須搭配面膜使用。",pair:"Booster 模式可先搭配清爽精華／安瓶，再接續較有稠度的乳霜或凝膠質地。"},
+  mini:{how:"先塗抹基礎保養品，再讓機頭貼合肌膚使用。初次使用請從較低段開始，並依肌膚狀況調整強度與使用時間。",pair:"搭配平常使用、含水量充足的基礎保養品。"},
+  vroller:{how:"與 Booster Pro Mini Plus 結合後，充分塗抹導電凝膠並在目標部位滾動。品牌建議每日 1–3 次，每次約 5 分鐘。",pair:"中頻電流需要導電介質，品牌建議搭配專用導電凝膠。"},
+  glow:{how:"充分塗抹保濕質地後輕柔滑動；若過程中變乾可再次補塗，並依肌膚狀況在每日 1–3 次範圍內調整。",pair:"適合保濕凝膠霜、較有黏度的安瓶與面膜等含水量高的質地。"},
+  vsera:{how:"這是一款以 EMS 進行臉部線條保養的美容儀，強度與使用方式請依商品隨附說明書調整。",pair:"品牌官方商城將 Green Collagen Boosting Gel 列為可搭配美容儀使用的保養品。實際適合的質地請以隨附說明書及最新官方說明為準。"},
+  thome:{how:"潔面並整理肌膚後，先塗抹要搭配使用的保養品再使用美容儀。確切使用時間、頻率、部位與段數設定請以隨附說明書及最新官方使用指南為準。",pair:"THOME 官方頁面同時提供 6 種 Boost Ampoule 套組與單款 Boost Ampoule。實際內容物與適合搭配的質地請依購買選項及最新官方說明確認。"},
+  therma:{how:"潔面後以化妝棉整理肌膚並塗抹基礎保養，再選擇模式。GLOW／FIRM／JAW 建議每日 1 次 5 分鐘，PORE／EYE 每日 1 次 3 分鐘。",pair:"搭配基礎保養使用；若機頭滑動變得不順，可追加塗抹保養品。也可搭配品牌 Glasslike 保養系列。"},
+  galvanic:{how:"先塗抹基礎保養，手指接觸下方電極後將機頭貼在目標部位。官方使用指南建議每個部位約 1 分鐘；若連續使用多個部位，總時間不超過 3 分鐘。",pair:"在塗抹適量基礎保養品的狀態下使用，可依需求選擇吸收、Contour 或 Booster 使用方式。"}
+ },
+ ja:{
+  x2:{how:"洗顔後、Air Shot X2は乾いた肌に先に使用。その後スキンケアを塗布し、Booster・MC・Derma Shot・Dualモードを使います。Maskモードは必ずシートマスクと一緒に使用します。",pair:"Boosterモードは軽い美容液・アンプルから始め、次にコクのあるクリームやジェルを重ねます。"},
+  mini:{how:"基礎化粧品を塗布してから肌に密着させて使用します。初めて使う場合は低いレベルから始め、肌状態に合わせて強度と使用時間を調整してください。",pair:"普段使用している水分感のある基礎化粧品と一緒に使用します。"},
+  vroller:{how:"Booster Pro Mini Plusに装着し、導電ジェルを十分に塗って気になる部位をローリングします。ブランドは1日1〜3回、1回約5分を案内しています。",pair:"中周波を伝えるため導電性のある媒体が必要で、ブランドは専用ジェルを推奨しています。"},
+  glow:{how:"水分感のあるアイテムを十分に塗り、やさしくローリングします。滑りが悪くなったら追加塗布し、肌状態に合わせて1日1〜3回の範囲で調整します。",pair:"ジェルクリーム、粘度のあるアンプル、シートマスクなど水分量の多いテクスチャーと一緒に使用します。"},
+  vsera:{how:"EMSを使ったフェイスラインケア用デバイスです。強度と使用方法は商品に同梱された取扱説明書に合わせて調整してください。",pair:"ブランド公式ストアではGreen Collagen Boosting Gelをデバイスケアの併用アイテムとして案内しています。実際に使用するテクスチャーは同梱の説明書と最新の公式案内をご確認ください。"},
+  thome:{how:"洗顔後に肌を整え、併用するスキンケアを塗布してから使用します。正確な使用時間・頻度・使用部位・レベル設定は、同梱の取扱説明書と最新の公式使用ガイドをご確認ください。",pair:"THOME公式ページではThe Glow Signatureとあわせて6種類のBoost Ampouleキットや単品Boost Ampouleを案内しています。内容物と併用するテクスチャーは購入オプションと最新の公式案内をご確認ください。"},
+  therma:{how:"洗顔後にトナーパッドで肌を整え、基礎化粧品を塗ってモードを選択します。GLOW・FIRM・JAWは1日1回5分、PORE・EYEは1日1回3分の案内です。",pair:"基礎化粧品と一緒に使い、滑りが悪くなったら追加塗布します。ブランドのGlasslikeスキンケアラインとも組み合わせられます。"},
+  galvanic:{how:"基礎化粧品を塗り、下部電極に指を触れた状態でヘッドを気になる部位に当てます。公式ガイドは1部位あたり約1分、複数部位を続けて使う場合は合計3分以内を案内しています。",pair:"基礎化粧品を適量塗布した状態で使用し、悩みに合わせてAbsorption・Contour・Boosterの使い方を選べます。"}
+ }
+};
+
+
+const productModes={
+ ko:{
+  x2:[
+   {name:"AIR SHOT X2",desc:"모공 중심 케어 · 건조한 피부에 사용하는 방식"},
+   {name:"BOOSTER X2",desc:"광채·기초 제품 흡수 중심 케어"},
+   {name:"MC X2",desc:"미세전류 기반 볼륨 중심 케어"},
+   {name:"DERMA SHOT X2",desc:"중주파(EMS) 기반 탄력 중심 케어"},
+   {name:"DUAL",desc:"앱에서 두 가지 모드를 조합하는 복합 케어"},
+   {name:"MASK",desc:"마스크팩 부착 상태에서 사용하는 전용 케어"}
+  ],
+  mini:[
+   {name:"RED",desc:"흔적·브라이트닝 중심 케어"},
+   {name:"BLUE",desc:"트러블 진정·피지 컨디션 중심 케어"},
+   {name:"PURPLE",desc:"스킨케어 흡수·광채 중심 케어"}
+  ],
+  vroller:[
+   {name:"V ROLLER EMS CARE",desc:"미니 플러스에 결합해 사용하는 중주파(EMS) 롤러 케어 · 넓은 얼굴 근육·페이스라인·탄력 중심"}
+  ],
+  glow:[
+   {name:"BOOST",desc:"수분 중심 케어"},
+   {name:"FOCUS",desc:"탄력 중심 케어"},
+   {name:"GLOW",desc:"광채 중심 케어"},
+   {name:"CALMING",desc:"피부 진정 중심 케어"},
+   {name:"MASTER",desc:"여러 초음파 패턴을 활용한 복합 피부 컨디션 케어"}
+  ],
+  vsera:[
+   {name:"SLIM",desc:"얼굴선 중심 EMS 케어"},
+   {name:"UP",desc:"얼굴 탄력 중심 EMS 케어"},
+   {name:"BODY",desc:"얼굴 외 바디 부위 EMS 케어"}
+  ],
+  thome:[
+   {name:"FOCUS",desc:"피부결·광채 중심 케어"},
+   {name:"INNER",desc:"수분 중심 케어"},
+   {name:"TENSION",desc:"탄력 중심 케어"}
+  ],
+  therma:[
+   {name:"GLOW",desc:"고주파(RF)+EP 기반 광채 케어"},
+   {name:"FIRM",desc:"16중 고주파(RF) 기반 탄력 케어"},
+   {name:"JAW",desc:"고주파(RF)+EMS 기반 하관·턱선 케어"},
+   {name:"PORE",desc:"미세전류(MC) 기반 모공 케어"},
+   {name:"EYE",desc:"고주파(RF) 기반 눈가·입가 등 국소 부위 케어"}
+  ],
+  galvanic:[
+   {name:"ABSORB · 흡수",desc:"공식 사용 방식 · 기초 제품 위를 가볍게 롤링"},
+   {name:"CONTOUR · 컨투어",desc:"공식 사용 방식 · 아래에서 위로 끌어올리듯 사용"},
+   {name:"BOOST · 부스터",desc:"공식 사용 방식 · 스팟 부위에 2~3초간 집중 사용"}
+  ]
+ },
+ en:{
+  x2:[
+   {name:"AIR SHOT X2",desc:"A pore-care mode guided for use on dry skin."},
+   {name:"BOOSTER X2",desc:"For radiance care and helping basic skincare absorb."},
+   {name:"MC X2",desc:"A microcurrent mode focused on volume care."},
+   {name:"DERMA SHOT X2",desc:"An EMS mode focused on firmness care."},
+   {name:"DUAL",desc:"Combines two selected modes; the pairing can be customized in the AGE-R app."},
+   {name:"MASK",desc:"A dedicated mode used while wearing a sheet mask."}
+  ],
+  mini:[
+   {name:"RED",desc:"Focused on post-blemish mark and brightening care."},
+   {name:"BLUE",desc:"Focused on soothing and sebum-condition care."},
+   {name:"PURPLE",desc:"Focused on skincare absorption and radiance care."}
+  ],
+  vroller:[
+   {name:"V ROLLER EMS CARE",desc:"No separate named mode selection. Attach it to Mini Plus for mid-frequency EMS rolling focused on broader facial muscles, contour and firmness care."}
+  ],
+  glow:[
+   {name:"BOOST",desc:"Focused on hydration care."},
+   {name:"FOCUS",desc:"Focused on firmness care."},
+   {name:"GLOW",desc:"Focused on radiance care."},
+   {name:"CALMING",desc:"Focused on soothing care."},
+   {name:"MASTER",desc:"An integrated mode using multiple ultrasound patterns for broader skin-condition care."}
+  ],
+  vsera:[
+   {name:"SLIM",desc:"An EMS mode focused on facial-contour care."},
+   {name:"UP",desc:"An EMS mode focused on facial firmness care."},
+   {name:"BODY",desc:"An EMS mode intended for body-area care outside the face."}
+  ],
+  thome:[
+   {name:"FOCUS",desc:"Focused on texture and radiance care."},
+   {name:"INNER",desc:"Focused on hydration care."},
+   {name:"TENSION",desc:"Focused on firmness care."}
+  ],
+  therma:[
+   {name:"GLOW",desc:"Radiance care using RF + EP."},
+   {name:"FIRM",desc:"Firmness care using 16-band RF."},
+   {name:"JAW",desc:"Jawline/lower-face care using RF + EMS."},
+   {name:"PORE",desc:"Pore care using microcurrent (MC)."},
+   {name:"EYE",desc:"Localized care for areas such as the eyes and mouth using RF."}
+  ],
+  galvanic:[
+   {name:"ABSORB",desc:"Not a separate device mode, but an official technique: lightly roll over skincare."},
+   {name:"CONTOUR",desc:"Not a separate device mode, but an official technique: glide upward from lower to upper areas."},
+   {name:"BOOST",desc:"Not a separate device mode, but an official technique: focus on a spot for 2–3 seconds."}
+  ]
+ },
+ zh:{
+  x2:[
+   {name:"AIR SHOT X2",desc:"毛孔護理模式；官方建議在乾燥肌膚上使用。"},
+   {name:"BOOSTER X2",desc:"用於光澤護理與基礎保養品吸收護理。"},
+   {name:"MC X2",desc:"運用微電流、以豐盈感護理為重點的模式。"},
+   {name:"DERMA SHOT X2",desc:"運用 EMS、以彈力護理為重點的模式。"},
+   {name:"DUAL",desc:"可在 AGE-R App 設定兩種模式組合並同時護理。"},
+   {name:"MASK",desc:"需搭配面膜使用的專用模式。"}
+  ],
+  mini:[
+   {name:"RED",desc:"以痘印痕跡與亮白護理為重點。"},
+   {name:"BLUE",desc:"以舒緩與皮脂狀態護理為重點。"},
+   {name:"PURPLE",desc:"以保養品吸收與光澤護理為重點。"}
+  ],
+  vroller:[
+   {name:"V ROLLER EMS CARE",desc:"沒有獨立模式選擇；需與 Mini Plus 結合，以中頻 EMS 滾輪進行較大範圍臉部肌肉、輪廓與彈力護理。"}
+  ],
+  glow:[
+   {name:"BOOST",desc:"以補水護理為重點。"},
+   {name:"FOCUS",desc:"以彈力護理為重點。"},
+   {name:"GLOW",desc:"以光澤護理為重點。"},
+   {name:"CALMING",desc:"以舒緩護理為重點。"},
+   {name:"MASTER",desc:"運用多種超音波模式進行複合肌膚狀態管理的整合模式。"}
+  ],
+  vsera:[
+   {name:"SLIM",desc:"以臉部輪廓護理為重點的 EMS 模式。"},
+   {name:"UP",desc:"以臉部彈力護理為重點的 EMS 模式。"},
+   {name:"BODY",desc:"用於臉部以外身體部位護理的 EMS 模式。"}
+  ],
+  thome:[
+   {name:"FOCUS",desc:"以膚質與光澤護理為重點。"},
+   {name:"INNER",desc:"以補水護理為重點。"},
+   {name:"TENSION",desc:"以彈力護理為重點。"}
+  ],
+  therma:[
+   {name:"GLOW",desc:"運用 RF + EP 的光澤護理模式。"},
+   {name:"FIRM",desc:"運用 16 重 RF 的彈力護理模式。"},
+   {name:"JAW",desc:"運用 RF + EMS 的下半臉與下顎線護理模式。"},
+   {name:"PORE",desc:"運用微電流（MC）的毛孔護理模式。"},
+   {name:"EYE",desc:"運用 RF 針對眼周、唇周等局部部位進行護理。"}
+  ],
+  galvanic:[
+   {name:"ABSORB · 吸收",desc:"不是獨立模式，而是官方使用方式：搭配保養品輕柔滾動。"},
+   {name:"CONTOUR · 輪廓",desc:"不是獨立模式，而是官方使用方式：由下往上提拉般滑動。"},
+   {name:"BOOST · 集中",desc:"不是獨立模式，而是官方使用方式：在局部位置集中停留 2–3 秒。"}
+  ]
+ },
+ ja:{
+  x2:[
+   {name:"AIR SHOT X2",desc:"毛穴ケア用モード。乾いた肌での使用が案内されています。"},
+   {name:"BOOSTER X2",desc:"ツヤケアと基礎化粧品のなじみをサポートするモードです。"},
+   {name:"MC X2",desc:"微弱電流を使ったボリュームケア中心のモードです。"},
+   {name:"DERMA SHOT X2",desc:"EMSを使ったハリケア中心のモードです。"},
+   {name:"DUAL",desc:"AGE-Rアプリで選んだ2つのモードを組み合わせてケアできます。"},
+   {name:"MASK",desc:"シートマスクを装着した状態で使う専用モードです。"}
+  ],
+  mini:[
+   {name:"RED",desc:"跡・ブライトニングケア中心。"},
+   {name:"BLUE",desc:"肌を整えるケア・皮脂コンディション中心。"},
+   {name:"PURPLE",desc:"スキンケアのなじみ・ツヤケア中心。"}
+  ],
+  vroller:[
+   {name:"V ROLLER EMS CARE",desc:"独立したモード選択はなく、Mini Plusに装着して中周波EMSで広い顔筋・フェイスライン・ハリをケアするローラーです。"}
+  ],
+  glow:[
+   {name:"BOOST",desc:"水分ケア中心のモードです。"},
+   {name:"FOCUS",desc:"ハリケア中心のモードです。"},
+   {name:"GLOW",desc:"ツヤケア中心のモードです。"},
+   {name:"CALMING",desc:"肌を整えるケア中心のモードです。"},
+   {name:"MASTER",desc:"複数の超音波パターンを使い、複合的な肌コンディションをまとめてケアする統合モードです。"}
+  ],
+  vsera:[
+   {name:"SLIM",desc:"フェイスライン・輪郭ケアを中心に使うEMSモードです。"},
+   {name:"UP",desc:"顔のハリケアを中心に使うEMSモードです。"},
+   {name:"BODY",desc:"顔以外のボディ部位ケアに使うEMSモードです。"}
+  ],
+  thome:[
+   {name:"FOCUS",desc:"キメ・ツヤケア中心のモードです。"},
+   {name:"INNER",desc:"保湿ケア中心のモードです。"},
+   {name:"TENSION",desc:"ハリケア中心のモードです。"}
+  ],
+  therma:[
+   {name:"GLOW",desc:"RF + EPを使ったツヤケアモードです。"},
+   {name:"FIRM",desc:"16重RFを使ったハリケアモードです。"},
+   {name:"JAW",desc:"RF + EMSを使った下顔面・フェイスラインケアモードです。"},
+   {name:"PORE",desc:"微弱電流（MC）を使った毛穴ケアモードです。"},
+   {name:"EYE",desc:"RFで目元・口元など局所部位をケアするモードです。"}
+  ],
+  galvanic:[
+   {name:"ABSORB · 吸収",desc:"独立したモードではなく、公式案内の使い方です。スキンケアの上を軽くローリングします。"},
+   {name:"CONTOUR",desc:"独立したモードではなく、公式案内の使い方です。下から上へ引き上げるように動かします。"},
+   {name:"BOOST",desc:"独立したモードではなく、公式案内の使い方です。気になる箇所に2〜3秒集中的に当てます。"}
+  ]
+ }
+};
+
+const labels={
+ko:{glow:"건조·광채",absorb:"스킨케어 흡수",texture:"모공·피부결",trouble:"트러블·컨디션",elastic:"탄력",jaw:"턱선·라인",whole:"얼굴 전체",cheek:"볼·팔자",jawarea:"턱선",eye:"눈가",spot:"특정 부위",quick:"간단한 루틴",target:"집중 관리",all:"다기능",care:"꼼꼼한 관리",beginner:"입문",some:"사용 경험 있음",advanced:"숙련",easy:"사용 편의",multi:"다양한 기능",focus:"집중 관리",gentle:"편안한 사용감",budget15:"15만 원 이하",budget30:"15~30만 원",budget50:"30~50만 원",budget50p:"50만 원 이상",budgetAny:"가격 제한 없음"},
+en:{glow:"Dryness & glow",absorb:"Skincare absorption",texture:"Pores & texture",trouble:"Skin condition",elastic:"Firmness",jaw:"Jawline",whole:"Whole face",cheek:"Cheeks",jawarea:"Jawline",eye:"Eye area",spot:"Specific area",quick:"Quick routine",target:"Focused care",all:"Versatility",care:"Thorough routine",beginner:"Beginner",some:"Some experience",advanced:"Advanced",easy:"Ease of use",multi:"Versatility",focus:"Focused care",gentle:"Comfortable feel",budget15:"Under ₩150k",budget30:"₩150k–₩300k",budget50:"₩300k–₩500k",budget50p:"₩500k+",budgetAny:"No budget limit"},
+zh:{glow:"乾燥・光澤",absorb:"保養品吸收",texture:"毛孔・膚質",trouble:"肌膚狀態",elastic:"彈力",jaw:"下顎線",whole:"全臉",cheek:"臉頰",jawarea:"下顎線",eye:"眼周",spot:"特定部位",quick:"快速保養",target:"集中保養",all:"多功能",care:"仔細保養",beginner:"初次使用",some:"有使用經驗",advanced:"熟悉美容儀",easy:"操作方便",multi:"多功能",focus:"集中管理",gentle:"舒適使用感",budget15:"15萬韓元以下",budget30:"15–30萬韓元",budget50:"30–50萬韓元",budget50p:"50萬韓元以上",budgetAny:"預算不限"},
+ja:{glow:"乾燥・ツヤ",absorb:"スキンケアなじみ",texture:"毛穴・キメ",trouble:"肌コンディション",elastic:"ハリ",jaw:"フェイスライン",whole:"顔全体",cheek:"頬",jawarea:"フェイスライン",eye:"目元",spot:"特定部位",quick:"簡単ルーティン",target:"集中ケア",all:"多機能",care:"丁寧なケア",beginner:"初心者",some:"使用経験あり",advanced:"経験豊富",easy:"使いやすさ",multi:"多機能",focus:"集中ケア",gentle:"やさしい使用感",budget15:"15万ウォン以下",budget30:"15〜30万ウォン",budget50:"30〜50万ウォン",budget50p:"50万ウォン以上",budgetAny:"予算なし"}
+};
+
+const zhSimplifier=(window.OpenCC&&OpenCC.Converter)
+ ? OpenCC.Converter({from:"tw",to:"cn"})
+ : (text=>String(text));
+function simplifyZhValue(value){
+ if(typeof value==="string")return zhSimplifier(value);
+ if(Array.isArray(value))return value.map(simplifyZhValue);
+ if(value&&typeof value==="object"){
+  const out={};
+  Object.keys(value).forEach(k=>out[k]=simplifyZhValue(value[k]));
+  return out;
+ }
+ return value;
+}
+I18N.zhs=simplifyZhValue(I18N.zh);
+Q.zhs=simplifyZhValue(Q.zh);
+productDescriptions.zhs=simplifyZhValue(productDescriptions.zh);
+productGuides.zhs=simplifyZhValue(productGuides.zh);
+productModes.zhs=simplifyZhValue(productModes.zh);
+labels.zhs=simplifyZhValue(labels.zh);
+products.forEach(p=>{
+ if(p.names&&p.names.zh)p.names.zhs=zhSimplifier(p.names.zh);
+});
+
 let lang="ko", step=0;
-let answers=[[],null,null,null,null];
+let answers=[[],null,null,null,null,null];
 const $=s=>document.querySelector(s);
 
 function t(k){return I18N[lang][k]||k}
 function setLang(l){
  lang=l; localStorage.setItem("beauty-device-lang",l);
- document.documentElement.lang=l==="zh"?"zh-Hant":l;
+ document.documentElement.lang=l==="zh"?"zh-Hant":l==="zhs"?"zh-Hans":l;
  document.querySelectorAll("[data-i]").forEach(el=>el.innerHTML=t(el.dataset.i));
- $("#langBtn").textContent=({ko:"한국어",en:"English",zh:"繁體中文",ja:"日本語"})[l]+" ▾";
+ $("#langBtn").textContent=({ko:"한국어",en:"English",zhs:"简体中文",zh:"繁體中文",ja:"日本語"})[l]+" ▾";
  $("#langSheet").classList.add("hidden");
  if(!$("#quiz").classList.contains("hidden")) renderQ();
  if(!$("#result").classList.contains("hidden")) showResult();
@@ -275,8 +680,8 @@ function show(id){["home","quiz","result"].forEach(x=>$("#"+x).classList.toggle(
 
 function renderQ(){
  const q=Q[lang][step];
- $("#stepText").textContent=(step+1)+" / 5";
- $("#bar").style.width=((step+1)*20)+"%";
+ $("#stepText").textContent=(step+1)+" / 6";
+ $("#bar").style.width=(((step+1)/6)*100)+"%";
  $("#question").innerHTML='<div class="qtitle">'+q.title+'</div><div class="qhint">'+q.hint+'</div>';
  $("#options").innerHTML="";
  q.opts.forEach(o=>{
@@ -295,7 +700,7 @@ function renderQ(){
  $("#back").style.visibility=step===0?"hidden":"visible";
  const valid=q.multi?answers[step].length>0:!!answers[step];
  $("#next").disabled=!valid;
- $("#next").textContent=step===4?(lang==="ko"?"결과 보기 ✨":lang==="en"?"See my result ✨":lang==="zh"?"查看結果 ✨":"結果を見る ✨"):t("next");
+ $("#next").textContent=step===5?(lang==="ko"?"결과 보기 ✨":lang==="en"?"See my result ✨":lang==="zhs"?"查看结果 ✨":lang==="zh"?"查看結果 ✨":"結果を見る ✨"):t("next");
 }
 
 function scoreProduct(p){
@@ -312,16 +717,73 @@ function scoreProduct(p){
  if(exp==="beginner")s+=(p.v.beginner||0)*1.8+(p.v.easy||0)*1.2;
  if(exp==="advanced")s+=(p.v.multi||0)*.9+(p.v.focus||0)*.7;
  const priority=answers[4]; if(priority)s+=(p.v[priority]||0)*2.2;
+ const budget=answers[5]; if(budget)s+=budgetScore(p,budget);
  return s;
 }
+function productPriceNumber(p){
+ const n=parseInt(String(p.price||"").replace(/[^0-9]/g,""),10);
+ return Number.isFinite(n)?n:null;
+}
+function budgetScore(p,budget){
+ const price=productPriceNumber(p);
+ if(!price||budget==="budgetAny")return 0;
+ if(budget==="budget15"){
+  if(price<=150000)return 10;
+  if(price<=200000)return 5;
+  if(price<=300000)return 0;
+  return -5;
+ }
+ if(budget==="budget30"){
+  if(price>=150000&&price<=300000)return 9;
+  if(price<150000)return 5;
+  if(price<=400000)return 2;
+  return -4;
+ }
+ if(budget==="budget50"){
+  if(price>=300000&&price<=500000)return 9;
+  if(price>=200000&&price<300000)return 4;
+  if(price>500000)return 3;
+  return 1;
+ }
+ if(budget==="budget50p"){
+  if(price>=500000)return 9;
+  if(price>=300000)return 5;
+  return 1;
+ }
+ return 0;
+}
 function pname(p){return (p.names&&p.names[lang])||p.name}
+function pdesc(p){return productDescriptions[lang][p.id]||""}
+function pguide(p,key){const g=productGuides[lang]&&productGuides[lang][p.id];return g&&g[key]?g[key]:""}
+function pmodes(p){return (productModes[lang]&&productModes[lang][p.id])||[]}
+function renderModes(p){return pmodes(p).map(m=>'<div class="mode-item"><span class="mode-name">'+m.name+'</span><span class="mode-desc">'+m.desc+'</span></div>').join("")}
+function purl(p){return PRODUCT_URLS[p.id]||"https://www.oliveyoung.co.kr/store/main/main.do"}
+function pprice(p){
+ if(p.price!=="CHECK") return p.price;
+ return lang==="ko"?"가격 확인":lang==="en"?"Check price":lang==="zhs"?"价格确认":lang==="zh"?"價格確認":"価格確認";
+}
+function setProductPhoto(el,p){
+ el.src=p.image;
+ el.alt=pname(p);
+}
+function fitLine(p){
+ const c=answers[0]||[];
+ const top=c.slice().sort((a,b)=>(p.v[b]||0)-(p.v[a]||0))[0]||c[0];
+ const style=answers[2];
+ if(lang==="ko") return labels.ko[top]+" 고민을 우선으로 보고, "+labels.ko[style]+"을 원하는 고객에게 특히 비교하기 좋아요.";
+ if(lang==="en") return "A strong comparison if "+labels.en[top]+" is a priority and you prefer "+labels.en[style].toLowerCase()+".";
+ if(lang==="zhs") return "如果你最重视「"+labels.zhs[top]+"」，并偏好「"+labels.zhs[style]+"」，很适合一起比较。";
+ if(lang==="zh") return "如果你最重視「"+labels.zh[top]+"」，並偏好「"+labels.zh[style]+"」，很適合一起比較。";
+ return "「"+labels.ja[top]+"」を重視し、「"+labels.ja[style]+"」を希望する方に比較しやすい商品です。";
+}
 function translatedTags(p){
  const map={
   ko:p.tags,
-  en:p.id==="x2"?["All-in-one","Firmness","Texture"]:p.id==="mini"?["Easy","Condition","Beginner"]:p.id==="vroller"?["Jawline","EMS","Focused"]:p.id==="glow"?["Glow","Skincare","Easy"]:p.id==="vsera"?["Jawline","EMS","Focused"]:p.id==="thome"?["Trouble care","Spot","Beginner"]:p.id==="therma"?["Firmness","Texture","All-in-one"]:["Skincare","Easy","Beginner"],
-  zh:p.id==="x2"?["多功能","彈力","膚質"]:p.id==="mini"?["簡單","肌膚狀態","入門"]:p.id==="vroller"?["下顎線","EMS","集中"]:p.id==="glow"?["光澤","保養","簡單"]:p.id==="vsera"?["下顎線","EMS","集中"]:p.id==="thome"?["肌膚狀態","局部","入門"]:p.id==="therma"?["彈力","膚質","多功能"]:["保養","簡單","入門"],
-  ja:p.id==="x2"?["多機能","ハリ","キメ"]:p.id==="mini"?["簡単","コンディション","初心者"]:p.id==="vroller"?["フェイスライン","EMS","集中"]:p.id==="glow"?["ツヤ","スキンケア","簡単"]:p.id==="vsera"?["フェイスライン","EMS","集中"]:p.id==="thome"?["コンディション","スポット","初心者"]:p.id==="therma"?["ハリ","キメ","多機能"]:["スキンケア","簡単","初心者"]
+  en:p.id==="x2"?["All-in-one","Firmness","Texture"]:p.id==="mini"?["Easy","Condition","Beginner"]:p.id==="vroller"?["Jawline","EMS","Focused"]:p.id==="glow"?["Glow","Skincare","Easy"]:p.id==="vsera"?["Jawline","EMS","Focused"]:p.id==="thome"?["Microdroplet ultrasound","Skincare","Ampoule"]:p.id==="therma"?["Firmness","Texture","All-in-one"]:["Skincare","Easy","Beginner"],
+  zh:p.id==="x2"?["多功能","彈力","膚質"]:p.id==="mini"?["簡單","肌膚狀態","入門"]:p.id==="vroller"?["下顎線","EMS","集中"]:p.id==="glow"?["光澤","保養","簡單"]:p.id==="vsera"?["下顎線","EMS","集中"]:p.id==="thome"?["水滴超音波","保養","安瓶"]:p.id==="therma"?["彈力","膚質","多功能"]:["保養","簡單","入門"],
+  ja:p.id==="x2"?["多機能","ハリ","キメ"]:p.id==="mini"?["簡単","コンディション","初心者"]:p.id==="vroller"?["フェイスライン","EMS","集中"]:p.id==="glow"?["ツヤ","スキンケア","簡単"]:p.id==="vsera"?["フェイスライン","EMS","集中"]:p.id==="thome"?["水滴超音波","スキンケア","アンプル"]:p.id==="therma"?["ハリ","キメ","多機能"]:["スキンケア","簡単","初心者"]
  };
+ if(lang==="zhs")return map.zh.map(zhSimplifier);
  return map[lang];
 }
 function reasonLines(p){
@@ -330,22 +792,27 @@ function reasonLines(p){
  if(lang==="ko") return [
   "선택한 "+labels.ko[top]+" 고민과의 매칭 점수가 높았어요.",
   labels.ko[area]+" 관리 선호와 "+labels.ko[style]+" 스타일을 함께 반영했어요.",
-  labels.ko[exp]+" · "+labels.ko[pri]+" 조건까지 종합해 비교했어요."
+  labels.ko[exp]+" · "+labels.ko[pri]+" · "+labels.ko[answers[5]]+" 조건까지 종합해 비교했어요."
  ];
  if(lang==="en") return [
   "It scored highly for your selected "+labels.en[top]+" concern.",
   "Your "+labels.en[area]+" focus and "+labels.en[style]+" preference were included.",
-  "We also considered "+labels.en[exp]+" and "+labels.en[pri]+"."
+  "We also considered "+labels.en[exp]+", "+labels.en[pri]+" and "+labels.en[answers[5]]+"."
+ ];
+ if(lang==="zhs") return [
+  "在你选择的「"+labels.zhs[top]+"」需求中匹配分数较高。",
+  "同时纳入「"+labels.zhs[area]+"」与「"+labels.zhs[style]+"」偏好。",
+  "也综合考虑「"+labels.zhs[exp]+"」、「"+labels.zhs[pri]+"」与「"+labels.zhs[answers[5]]+"」。"
  ];
  if(lang==="zh") return [
   "在你選擇的「"+labels.zh[top]+"」需求中配對分數較高。",
   "同時納入「"+labels.zh[area]+"」與「"+labels.zh[style]+"」偏好。",
-  "也綜合考量「"+labels.zh[exp]+"」與「"+labels.zh[pri]+"」。"
+  "也綜合考量「"+labels.zh[exp]+"」、「"+labels.zh[pri]+"」與「"+labels.zh[answers[5]]+"」。"
  ];
  return [
   "選択した「"+labels.ja[top]+"」とのマッチ度が高い結果でした。",
   "「"+labels.ja[area]+"」と「"+labels.ja[style]+"」の希望も反映しています。",
-  "「"+labels.ja[exp]+"」・「"+labels.ja[pri]+"」も含めて比較しました。"
+  "「"+labels.ja[exp]+"」・「"+labels.ja[pri]+"」・「"+labels.ja[answers[5]]+"」も含めて比較しました。"
  ];
 }
 function resultType(){
@@ -353,7 +820,7 @@ function resultType(){
  const l=labels[lang];
  if(lang==="ko") return c.map(x=>l[x]).join(" + ")+" 집중형";
  if(lang==="en") return c.map(x=>l[x]).join(" + ")+" Match";
- if(lang==="zh") return c.map(x=>l[x]).join(" + ")+" 型";
+ if(lang==="zhs"||lang==="zh") return c.map(x=>l[x]).join(" + ")+" 型";
  return c.map(x=>l[x]).join(" + ")+" タイプ";
 }
 function showResult(){
@@ -361,32 +828,338 @@ function showResult(){
  const main=ranked[0].p, also=ranked[1].p;
  $("#resultType").textContent=resultType();
  $("#resultSub").textContent=t("resultSub");
- $("#mainName").textContent=pname(main); $("#mainBrand").textContent=main.brand;
+ $("#mainName").textContent=pname(main); $("#mainBrand").textContent=main.brand; $("#mainLink").href=purl(main); setProductPhoto($("#mainPhoto"),main); $("#mainPrice").textContent=pprice(main); $("#mainDesc").textContent=pdesc(main); $("#mainHow").textContent=pguide(main,"how"); $("#mainPair").textContent=pguide(main,"pair"); $("#mainFit").textContent=fitLine(main);
  $("#mainTags").innerHTML=translatedTags(main).map(x=>'<span class="tag">'+x+'</span>').join("");
  $("#mainReasons").innerHTML=reasonLines(main).map(x=>'<li>'+x+'</li>').join("");
- $("#alsoName").textContent=pname(also); $("#alsoBrand").textContent=also.brand;
+ $("#alsoName").textContent=pname(also); $("#alsoBrand").textContent=also.brand; $("#alsoLink").href=purl(also); setProductPhoto($("#alsoPhoto"),also); $("#alsoPrice").textContent=pprice(also); $("#alsoDesc").textContent=pdesc(also);
  $("#alsoTags").innerHTML=translatedTags(also).slice(0,2).map(x=>'<span class="tag">'+x+'</span>').join("");
  $("#alsoReason").textContent=t("also");
- $("#staffConcern").textContent=answers[0].map(x=>labels[lang][x]).join(" · ");
- $("#staffMain").textContent=pname(main);
+ $("#staffConcern").textContent=answers[0].map(x=>labels.ko[x]).join(" · ");
+ $("#staffMain").textContent=main.name;
  show("result");
+ window.__ranked=ranked.map(x=>x.p);
  window.__mainPick=main;
+ window.__alsoPick=also;
+ renderSelectedProduct(main);
 }
 
-$("#start").onclick=()=>{step=0;answers=[[],null,null,null,null];show("quiz");renderQ()};
-$("#next").onclick=()=>{if(step<4){step++;renderQ();window.scrollTo({top:0,behavior:"smooth"})}else showResult()};
+
+function renderProductGuides(){
+ const grid=$("#guideGrid");
+ grid.innerHTML=products.map(p=>{
+  const guide=productGuides[lang][p.id];
+  const best=(lang==="ko"?pdesc(p):pdesc(p));
+  return '<div class="product-guide-card">'
+   +'<a class="product-link guide-shop" data-product="'+p.id+'" href="'+purl(p)+'" target="_blank" rel="noopener noreferrer">'
+   +'<img class="product-guide-photo" src="'+p.image+'" alt="'+pname(p)+'" referrerpolicy="no-referrer">'
+   +'</a>'
+   +'<div class="product-guide-body">'
+   +'<div class="product-guide-brand">'+p.brand+'</div>'
+   +'<button class="product-guide-name guide-select" data-product="'+p.id+'" type="button" style="border:0;background:transparent;padding:0;text-align:left;color:inherit;width:100%">'+pname(p)+'</button>'
+   +'<div class="product-guide-price">'+pprice(p)+' <small style="font-weight:600;color:var(--muted)">· '+t("priceDate")+'</small></div>'
+   +'<div class="product-guide-section"><b>'+t("modeTitle")+'</b><div class="mode-list">'+renderModes(p)+'</div><div class="mode-note">'+t("modeNote")+'</div></div>'
+   +'<div class="product-guide-section"><b>'+t("howUse")+'</b><p>'+guide.how+'</p></div>'
+   +'<div class="product-guide-section"><b>'+t("pairWith")+'</b><p>'+guide.pair+'</p></div>'
+   +'<div class="product-guide-section"><b>'+t("fitTitle")+'</b><p>'+best+'</p></div>'
+   +'</div></div>';
+ }).join("");
+ grid.querySelectorAll(".guide-shop").forEach(a=>a.onclick=()=>saveResultState());
+ grid.querySelectorAll(".guide-select").forEach(btn=>btn.onclick=()=>{
+  const p=products.find(x=>x.id===btn.dataset.product);
+  if(!p)return;
+  renderSelectedProduct(p);
+  $("#guideModal").classList.add("hidden");
+  document.body.style.overflow="";
+  show("result");
+ });
+}
+$("#guideBtn").onclick=()=>{renderProductGuides();$("#guideModal").classList.remove("hidden");document.body.style.overflow="hidden"};
+$("#guideClose").onclick=()=>{$("#guideModal").classList.add("hidden");document.body.style.overflow=""};
+$("#guideModal").onclick=e=>{if(e.target.id==="guideModal"){$("#guideModal").classList.add("hidden");document.body.style.overflow=""}};
+
+function renderSelectedProduct(p){
+ window.__mainPick=p;
+ $("#mainName").textContent=pname(p);
+ $("#mainBrand").textContent=p.brand;
+ $("#mainLink").href=purl(p);
+ setProductPhoto($("#mainPhoto"),p);
+ $("#mainPrice").textContent=pprice(p);
+ $("#mainDesc").textContent=pdesc(p);
+ $("#mainHow").textContent=pguide(p,"how");
+ $("#mainPair").textContent=pguide(p,"pair");
+ $("#mainFit").textContent=fitLine(p);
+ $("#mainTags").innerHTML=translatedTags(p).map(x=>'<span class="tag">'+x+'</span>').join("");
+ $("#mainReasons").innerHTML=reasonLines(p).map(x=>'<li>'+x+'</li>').join("");
+ $("#staffMain").textContent=p.name;
+}
+$("#mainName").onclick=()=>{const p=window.__mainPick;if(p)renderSelectedProduct(p)};
+$("#alsoName").onclick=()=>{
+ const p=window.__alsoPick;
+ if(!p)return;
+ const previous=window.__mainPick;
+ renderSelectedProduct(p);
+ window.__alsoPick=previous;
+ $("#alsoName").textContent=pname(previous); $("#alsoBrand").textContent=previous.brand; $("#alsoLink").href=purl(previous); setProductPhoto($("#alsoPhoto"),previous); $("#alsoPrice").textContent=pprice(previous); $("#alsoDesc").textContent=pdesc(previous);
+ $("#alsoTags").innerHTML=translatedTags(previous).slice(0,2).map(x=>'<span class="tag">'+x+'</span>').join("");
+ window.scrollTo({top:document.querySelector(".result-head").offsetTop,behavior:"smooth"});
+};
+$("#mainShop").onclick=()=>{
+ const p=window.__mainPick;if(!p)return;
+ saveResultState();
+ window.location.href=purl(p);
+};
+function encodeResultPayload(){
+ try{
+  const payload={a:answers,l:lang,p:(window.__mainPick&&window.__mainPick.id)||null};
+  return btoa(JSON.stringify(payload)).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+ }catch(e){return ""}
+}
+function decodeResultPayload(raw){
+ try{
+  const b64=raw.replace(/-/g,"+").replace(/_/g,"/")+"=".repeat((4-raw.length%4)%4);
+  return JSON.parse(atob(b64));
+ }catch(e){return null}
+}
+function makeShareResultUrl(){
+ const url=new URL("https://khj-hub.github.io/OYHAYA/beauty-device/");
+ url.searchParams.set("v","13");
+ const r=encodeResultPayload();
+ if(r)url.searchParams.set("r",r);
+ return url.toString();
+}
+function applySharedMainProduct(id){
+ if(!id)return;
+ const p=products.find(x=>x.id===id);
+ if(!p||!window.__mainPick||p.id===window.__mainPick.id)return;
+ const previous=window.__mainPick;
+ renderSelectedProduct(p);
+ window.__alsoPick=previous;
+ $("#alsoName").textContent=pname(previous);
+ $("#alsoBrand").textContent=previous.brand;
+ $("#alsoLink").href=purl(previous);
+ setProductPhoto($("#alsoPhoto"),previous);
+ $("#alsoPrice").textContent=pprice(previous);
+ $("#alsoDesc").textContent=pdesc(previous);
+ $("#alsoTags").innerHTML=translatedTags(previous).slice(0,2).map(x=>'<span class="tag">'+x+'</span>').join("");
+}
+function restoreSharedResult(){
+ try{
+  const raw=new URLSearchParams(location.search).get("r");
+  if(!raw)return false;
+  const s=decodeResultPayload(raw);
+  if(!s||!Array.isArray(s.a)||s.a.length!==6)return false;
+  answers=s.a;
+  if(s.l&&I18N[s.l])setLang(s.l);
+  showResult();
+  applySharedMainProduct(s.p);
+  return true;
+ }catch(e){return false}
+}
+function saveResultState(){
+ try{
+  localStorage.setItem("beauty-device-pending-result",JSON.stringify({answers,lang,ts:Date.now(),p:(window.__mainPick&&window.__mainPick.id)||null}));
+  history.replaceState(null,"",makeShareResultUrl());
+ }catch(e){}
+}
+function restoreResultState(){
+ try{
+  const raw=localStorage.getItem("beauty-device-pending-result");
+  if(!raw)return false;
+  const s=JSON.parse(raw);
+  if(!s||!Array.isArray(s.answers)||s.answers.length!==6)return false;
+  if(Date.now()-(s.ts||0)>1000*60*60*12){localStorage.removeItem("beauty-device-pending-result");return false;}
+  answers=s.answers;
+  if(s.lang&&I18N[s.lang])setLang(s.lang);
+  showResult();
+  applySharedMainProduct(s.p);
+  localStorage.removeItem("beauty-device-pending-result");
+  return true;
+ }catch(e){return false}
+}
+$("#mainLink").onclick=()=>saveResultState();
+$("#alsoLink").onclick=()=>saveResultState();
+$("#start").onclick=()=>{try{localStorage.removeItem("beauty-device-pending-result")}catch(e){};step=0;answers=[[],null,null,null,null,null];show("quiz");renderQ()};
+$("#next").onclick=()=>{if(step<5){step++;renderQ();window.scrollTo({top:0,behavior:"smooth"})}else showResult()};
 $("#back").onclick=()=>{if(step>0){step--;renderQ()}};
-$("#restart").onclick=()=>{step=0;answers=[[],null,null,null,null];show("home")};
-$("#share").onclick=async()=>{
+$("#restart").onclick=()=>{try{localStorage.removeItem("beauty-device-pending-result")}catch(e){};step=0;answers=[[],null,null,null,null,null];show("home")};
+
+function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight,maxLines=3){
+ const chars=Array.from(String(text||""));
+ let line="", lines=[];
+ for(const ch of chars){
+  const test=line+ch;
+  if(ctx.measureText(test).width>maxWidth && line){lines.push(line);line=ch;}
+  else line=test;
+ }
+ if(line)lines.push(line);
+ lines=lines.slice(0,maxLines);
+ lines.forEach((ln,i)=>ctx.fillText(ln,x,y+i*lineHeight));
+ return y+lines.length*lineHeight;
+}
+function dataUrlToFile(dataUrl,filename){
+ const parts=dataUrl.split(",");
+ const mime=(parts[0].match(/:(.*?);/)||[])[1]||"image/png";
+ const binary=atob(parts[1]);
+ const bytes=new Uint8Array(binary.length);
+ for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+ return new File([bytes],filename,{type:mime});
+}
+
+function drawShareQr(ctx,text,x,y,size){
+ if(typeof QRCode==="undefined")throw new Error("QR library unavailable");
+ const holder=document.createElement("div");
+ new QRCode(holder,{
+  text,
+  width:size,
+  height:size,
+  colorDark:"#241b22",
+  colorLight:"#ffffff",
+  correctLevel:QRCode.CorrectLevel.M
+ });
+ const qrCanvas=holder.querySelector("canvas");
+ if(!qrCanvas)throw new Error("QR canvas unavailable");
+ ctx.drawImage(qrCanvas,x,y,size,size);
+}
+
+const brandShareImage=new Image();
+brandShareImage.decoding="async";
+brandShareImage.src="./icons/icon-192.png?v=4";
+
+function createShareFile(){
  const p=window.__mainPick;
+ const canvas=document.createElement("canvas");
+ canvas.width=1080;canvas.height=1350;
+ const ctx=canvas.getContext("2d");
+
+ const grad=ctx.createLinearGradient(0,0,1080,1350);
+ grad.addColorStop(0,"#fff7fb");grad.addColorStop(.68,"#ffffff");grad.addColorStop(1,"#ffe9f2");
+ ctx.fillStyle=grad;ctx.fillRect(0,0,1080,1350);
+
+ ctx.fillStyle="#241b22";ctx.font="800 40px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+ ctx.fillText("BEAUTY DEVICE FINDER",70,92);
+ ctx.fillStyle="#8a8087";ctx.font="600 23px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+ ctx.fillText("PERSONAL BEAUTY DEVICE GUIDE",70,132);
+ if(brandShareImage.complete&&brandShareImage.naturalWidth){
+  ctx.drawImage(brandShareImage,900,42,110,110);
+ }
+
+ ctx.fillStyle="#b32867";ctx.font="800 26px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+ ctx.fillText("MY BEAUTY PICK",70,235);
+
+ ctx.fillStyle="#241b22";ctx.font="900 58px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+ wrapCanvasText(ctx,resultType(),70,315,520,68,2);
+
+ // The site's own brand icon is used above; product photography stays out of this card.
+ // The QR stores the completed-result URL so scanning restores this exact result.
+ ctx.fillStyle="#fff";ctx.strokeStyle="#f0dbe4";ctx.lineWidth=3;
+ if(ctx.roundRect){ctx.beginPath();ctx.roundRect(615,215,395,395,30);ctx.fill();ctx.stroke();}
+ else{ctx.fillRect(615,215,395,395);ctx.strokeRect(615,215,395,395);}
+ drawShareQr(ctx,makeShareResultUrl(),654,254,317);
+
+ ctx.fillStyle="#8a8087";ctx.font="800 24px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+ ctx.fillText("MAIN PICK",70,500);
+ ctx.fillStyle="#241b22";ctx.font="900 52px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+ let y=wrapCanvasText(ctx,pname(p),70,570,500,60,3);
+ y+=20;ctx.fillStyle="#796f77";ctx.font="600 27px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+ ctx.fillText(p.brand,70,y);
+
+ y+=84;
+ const chips=translatedTags(p).slice(0,3);
+ let cx=70;
+ for(const chip of chips){
+  ctx.font="700 23px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+  const w=Math.min(ctx.measureText(chip).width+46,250);
+  ctx.fillStyle="#fff";ctx.strokeStyle="#f0dbe4";ctx.lineWidth=2;
+  if(ctx.roundRect){ctx.beginPath();ctx.roundRect(cx,y-34,w,54,27);ctx.fill();ctx.stroke();}
+  else{ctx.fillRect(cx,y-34,w,54);ctx.strokeRect(cx,y-34,w,54);}
+  ctx.fillStyle="#5d5158";ctx.fillText(chip,cx+23,y);
+  cx+=w+12;
+ }
+
+ ctx.fillStyle="#fff";ctx.strokeStyle="#f0dbe4";ctx.lineWidth=2;
+ if(ctx.roundRect){ctx.beginPath();ctx.roundRect(70,800,940,290,28);ctx.fill();ctx.stroke();}
+ else{ctx.fillRect(70,800,940,290);ctx.strokeRect(70,800,940,290);}
+
+ ctx.fillStyle="#b32867";ctx.font="800 24px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+ ctx.fillText(lang==="ko"?"WHY IT MATCHES":"WHY IT MATCHES",105,855);
+ ctx.fillStyle="#4d434a";ctx.font="600 27px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+ const reasons=reasonLines(p);
+ let ry=910;
+ for(const line of reasons.slice(0,3)){
+  ry=wrapCanvasText(ctx,"• "+line,105,ry,835,39,2)+16;
+ }
+
+ // Staff-facing card: always Korean, regardless of the selected customer language.
+ ctx.fillStyle="#241b22";
+ if(ctx.roundRect){ctx.beginPath();ctx.roundRect(70,1120,940,180,30);ctx.fill();}
+ else{ctx.fillRect(70,1120,940,180);}
+ ctx.fillStyle="#c8c0c5";ctx.font="800 16px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+ ctx.fillText("SHOW TO STAFF · 직원에게 보여주세요",105,1150);
+ ctx.fillStyle="#ffffff";ctx.font="900 29px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+ ctx.fillText("MY BEAUTY PICK",105,1187);
+
+ const staffConcern=answers[0].map(x=>labels.ko[x]).join(" · ");
+ const staffProduct=p.name;
+ ctx.strokeStyle="#4b4248";ctx.lineWidth=2;
+ if(ctx.roundRect){
+  ctx.beginPath();ctx.roundRect(105,1205,390,70,16);ctx.stroke();
+  ctx.beginPath();ctx.roundRect(515,1205,460,70,16);ctx.stroke();
+ }else{
+  ctx.strokeRect(105,1205,390,70);ctx.strokeRect(515,1205,460,70);
+ }
+ ctx.fillStyle="#a89fa5";ctx.font="600 14px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+ ctx.fillText("피부 고민",125,1228);
+ ctx.fillText("추천 제품",535,1228);
+ ctx.fillStyle="#ffffff";ctx.font="800 19px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+ ctx.fillText(staffConcern,125,1258);
+ ctx.fillText(staffProduct,535,1258);
+
+ return dataUrlToFile(canvas.toDataURL("image/png",1),"my-beauty-pick.png");
+}
+
+$("#share").onclick=()=>{
+ const p=window.__mainPick;
+ const pageUrl=makeShareResultUrl();
  const txt=t("shareText")+"\n"+resultType()+"\nMAIN PICK: "+pname(p);
- if(navigator.share){try{await navigator.share({title:"Beauty Device Finder",text:txt})}catch(e){}}
- else {try{await navigator.clipboard.writeText(txt);alert(lang==="ko"?"결과가 복사됐어요!":"Copied!")}catch(e){}}
+ try{
+  const file=createShareFile();
+
+  // Keep this call synchronous in the tap handler for iPhone/iPad Safari.
+  if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
+   navigator.share({title:"Beauty Device Finder",text:txt,files:[file]}).catch(err=>{
+    if(err&&err.name!=="AbortError"){
+     navigator.share({title:"Beauty Device Finder",text:txt,url:pageUrl}).catch(()=>{});
+    }
+   });
+   return;
+  }
+
+  if(navigator.share){
+   navigator.share({title:"Beauty Device Finder",text:txt,url:pageUrl}).catch(()=>{});
+   return;
+  }
+
+  const blob=file;
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download="my-beauty-pick.png";document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),2000);
+  if(navigator.clipboard)navigator.clipboard.writeText(txt).catch(()=>{});
+  alert(lang==="ko"?"QR이 포함된 결과 카드 이미지를 저장했어요!":lang==="zhs"?"已保存包含 QR 的结果卡片！":lang==="zh"?"已儲存包含 QR 的結果卡片！":lang==="ja"?"QR付きの結果カードを保存しました！":"Result card with QR saved!");
+ }catch(e){
+  if(navigator.share){
+   navigator.share({title:"Beauty Device Finder",text:txt,url:pageUrl}).catch(()=>{});
+  }else if(navigator.clipboard){
+   navigator.clipboard.writeText(txt).then(()=>alert(lang==="ko"?"링크를 복사했어요!":lang==="zhs"?"链接已复制！":lang==="zh"?"連結已複製！":lang==="ja"?"リンクをコピーしました！":"Link copied!")).catch(()=>{});
+  }
+ }
 };
 $("#langBtn").onclick=()=>$("#langSheet").classList.remove("hidden");
 $("#langSheet").onclick=e=>{if(e.target.id==="langSheet")$("#langSheet").classList.add("hidden")};
 document.querySelectorAll(".langbtn").forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
 setLang(localStorage.getItem("beauty-device-lang")||"ko");
+restoreSharedResult();
+window.addEventListener("pageshow",()=>{if(!new URLSearchParams(location.search).get("r"))restoreResultState()});
 </script>
 </body>
 </html>
