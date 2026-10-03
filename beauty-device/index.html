@@ -830,13 +830,13 @@ function pmodes(p){return (productModes[lang]&&productModes[lang][p.id])||[]}
 function renderModes(p){return pmodes(p).map(m=>'<div class="mode-item"><span class="mode-name">'+m.name+'</span><span class="mode-desc">'+m.desc+'</span></div>').join("")}
 function purl(p){return PRODUCT_URLS[p.id]||"https://www.oliveyoung.co.kr/store/main/main.do"}
 function pprice(p){
+ const money=n=>lang==="ko"?n+"원":"₩"+n;
  if(p.id==="vroller"){
-  const money=n=>lang==="en"?"₩"+n:n+t("priceCurrency");
   const head=String(p.price).replace(/[^0-9,]/g,"");
   const bundle=p.budgetPrice.toLocaleString("en-US");
   return t("rollerHead")+" "+money(head)+" ("+t("rollerBodyRequired")+")\n"+t("rollerBundle")+" "+money(bundle);
  }
- if(p.price!=="CHECK") return p.price;
+ if(p.price!=="CHECK") return lang==="ko"?p.price:money(String(p.price).replace(/[^0-9,]/g,""));
  return lang==="ko"?"가격 확인":lang==="en"?"Check price":lang==="zhs"?"价格确认":lang==="zh"?"價格確認":"価格確認";
 }
 function setProductPhoto(el,p){
