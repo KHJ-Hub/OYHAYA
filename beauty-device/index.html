@@ -187,6 +187,7 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
         <div class="brandname" id="mainBrand"></div>
         <div class="tags" id="mainTags"></div>
         <div class="tags hidden" id="mainBudgetNotice"><span class="tag" id="mainBudgetText"></span></div>
+        <div class="compare-tip hidden" id="mainEyeNotice" role="status"></div>
         <div class="price-row"><span class="price-label" data-i="priceLabel">공식 정상가 · 2026.10.01</span><span class="price-value" id="mainPrice"></span></div>
         <p class="product-desc" id="mainDesc"></p>
         <div class="care-guide">
@@ -210,6 +211,7 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
           <button id="alsoName" type="button" style="border:0;background:transparent;padding:0;text-align:left;font:inherit;font-weight:800;color:inherit"></button><div class="brandname" id="alsoBrand"></div>
           <div class="tags" id="alsoTags" style="margin-top:8px"></div>
           <div class="tags hidden" id="alsoBudgetNotice"><span class="tag" id="alsoBudgetText"></span></div>
+          <div class="compare-tip hidden" id="alsoEyeNotice"></div>
           <div class="price-row"><span class="price-label" data-i="priceLabel">공식 정상가 · 2026.10.01</span><span class="price-value" id="alsoPrice" style="font-size:15px"></span></div>
           <p class="compare-desc" id="alsoDesc"></p>
           <div class="compare-tip" id="alsoReason"></div>
@@ -273,6 +275,13 @@ const budgetNotices={
  ja:{overBudget:"選択した予算を超えています",budgetAlternative:"予算超過 · 機能の適合度を優先した提案"}
 };
 Object.keys(budgetNotices).forEach(l=>Object.assign(I18N[l],budgetNotices[l]));
+const eyeNotices={
+ ko:{eyeUnverified:"눈가 사용 여부는 확인이 필요합니다.",eyeConfirmed:"눈가 사용 확인 · EYE 모드"},
+ en:{eyeUnverified:"Please check whether this device can be used around the eyes.",eyeConfirmed:"Eye-area use confirmed · EYE mode"},
+ zh:{eyeUnverified:"請確認是否適用於眼周。",eyeConfirmed:"已確認適用於眼周 · EYE 模式"},
+ ja:{eyeUnverified:"目元に使用できるか確認が必要です。",eyeConfirmed:"目元への使用を確認 · EYE モード"}
+};
+Object.keys(eyeNotices).forEach(l=>Object.assign(I18N[l],eyeNotices[l]));
 
 const Q={
 ko:[
@@ -352,6 +361,13 @@ const products=[
  {id:"galvanic",price:"108,000원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0023/A00000023910340ko.jpg?l=ko",brand:"LG Pra.L",name:"갈바닉 부스터",names:{en:"Galvanic Booster",zh:"Galvanic Booster",ja:"ガルバニック ブースター"},v:{glow:4,absorb:5,texture:2,trouble:1,elastic:1,jaw:0,all:1,quick:5,target:4,beginner:5,easy:5,multi:1,focus:3,gentle:5,whole:5,cheek:3,jawarea:0,eye:2,spot:5},tags:["스킨케어","간편","입문"]}
 ];
 
+
+// Staff guide: only Thermashot's EYE mode is explicitly confirmed (page 9).
+// Unverified means further confirmation is needed, not that use is prohibited.
+const eyeUsage={
+ x2:"unverified",mini:"unverified",vroller:"unverified",glow:"unverified",
+ vsera:"unverified",thome:"unverified",therma:"confirmed",galvanic:"unverified"
+};
 
 const PRODUCT_URLS={
  x2:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000251745",
@@ -754,7 +770,10 @@ function selectAlso(ranked,main){
 }
 function getRecommendations(selectedId){
  const ranked=products.map(p=>({p,s:scoreProduct(p)})).sort((a,b)=>b.s-a.s);
- const main=products.find(p=>p.id===selectedId)||ranked.find(x=>isWithinBudget(x.p)).p;
+ const budgetCandidates=ranked.filter(x=>isWithinBudget(x.p));
+ const confirmedCandidates=answers[1]==="eye"?budgetCandidates.filter(x=>eyeUsage[x.p.id]==="confirmed"):[];
+ const automaticCandidates=confirmedCandidates.length?confirmedCandidates:budgetCandidates;
+ const main=products.find(p=>p.id===selectedId)||automaticCandidates[0].p;
  const also=selectAlso(ranked,main);
  return {ranked,main,also:also.p,alsoOverBudget:also.overBudget};
 }
@@ -888,6 +907,9 @@ function renderSelectedProduct(p){
  window.__mainPick=p;
  $("#mainBudgetNotice").classList.toggle("hidden",!isOverBudget(p));
  $("#mainBudgetText").textContent=isOverBudget(p)?t("overBudget"):"";
+ const eyeUnverified=answers[1]==="eye"&&eyeUsage[p.id]!=="confirmed";
+ $("#mainEyeNotice").classList.toggle("hidden",!eyeUnverified);
+ $("#mainEyeNotice").textContent=eyeUnverified?t("eyeUnverified"):"";
  $("#mainName").textContent=pname(p);
  $("#mainBrand").textContent=p.brand;
  $("#mainLink").href=purl(p);
@@ -904,6 +926,9 @@ function renderSelectedProduct(p){
  window.__alsoPick=also;
  $("#alsoBudgetNotice").classList.toggle("hidden",!recommendation.alsoOverBudget);
  $("#alsoBudgetText").textContent=recommendation.alsoOverBudget?t("budgetAlternative"):"";
+ const alsoEyeConfirmed=answers[1]==="eye"&&recommendation.alsoOverBudget&&eyeUsage[also.id]==="confirmed";
+ $("#alsoEyeNotice").classList.toggle("hidden",!alsoEyeConfirmed);
+ $("#alsoEyeNotice").textContent=alsoEyeConfirmed?t("eyeConfirmed"):"";
  $("#alsoName").textContent=pname(also); $("#alsoBrand").textContent=also.brand; $("#alsoLink").href=purl(also); setProductPhoto($("#alsoPhoto"),also); $("#alsoPrice").textContent=pprice(also); $("#alsoDesc").textContent=pdesc(also);
  $("#alsoTags").innerHTML=translatedTags(also).slice(0,2).map(x=>'<span class="tag">'+x+'</span>').join("");
  $("#alsoReason").textContent=t("also");
