@@ -111,13 +111,22 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 .staff-cell small{display:block;opacity:.62;font-size:10px;margin-bottom:4px}
 .staff-cell b{font-size:12px}
 .guide-launch{margin-top:14px}
-.guide-modal{position:fixed;inset:0;background:rgba(20,12,17,.48);z-index:30;overflow:auto;padding:18px}
-.guide-panel{width:min(100%,760px);margin:0 auto;background:#fff8fb;border-radius:28px;padding:18px;box-shadow:var(--shadow)}
+.guide-modal{position:fixed;inset:0;background:rgba(20,12,17,.48);z-index:30;overflow-y:auto;overflow-x:hidden;padding:18px;overscroll-behavior:contain}
+.guide-panel{width:min(100%,560px);margin:0 auto;background:#fff8fb;border-radius:28px;padding:18px;box-shadow:var(--shadow)}
 .guide-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
 .guide-top h2{margin:0;font-size:22px}
-.guide-close{border:0;background:#fff;border-radius:999px;width:42px;height:42px;font-size:24px;box-shadow:0 4px 16px rgba(0,0,0,.08)}
-.guide-grid{display:grid;gap:14px}
-.product-guide-card{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.guide-close{border:0;background:#fff;border-radius:999px;width:44px;height:44px;flex-shrink:0;font-size:24px;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.guide-navigation{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:10px;margin:0 0 12px}
+.guide-arrow{width:44px;height:44px;padding:0;border:1px solid var(--line);border-radius:50%;background:#fff;color:#b32867;font-size:32px;line-height:1;cursor:pointer}
+.guide-arrow:disabled{opacity:.3;cursor:default}
+.guide-arrow:focus-visible,.guide-grid:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+.guide-swipe-hint{font-size:11px;line-height:1.4;text-align:center;color:var(--muted)}
+.guide-grid{position:relative;display:flex;gap:8px;align-items:flex-start;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
+.guide-grid::-webkit-scrollbar{display:none}
+.guide-grid:after{content:"";flex:0 0 8px}
+.guide-position{margin:14px 0 0;text-align:center;font-size:13px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+.product-guide-card{flex:0 0 calc(100% - 16px);min-width:0;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always;overflow-wrap:anywhere}
+@media(max-width:600px){.guide-modal{padding:12px 6px}.guide-panel{padding:16px 6px}.guide-top,.guide-panel>.notice{margin-left:8px!important;margin-right:8px!important}.guide-navigation{margin-left:6px;margin-right:6px}}
 .product-guide-photo{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;display:block}
 .product-guide-body{padding:16px}
 .product-guide-brand{font-size:11px;color:var(--muted);font-weight:700}
@@ -239,10 +248,16 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 </div>
 
 <div id="guideModal" class="guide-modal hidden">
-  <div class="guide-panel">
-    <div class="guide-top"><h2 data-i="guideTitle">PRODUCT GUIDE</h2><button class="guide-close" id="guideClose" aria-label="close">×</button></div>
+  <div class="guide-panel" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+    <div class="guide-top"><h2 id="guideTitle" data-i="guideTitle">PRODUCT GUIDE</h2><button class="guide-close" id="guideClose" type="button" aria-label="제품 가이드 닫기">×</button></div>
     <div class="notice" data-i="guideNotice" style="margin:0 0 12px">제품 이미지는 실제 올리브영 상품 이미지로만 표시합니다.</div>
-    <div class="guide-grid" id="guideGrid"></div>
+    <div class="guide-navigation">
+      <button class="guide-arrow" id="guidePrev" type="button" aria-label="이전 제품" aria-controls="guideGrid" disabled>‹</button>
+      <span class="guide-swipe-hint" data-i="guideSwipe">좌우로 넘겨 제품을 비교하세요</span>
+      <button class="guide-arrow" id="guideNext" type="button" aria-label="다음 제품" aria-controls="guideGrid">›</button>
+    </div>
+    <div class="guide-grid" id="guideGrid" tabindex="0" role="region" aria-labelledby="guideTitle"></div>
+    <div class="guide-position" id="guidePosition" role="status" aria-live="polite" aria-atomic="true">1 / 8</div>
   </div>
 </div>
 
@@ -276,6 +291,14 @@ const resultFootnotes={
  ja:{priceFoot:"価格はOlive Young公式オンラインストアの通常価格です。キャンペーン・オプション・店舗により異なる場合があります。",stockNotice:"商品情報・価格・在庫は販売店または公式商品ページでご確認ください。",footer:"使用前に、同梱の説明書とブランドの最新の使用方法・注意事項をご確認ください。"}
 };
 Object.keys(resultFootnotes).forEach(l=>Object.assign(I18N[l],resultFootnotes[l]));
+
+const guideCarouselLabels={
+ ko:{guidePrevious:"이전 제품",guideNext:"다음 제품",guideClose:"제품 가이드 닫기",guideSwipe:"좌우로 넘겨 제품을 비교하세요"},
+ en:{guidePrevious:"Previous product",guideNext:"Next product",guideClose:"Close product guide",guideSwipe:"Swipe to compare products"},
+ zh:{guidePrevious:"上一款產品",guideNext:"下一款產品",guideClose:"關閉產品指南",guideSwipe:"左右滑動比較產品"},
+ ja:{guidePrevious:"前の商品",guideNext:"次の商品",guideClose:"商品ガイドを閉じる",guideSwipe:"左右にスワイプして商品を比較"}
+};
+Object.keys(guideCarouselLabels).forEach(l=>Object.assign(I18N[l],guideCarouselLabels[l]));
 
 const budgetNotices={
  ko:{overBudget:"선택 예산 초과",budgetAlternative:"예산 초과 · 기능 적합도 우선 추천"},
@@ -717,6 +740,7 @@ function setLang(l){
  $("#langSheet").classList.add("hidden");
  if(!$("#quiz").classList.contains("hidden")) renderQ();
  if(!$("#result").classList.contains("hidden")) showResult(window.__mainPick&&window.__mainPick.id);
+ if(!$("#guideModal").classList.contains("hidden")) renderProductGuides();
 }
 function show(id){["home","quiz","result"].forEach(x=>$("#"+x).classList.toggle("hidden",x!==id));window.scrollTo({top:0,behavior:"smooth"})}
 
@@ -891,12 +915,75 @@ function showResult(selectedId){
 }
 
 
+let guideIndex=0,guideTargetIndex=null,guideScrollFrame=0,guideSettleTimer=0,guideRendering=false;
+const guideSizeObserver=new ResizeObserver(()=>updateGuideHeight());
+function guideCards(){return Array.from($("#guideGrid").children).filter(el=>el.classList.contains("product-guide-card"))}
+function guideCardLeft(card){return card.offsetLeft-guideCards()[0].offsetLeft}
+function updateGuideHeight(){
+ const card=guideCards()[guideIndex];
+ if(card&&card.offsetHeight)$("#guideGrid").style.height=card.offsetHeight+"px";
+}
+function updateGuideControls(){
+ const cards=guideCards();
+ $("#guidePrev").disabled=guideIndex===0;
+ $("#guideNext").disabled=guideIndex===cards.length-1;
+ $("#guidePrev").setAttribute("aria-label",t("guidePrevious"));
+ $("#guideNext").setAttribute("aria-label",t("guideNext"));
+ $("#guideClose").setAttribute("aria-label",t("guideClose"));
+ $("#guidePosition").textContent=(guideIndex+1)+" / "+cards.length;
+ cards.forEach((card,i)=>{card.inert=i!==guideIndex;card.setAttribute("aria-hidden",i===guideIndex?"false":"true")});
+ guideSizeObserver.disconnect();
+ if(cards[guideIndex])guideSizeObserver.observe(cards[guideIndex]);
+ updateGuideHeight();
+}
+function updateGuidePosition(){
+ if(guideRendering||$("#guideModal").classList.contains("hidden"))return;
+ const grid=$("#guideGrid"),cards=guideCards();
+ if(!cards.length)return;
+ let nearest=0;
+ cards.forEach((card,i)=>{if(Math.abs(guideCardLeft(card)-grid.scrollLeft)<Math.abs(guideCardLeft(cards[nearest])-grid.scrollLeft))nearest=i});
+ if(nearest!==guideIndex){guideIndex=nearest;updateGuideControls()}
+}
+function alignGuideCard(behavior="instant"){
+ const card=guideCards()[guideIndex];
+ if(!card||$("#guideModal").classList.contains("hidden"))return;
+ $("#guideGrid").scrollTo({left:guideCardLeft(card),behavior});
+ updateGuideControls();
+}
+function moveGuideCard(delta){
+ const cards=guideCards();
+ const target=Math.max(0,Math.min(cards.length-1,(guideTargetIndex===null?guideIndex:guideTargetIndex)+delta));
+ guideTargetIndex=target;
+ $("#guideGrid").scrollTo({left:guideCardLeft(cards[target]),behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
+}
+function finishGuideScroll(){updateGuidePosition();guideTargetIndex=null}
+$("#guideGrid").addEventListener("scroll",()=>{
+ cancelAnimationFrame(guideScrollFrame);
+ guideScrollFrame=requestAnimationFrame(updateGuidePosition);
+ clearTimeout(guideSettleTimer);
+ guideSettleTimer=setTimeout(finishGuideScroll,160);
+},{passive:true});
+$("#guideGrid").addEventListener("scrollend",finishGuideScroll);
+$("#guidePrev").onclick=()=>moveGuideCard(-1);
+$("#guideNext").onclick=()=>moveGuideCard(1);
+$("#guideGrid").addEventListener("keydown",e=>{
+ if(e.target!==$("#guideGrid"))return;
+ if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();moveGuideCard(e.key==="ArrowLeft"?-1:1)}
+ if(e.key==="Home"||e.key==="End"){e.preventDefault();guideIndex=e.key==="Home"?0:guideCards().length-1;guideTargetIndex=null;alignGuideCard()}
+});
+window.addEventListener("resize",()=>{guideTargetIndex=null;alignGuideCard()});
+
 function renderProductGuides(){
+ updateGuidePosition();
+ guideRendering=true;
+ guideTargetIndex=null;
+ clearTimeout(guideSettleTimer);
  const grid=$("#guideGrid");
+ const restoreGuideFocus=grid.contains(document.activeElement);
  grid.innerHTML=products.map(p=>{
   const guide=productGuides[lang][p.id];
   const best=(lang==="ko"?pdesc(p):pdesc(p));
-  return '<div class="product-guide-card">'
+  return '<div class="product-guide-card" role="group" aria-label="'+pname(p)+' · '+(products.indexOf(p)+1)+' / '+products.length+'">'
    +'<a class="product-link guide-shop" data-product="'+p.id+'" href="'+purl(p)+'" target="_blank" rel="noopener noreferrer">'
    +'<img class="product-guide-photo" src="'+p.image+'" alt="'+pname(p)+'" referrerpolicy="no-referrer">'
    +'</a>'
@@ -915,14 +1002,36 @@ function renderProductGuides(){
   const p=products.find(x=>x.id===btn.dataset.product);
   if(!p)return;
   renderSelectedProduct(p);
-  $("#guideModal").classList.add("hidden");
-  document.body.style.overflow="";
+  closeProductGuides();
   show("result");
  });
+ updateGuideControls();
+ if(restoreGuideFocus)grid.focus({preventScroll:true});
+ requestAnimationFrame(()=>{alignGuideCard();guideRendering=false});
 }
-$("#guideBtn").onclick=()=>{renderProductGuides();$("#guideModal").classList.remove("hidden");document.body.style.overflow="hidden"};
-$("#guideClose").onclick=()=>{$("#guideModal").classList.add("hidden");document.body.style.overflow=""};
-$("#guideModal").onclick=e=>{if(e.target.id==="guideModal"){$("#guideModal").classList.add("hidden");document.body.style.overflow=""}};
+function closeProductGuides(){
+ $("#guideModal").classList.add("hidden");document.body.style.overflow="";
+ $("#guideBtn").setAttribute("aria-expanded","false");
+ $("#guideBtn").focus({preventScroll:true});
+}
+$("#guideBtn").setAttribute("aria-controls","guideModal");
+$("#guideBtn").setAttribute("aria-expanded","false");
+$("#guideBtn").onclick=()=>{
+ renderProductGuides();$("#guideModal").classList.remove("hidden");document.body.style.overflow="hidden";
+ $("#guideBtn").setAttribute("aria-expanded","true");
+ alignGuideCard();$("#guideGrid").focus({preventScroll:true});
+};
+$("#guideClose").onclick=closeProductGuides;
+$("#guideModal").onclick=e=>{if(e.target.id==="guideModal")closeProductGuides()};
+$("#guideModal").addEventListener("keydown",e=>{
+ if(e.key==="Tab"){
+  const items=Array.from($("#guideModal").querySelectorAll("button,a[href],[tabindex='0']")).filter(el=>!el.disabled&&!el.closest("[inert]")&&el.getClientRects().length);
+  const first=items[0],last=items[items.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+  if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+ }
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#guideModal").classList.contains("hidden"))closeProductGuides()});
 
 function renderSelectedProduct(p){
  const recommendation=getRecommendations(p.id);
