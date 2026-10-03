@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" role="img" aria-labelledby="title desc">
+  <title id="title">Device Icon</title>
+  <desc id="desc">A round care head and a compact handle form a single bold silhouette.</desc>
+  <path fill-rule="evenodd" d="M128 40C100 40 78 62 78 90C78 110 89 127 108 135V190C108 202 116 212 128 212C140 212 148 202 148 190V135C167 127 178 110 178 90C178 62 156 40 128 40ZM108 80H148A8 8 0 0 1 148 96H108A8 8 0 0 1 108 80Z"/>
+</svg>

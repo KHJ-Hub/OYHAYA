@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" role="img" aria-labelledby="title desc">
+  <title id="title">Device and Finder</title>
+  <desc id="desc">An angled rounded care device contains a clear selection cutout in its head.</desc>
+  <path transform="rotate(-20 128 128)" fill-rule="evenodd" d="M104 44H152Q180 44 180 72V102Q180 130 152 130H148V192Q148 212 128 212Q108 212 108 192V130H104Q76 130 76 102V72Q76 44 104 44ZM99 87L109 77L123 91L149 65L159 75L123 111Z"/>
+</svg>

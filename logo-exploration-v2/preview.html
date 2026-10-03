@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fff8fb">
+<title>Beauty Device Finder · 모바일 로고 시안 V2</title>
+<style>
+  :root{color-scheme:light;--pink:#ff5c9d;--ink:#241b22;--muted:#796f77;--line:#f0dbe4;--app:#fff8fb}
+  *{box-sizing:border-box}
+  body{margin:0;background:#faf8f9;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif}
+  main{max-width:1440px;margin:auto;padding:32px 24px 60px}
+  header{max-width:860px;margin-bottom:28px}
+  .eyebrow{font-size:11px;font-weight:750;letter-spacing:.12em;color:var(--muted)}
+  h1{font-size:clamp(26px,4vw,38px);letter-spacing:-.045em;margin:10px 0 12px;line-height:1.2}
+  header p{font-size:14px;line-height:1.7;color:var(--muted);margin:0}
+  .overview{display:flex;gap:28px;margin:20px 0;align-items:center}
+  .overview a{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:var(--ink);font-size:12px;font-weight:700}
+  .overview .mark{width:64px;height:64px;color:#000}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 0}
+  button{font:inherit;font-size:12px;border:1px solid var(--line);border-radius:999px;background:#fff;padding:9px 14px;color:var(--ink);cursor:pointer}
+  button:hover{background:#fff0f6}
+  a{color:#9a245a;text-underline-offset:3px}
+  .concepts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}
+  article{min-width:0;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;scroll-margin-top:20px}
+  .intro{padding:24px;min-height:218px}
+  .tag{font-size:11px;font-weight:800;letter-spacing:.08em;color:#b32867}
+  h2{font-size:24px;letter-spacing:-.04em;margin:8px 0 10px}
+  .intro p{font-size:13px;line-height:1.7;color:var(--muted);margin:0 0 12px}
+  .intro a{font-size:12px}
+  .mode{border-top:1px solid var(--line);padding:20px}
+  h3{font-size:13px;margin:0 0 16px}
+  .small{display:flex;gap:8px;justify-content:space-between;align-items:flex-start}
+  figure{margin:0;display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+  figcaption{font-size:11px;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums}
+  .tile{width:var(--size);height:var(--size);display:grid;place-items:center}
+  .mark{width:100%;height:100%;color:var(--symbol,#000)}
+  .mark svg{display:block;width:100%;height:100%}
+  .pink,.app{--symbol:var(--pink)}
+  .app .tile{background:var(--app);border-radius:24%;outline:1px solid #f5e6ed;outline-offset:-1px}
+  details{margin-top:20px;padding-top:16px;border-top:1px dashed var(--line)}
+  summary{cursor:pointer;font-size:12px;color:var(--muted);font-weight:600}
+  details[open] summary{margin-bottom:20px}
+  .large{display:flex;flex-direction:column;align-items:center;gap:22px}
+  .native512{width:100%;overflow-x:auto;padding:4px 0 12px;overscroll-behavior-x:contain}
+  .native512 figure{width:512px}
+  footer{font-size:12px;line-height:1.7;color:var(--muted);margin-top:24px}
+  @media(max-width:1100px){.concepts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:720px){main{padding:24px 16px 40px}.concepts{grid-template-columns:1fr}.intro{min-height:0}.small{justify-content:space-around}.mode{padding:20px 18px}.overview{justify-content:space-around;gap:12px}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">BEAUTY DEVICE FINDER · LOGO EXPLORATION V2</div>
+    <h1>케어 디바이스가 바로 읽히는 심볼</h1>
+    <p>먼저 32·40·48·64px에서 형태를 비교해보세요. 핑크는 현재 사이트의 #ff5c9d, 앱 배경은 현재 PWA 배경색 #fff8fb입니다.</p>
+    <nav class="overview" id="overview" aria-label="세 시안 빠른 비교"></nav>
+    <div class="toolbar"><button type="button" id="compact">180·512px 접기</button><button type="button" id="expand">모든 크기 펼치기</button></div>
+  </header>
+  <div class="concepts" id="concepts"></div>
+  <footer>기존 사이트에 적용하지 않은 비교용 시안입니다. 검정·핑크·앱 배경마다 여섯 크기를 실제 픽셀 크기로 표시합니다. 512px는 좁은 화면에서 해당 영역만 가로로 스크롤할 수 있습니다. SVG에 글꼴·외부 이미지·그라데이션은 사용하지 않았습니다.</footer>
+</main>
+<template id="symbol-a"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M128 40C100 40 78 62 78 90C78 110 89 127 108 135V190C108 202 116 212 128 212C140 212 148 202 148 190V135C167 127 178 110 178 90C178 62 156 40 128 40ZM108 80H148A8 8 0 0 1 148 96H108A8 8 0 0 1 108 80Z"/></svg></template>
+<template id="symbol-b"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path transform="rotate(-20 128 128)" fill-rule="evenodd" d="M104 44H152Q180 44 180 72V102Q180 130 152 130H148V192Q148 212 128 212Q108 212 108 192V130H104Q76 130 76 102V72Q76 44 104 44ZM99 87L109 77L123 91L149 65L159 75L123 111Z"/></svg></template>
+<template id="symbol-c"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M76 64H180Q208 64 208 92Q208 120 180 120H155L148 190Q146 210 128 210Q110 210 108 190L101 120H76Q48 120 48 92Q48 64 76 64ZM88 84H168A8 8 0 0 1 168 100H88A8 8 0 0 1 88 84Z"/></svg></template>
+<script>
+const concepts=[
+  {id:"a",name:"Device Icon",tag:"A · 원형 케어 헤드",copy:"원형 헤드와 손잡이를 하나의 굵은 실루엣으로 묶었습니다. 헤드의 넓은 홈 하나만 남겨, 작은 크기에서도 기기의 접촉면이 구분됩니다."},
+  {id:"b",name:"Device + Finder",tag:"B · 내게 맞는 기기",copy:"둥근 기기 헤드 안에 선택을 뜻하는 빈 공간을 넣었습니다. 하나의 기기 형태 안에서 맞춤 추천의 의미를 전달하며, 기울기를 더해 손에 잡히는 인상을 줍니다."},
+  {id:"c",name:"Beauty Tech Symbol",tag:"C · 와이드 케어 헤드",copy:"넓은 접촉 헤드와 짧게 좁아지는 그립으로 케어 기기의 인상을 담았습니다. 가로형 실루엣과 큰 내부 홈이 작은 화면에서도 남도록 단순화했습니다."}
+];
+function symbol(id){return document.getElementById('symbol-'+id).innerHTML;}
+function sample(id,size){return '<figure><div class="tile" style="--size:'+size+'px"><div class="mark" role="img" aria-label="시안 '+id.toUpperCase()+', '+size+'px">'+symbol(id)+'</div></div><figcaption>'+size+'px</figcaption></figure>';}
+function mode(id,title,style){return '<section class="mode '+style+'"><h3>'+title+'</h3><div class="small">'+[32,40,48,64].map(s=>sample(id,s)).join('')+'</div><details open><summary>180·512px · 홈 화면 아이콘 확인</summary><div class="large">'+sample(id,180)+'<div class="native512">'+sample(id,512)+'</div></div></details></section>';}
+document.getElementById('overview').innerHTML=concepts.map(c=>'<a href="#concept-'+c.id+'"><div class="mark" aria-hidden="true">'+symbol(c.id)+'</div><span>'+c.id.toUpperCase()+'</span></a>').join('');
+document.getElementById('concepts').innerHTML=concepts.map(c=>'<article id="concept-'+c.id+'"><div class="intro"><div class="tag">'+c.tag+'</div><h2>'+c.name+'</h2><p>'+c.copy+'</p><a href="concept-'+c.id+'.svg" target="_blank" rel="noopener">SVG 원본 보기 ↗</a></div>'+mode(c.id,'01 · 검정 단색','black')+mode(c.id,'02 · 핑크 단색','pink')+mode(c.id,'03 · 앱 아이콘 배경','app')+'</article>').join('');
+document.getElementById('compact').onclick=()=>document.querySelectorAll('details').forEach(d=>d.open=false);
+document.getElementById('expand').onclick=()=>document.querySelectorAll('details').forEach(d=>d.open=true);
+</script>
+</body>
+</html>
