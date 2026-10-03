@@ -66,8 +66,10 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 .otxt small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
 .nav{display:grid;grid-template-columns:1fr 1.5fr;gap:10px;margin-top:18px}
 .result-head{text-align:center;padding:10px 4px 18px}
-.spark{font-size:34px}
-.type{font-size:26px;font-weight:950;letter-spacing:-.045em;margin:8px 0}
+.result-title-line{display:inline-flex;align-items:center;justify-content:center;gap:8px;max-width:100%;margin:8px auto 3px;padding:0 8px;vertical-align:middle}
+.spark{flex:0 0 auto;font-size:32px;line-height:1}
+.type{min-width:0;max-width:100%;font-size:26px;font-weight:950;line-height:1.15;letter-spacing:-.045em;margin:0;overflow-wrap:anywhere;text-align:center}
+@media(max-width:380px){.result-title-line{gap:6px;padding-inline:4px}.spark{font-size:28px}.type{font-size:clamp(20px,6.4vw,23px)}}
 .type-sub{font-size:13px;color:var(--muted);line-height:1.5}
 .pick{padding:0;overflow:hidden}
 .product-visual{padding:14px 14px 0;background:linear-gradient(160deg,#fff0f6,#fff)}
@@ -185,8 +187,7 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 
   <section id="result" class="hidden">
     <div class="result-head">
-      <div class="spark">✨</div>
-      <div class="type" id="resultType"></div>
+      <div class="result-title-line"><span class="spark" aria-hidden="true">✨</span><div class="type" id="resultType"></div></div>
       <div class="type-sub" id="resultSub"></div>
     </div>
     <div class="card pick">
