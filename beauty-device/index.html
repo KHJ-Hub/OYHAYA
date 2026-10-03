@@ -186,6 +186,7 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
         <button class="product product-title-btn" id="mainName" type="button" style="border:0;background:transparent;padding:0;text-align:left;color:inherit"></button>
         <div class="brandname" id="mainBrand"></div>
         <div class="tags" id="mainTags"></div>
+        <div class="tags hidden" id="mainBudgetNotice"><span class="tag" id="mainBudgetText"></span></div>
         <div class="price-row"><span class="price-label" data-i="priceLabel">공식 정상가 · 2026.10.01</span><span class="price-value" id="mainPrice"></span></div>
         <p class="product-desc" id="mainDesc"></p>
         <div class="care-guide">
@@ -208,6 +209,7 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
         <div class="compare-copy">
           <button id="alsoName" type="button" style="border:0;background:transparent;padding:0;text-align:left;font:inherit;font-weight:800;color:inherit"></button><div class="brandname" id="alsoBrand"></div>
           <div class="tags" id="alsoTags" style="margin-top:8px"></div>
+          <div class="tags hidden" id="alsoBudgetNotice"><span class="tag" id="alsoBudgetText"></span></div>
           <div class="price-row"><span class="price-label" data-i="priceLabel">공식 정상가 · 2026.10.01</span><span class="price-value" id="alsoPrice" style="font-size:15px"></span></div>
           <p class="compare-desc" id="alsoDesc"></p>
           <div class="compare-tip" id="alsoReason"></div>
@@ -264,6 +266,14 @@ zh:{kicker:"",heroTitle:"找到適合我的<br>美容儀",heroSub:"選擇你的�
 ja:{kicker:"",heroTitle:"私に合う<br>美容デバイスを探す",heroSub:"肌悩みとホームケアの好みを選ぶと、あなたに合う美容デバイスをご案内します。",pill1:"約40秒",pill2:"6 Questions",pill3:"パーソナル提案",start:"START ✨",notice:"本サービスは回答内容をもとに商品選びをサポートするもので、医療的な肌診断ではありません。",quick:"約40秒で完了",back:"戻る",next:"次へ",why:"おすすめの理由",howUse:"使い方",pairWith:"一緒に使いやすいテクスチャー",modeTitle:"MODES / CARE · モード・ケア機能",modeNote:"ブランド公式案内で確認できるモードとケア目的のみ要約しており、使用感には個人差があります。",fitTitle:"こんな方におすすめ",priceLabel:"公式通常価格 · 2026.10.01",priceDate:"2026.10.01時点",priceFoot:"価格は2026.10.01にOlive Young公式オンラインストアで確認した通常価格を基準に表示しています。確認できない商品は「価格確認」と表示し、実際の価格はキャンペーン・オプション・店舗により異なる場合があります。",myConcern:"MY CONCERN",share:"結果カードをシェア",guideAll:"8商品のガイドを見る",guideTitle:"PRODUCT GUIDE",guideNotice:"商品画像は Olive Young の実際の商品画像のみを使用しています。",shopOlive:"Olive Youngで商品を見る ↗",restart:"もう一度",stockNotice:"商品情報・価格・在庫は、実際の販売元および公式商品ページでご確認ください。",footer:"商品説明は2026.10.01時点で確認したブランド公式ページ・公式使用ガイドをもとに要約しています。使用前に同梱の取扱説明書と最新の公式使用方法・注意事項をご確認ください。",resultSub:"選択した悩み・ホームケアの好み・予算をもとに、美容デバイスを比較しました。",also:"あわせて比較しやすい商品です。",shareText:"私のビューティーデバイス診断結果"}
 };
 
+const budgetNotices={
+ ko:{overBudget:"선택 예산 초과",budgetAlternative:"예산 초과 · 기능 적합도 우선 추천"},
+ en:{overBudget:"Above your selected budget",budgetAlternative:"Above budget · suggested for its feature match"},
+ zh:{overBudget:"超出所選預算",budgetAlternative:"超出預算 · 優先依功能契合度推薦"},
+ ja:{overBudget:"選択した予算を超えています",budgetAlternative:"予算超過 · 機能の適合度を優先した提案"}
+};
+Object.keys(budgetNotices).forEach(l=>Object.assign(I18N[l],budgetNotices[l]));
+
 const Q={
 ko:[
  {title:"가장 신경 쓰이는 피부 고민은?",hint:"최대 2개까지 선택해주세요.",multi:2,opts:[
@@ -298,12 +308,12 @@ ko:[
   ["focus","🎯","집중 관리","한 고민을 더 선명하게"],
   ["gentle","☁️","부담 적은 사용감","편안한 사용 경험을 선호"]
  ]},
- {title:"구매할 때 생각하는 예산은?",hint:"대략적인 기준만 골라주세요. 추천 순위에 반영돼요.",opts:[
+ {title:"구매할 때 생각하는 예산은?",hint:"최대 예산을 골라주세요. 예산 안에서 가장 잘 맞는 제품을 추천해요.",opts:[
   ["budget15","💗","15만 원 이하","부담 적게 시작하고 싶어요"],
-  ["budget30","✨","15~30만 원","가격과 기능의 균형"],
-  ["budget50","🌟","30~50만 원","기능을 더 중요하게 봐요"],
-  ["budget50p","💎","50만 원 이상","예산보다 기능 우선"],
-  ["budgetAny","🤍","가격은 상관없어요","나에게 가장 잘 맞는 제품 우선"]
+  ["budget30","✨","30만 원 이하","최대 30만 원까지 고려해요"],
+  ["budget50","🌟","50만 원 이하","최대 50만 원까지 고려해요"],
+  ["budget50p","💎","50만 원 이상도 가능","가격 제한 없이 기능을 비교해요"],
+  ["budgetAny","🤍","가격 상관없음","나에게 가장 잘 맞는 제품 우선"]
  ]}
 ],
 en:[
@@ -312,7 +322,7 @@ en:[
  {title:"What kind of home-care routine do you want?",hint:"Choose the style closest to you.",opts:[["quick","⚡","Quick & simple","Easy to use often"],["target","🎯","One concern at a time","Focused routine"],["all","🌈","Many functions in one","Versatile device"],["care","🧘","More time, more focus","A thorough routine"]]},
  {title:"How experienced are you with beauty devices?",hint:"Choose what feels closest.",opts:[["beginner","🌱","I'm new","Prefer simple, intuitive use"],["some","🙂","I've tried a few","Comfortable with basic devices"],["advanced","✨","I use several types","Comfortable comparing features"]]},
  {title:"What matters most when using a device?",hint:"Choose the closest option.",opts:[["easy","👌","Ease of use","A simple routine"],["multi","🌈","Versatility","More functions in one device"],["focus","🎯","Focused care","A clear target concern"],["gentle","☁️","Comfortable feel","Prefer a gentler experience"]]},
- {title:"What budget are you considering?",hint:"Choose a rough range. It will influence the recommendation ranking.",opts:[["budget15","💗","Under ₩150,000","Keep the starting cost low"],["budget30","✨","₩150,000–₩300,000","Balance price and features"],["budget50","🌟","₩300,000–₩500,000","Features matter more"],["budget50p","💎","₩500,000+","Prioritize features over price"],["budgetAny","🤍","No budget limit","Prioritize the best overall match"]]}
+ {title:"What budget are you considering?",hint:"Choose your maximum budget. Your main pick will be within it.",opts:[["budget15","💗","Up to ₩150,000","Keep the starting cost low"],["budget30","✨","Up to ₩300,000","Consider devices up to ₩300,000"],["budget50","🌟","Up to ₩500,000","Consider devices up to ₩500,000"],["budget50p","💎","Open to ₩500,000 or more","Compare features without a price cap"],["budgetAny","🤍","No budget limit","Prioritize the best overall match"]]}
 ],
 zh:[
  {title:"你最在意的肌膚困擾是？",hint:"最多選2項。",multi:2,opts:[["glow","💧","乾燥・缺乏光澤","想要水潤亮澤感"],["absorb","✨","保養品吸收","搭配日常保養品使用"],["texture","🫧","毛孔・膚質","想加強肌膚平滑感"],["trouble","🌿","痘痘・肌膚狀態","針對在意部位保養"],["elastic","💗","彈力不足","居家彈力保養"],["jaw","〰️","下顎線・臉部線條","集中輪廓管理"]]},
@@ -320,7 +330,7 @@ zh:[
  {title:"你喜歡哪種居家保養方式？",hint:"選擇最符合你的方式。",opts:[["quick","⚡","快速簡單","適合經常使用"],["target","🎯","集中一個困擾","針對單一需求"],["all","🌈","一機多用","希望功能多元"],["care","🧘","願意花時間仔細保養","建立完整保養流程"]]},
  {title:"你使用美容儀的經驗？",hint:"請選最接近你的項目。",opts:[["beginner","🌱","第一次使用","偏好簡單直覺"],["some","🙂","用過簡單美容儀","熟悉基本操作"],["advanced","✨","使用過多種美容儀","可以比較多種功能"]]},
  {title:"使用美容儀時最重視什麼？",hint:"請選最接近的一項。",opts:[["easy","👌","操作方便","不複雜的流程"],["multi","🌈","多功能","一台完成多種保養"],["focus","🎯","集中管理","針對單一困擾"],["gentle","☁️","舒適使用感","偏好較溫和的體驗"]]},
- {title:"購買時考慮的預算大約是？",hint:"選擇大致範圍即可，會反映在推薦排序中。",opts:[["budget15","💗","15萬韓元以下","想以較低負擔開始"],["budget30","✨","15–30萬韓元","兼顧價格與功能"],["budget50","🌟","30–50萬韓元","更重視功能"],["budget50p","💎","50萬韓元以上","功能優先於價格"],["budgetAny","🤍","預算不限","優先選最適合我的產品"]]}
+ {title:"購買時考慮的預算大約是？",hint:"請選最高預算，主要推薦會從預算內挑選。",opts:[["budget15","💗","15萬韓元以下","想以較低負擔開始"],["budget30","✨","30萬韓元以下","最高可考慮30萬韓元"],["budget50","🌟","50萬韓元以下","最高可考慮50萬韓元"],["budget50p","💎","也可接受50萬韓元以上","不設價格上限，比較功能"],["budgetAny","🤍","預算不限","優先選最適合我的產品"]]}
 ],
 ja:[
  {title:"一番気になる肌悩みは？",hint:"2つまで選べます。",multi:2,opts:[["glow","💧","乾燥・ツヤ不足","うるおい感とツヤを重視"],["absorb","✨","スキンケアなじみ","普段の化粧品と一緒にケア"],["texture","🫧","毛穴・キメ","なめらかな印象を目指す"],["trouble","🌿","肌コンディション","気になる部分をケア"],["elastic","💗","ハリ不足","ハリ感を意識したケア"],["jaw","〰️","フェイスライン","輪郭を集中的にケア"]]},
@@ -328,7 +338,7 @@ ja:[
  {title:"どんなホームケアが理想？",hint:"近いスタイルを選んでください。",opts:[["quick","⚡","簡単・スピーディー","気軽に続けたい"],["target","🎯","1つの悩みに集中","目的を絞ってケア"],["all","🌈","1台で多機能","いろいろ試したい"],["care","🧘","時間をかけて集中","丁寧なルーティン"]]},
  {title:"美容デバイスの使用経験は？",hint:"一番近いものを選んでください。",opts:[["beginner","🌱","初めて","簡単で直感的な操作が好み"],["some","🙂","簡単なものは使ったことがある","基本操作には慣れている"],["advanced","✨","複数タイプを使ったことがある","機能比較もOK"]]},
  {title:"使用時に一番重視することは？",hint:"一番近いものを選んでください。",opts:[["easy","👌","使いやすさ","複雑すぎないルーティン"],["multi","🌈","多機能","1台でいろいろケア"],["focus","🎯","集中ケア","悩みを絞って選びたい"],["gentle","☁️","やさしい使用感","快適な使用感を重視"]]},
- {title:"購入時に考えている予算は？",hint:"おおよその範囲を選んでください。おすすめ順位に反映します。",opts:[["budget15","💗","15万ウォン以下","負担を抑えて始めたい"],["budget30","✨","15〜30万ウォン","価格と機能のバランス"],["budget50","🌟","30〜50万ウォン","機能をより重視"],["budget50p","💎","50万ウォン以上","価格より機能を優先"],["budgetAny","🤍","予算は気にしない","自分に一番合う商品を優先"]]}
+ {title:"購入時に考えている予算は？",hint:"上限予算を選んでください。予算内からメイン商品を提案します。",opts:[["budget15","💗","15万ウォン以下","負担を抑えて始めたい"],["budget30","✨","30万ウォン以下","上限30万ウォンで検討"],["budget50","🌟","50万ウォン以下","上限50万ウォンで検討"],["budget50p","💎","50万ウォン以上も検討可能","価格上限なしで機能を比較"],["budgetAny","🤍","予算は気にしない","自分に一番合う商品を優先"]]}
 ]};
 
 const products=[
@@ -633,10 +643,10 @@ const productModes={
 };
 
 const labels={
-ko:{glow:"건조·광채",absorb:"스킨케어 흡수",texture:"모공·피부결",trouble:"트러블·컨디션",elastic:"탄력",jaw:"턱선·라인",whole:"얼굴 전체",cheek:"볼·팔자",jawarea:"턱선",eye:"눈가",spot:"특정 부위",quick:"간단한 루틴",target:"집중 관리",all:"다기능",care:"꼼꼼한 관리",beginner:"입문",some:"사용 경험 있음",advanced:"숙련",easy:"사용 편의",multi:"다양한 기능",focus:"집중 관리",gentle:"편안한 사용감",budget15:"15만 원 이하",budget30:"15~30만 원",budget50:"30~50만 원",budget50p:"50만 원 이상",budgetAny:"가격 제한 없음"},
-en:{glow:"Dryness & glow",absorb:"Skincare absorption",texture:"Pores & texture",trouble:"Skin condition",elastic:"Firmness",jaw:"Jawline",whole:"Whole face",cheek:"Cheeks",jawarea:"Jawline",eye:"Eye area",spot:"Specific area",quick:"Quick routine",target:"Focused care",all:"Versatility",care:"Thorough routine",beginner:"Beginner",some:"Some experience",advanced:"Advanced",easy:"Ease of use",multi:"Versatility",focus:"Focused care",gentle:"Comfortable feel",budget15:"Under ₩150k",budget30:"₩150k–₩300k",budget50:"₩300k–₩500k",budget50p:"₩500k+",budgetAny:"No budget limit"},
-zh:{glow:"乾燥・光澤",absorb:"保養品吸收",texture:"毛孔・膚質",trouble:"肌膚狀態",elastic:"彈力",jaw:"下顎線",whole:"全臉",cheek:"臉頰",jawarea:"下顎線",eye:"眼周",spot:"特定部位",quick:"快速保養",target:"集中保養",all:"多功能",care:"仔細保養",beginner:"初次使用",some:"有使用經驗",advanced:"熟悉美容儀",easy:"操作方便",multi:"多功能",focus:"集中管理",gentle:"舒適使用感",budget15:"15萬韓元以下",budget30:"15–30萬韓元",budget50:"30–50萬韓元",budget50p:"50萬韓元以上",budgetAny:"預算不限"},
-ja:{glow:"乾燥・ツヤ",absorb:"スキンケアなじみ",texture:"毛穴・キメ",trouble:"肌コンディション",elastic:"ハリ",jaw:"フェイスライン",whole:"顔全体",cheek:"頬",jawarea:"フェイスライン",eye:"目元",spot:"特定部位",quick:"簡単ルーティン",target:"集中ケア",all:"多機能",care:"丁寧なケア",beginner:"初心者",some:"使用経験あり",advanced:"経験豊富",easy:"使いやすさ",multi:"多機能",focus:"集中ケア",gentle:"やさしい使用感",budget15:"15万ウォン以下",budget30:"15〜30万ウォン",budget50:"30〜50万ウォン",budget50p:"50万ウォン以上",budgetAny:"予算なし"}
+ko:{glow:"건조·광채",absorb:"스킨케어 흡수",texture:"모공·피부결",trouble:"트러블·컨디션",elastic:"탄력",jaw:"턱선·라인",whole:"얼굴 전체",cheek:"볼·팔자",jawarea:"턱선",eye:"눈가",spot:"특정 부위",quick:"간단한 루틴",target:"집중 관리",all:"다기능",care:"꼼꼼한 관리",beginner:"입문",some:"사용 경험 있음",advanced:"숙련",easy:"사용 편의",multi:"다양한 기능",focus:"집중 관리",gentle:"편안한 사용감",budget15:"15만 원 이하",budget30:"30만 원 이하",budget50:"50만 원 이하",budget50p:"50만 원 이상도 가능",budgetAny:"가격 상관없음"},
+en:{glow:"Dryness & glow",absorb:"Skincare absorption",texture:"Pores & texture",trouble:"Skin condition",elastic:"Firmness",jaw:"Jawline",whole:"Whole face",cheek:"Cheeks",jawarea:"Jawline",eye:"Eye area",spot:"Specific area",quick:"Quick routine",target:"Focused care",all:"Versatility",care:"Thorough routine",beginner:"Beginner",some:"Some experience",advanced:"Advanced",easy:"Ease of use",multi:"Versatility",focus:"Focused care",gentle:"Comfortable feel",budget15:"Up to ₩150k",budget30:"Up to ₩300k",budget50:"Up to ₩500k",budget50p:"Open to ₩500k or more",budgetAny:"No budget limit"},
+zh:{glow:"乾燥・光澤",absorb:"保養品吸收",texture:"毛孔・膚質",trouble:"肌膚狀態",elastic:"彈力",jaw:"下顎線",whole:"全臉",cheek:"臉頰",jawarea:"下顎線",eye:"眼周",spot:"特定部位",quick:"快速保養",target:"集中保養",all:"多功能",care:"仔細保養",beginner:"初次使用",some:"有使用經驗",advanced:"熟悉美容儀",easy:"操作方便",multi:"多功能",focus:"集中管理",gentle:"舒適使用感",budget15:"15萬韓元以下",budget30:"30萬韓元以下",budget50:"50萬韓元以下",budget50p:"也可接受50萬韓元以上",budgetAny:"預算不限"},
+ja:{glow:"乾燥・ツヤ",absorb:"スキンケアなじみ",texture:"毛穴・キメ",trouble:"肌コンディション",elastic:"ハリ",jaw:"フェイスライン",whole:"顔全体",cheek:"頬",jawarea:"フェイスライン",eye:"目元",spot:"特定部位",quick:"簡単ルーティン",target:"集中ケア",all:"多機能",care:"丁寧なケア",beginner:"初心者",some:"使用経験あり",advanced:"経験豊富",easy:"使いやすさ",multi:"多機能",focus:"集中ケア",gentle:"やさしい使用感",budget15:"15万ウォン以下",budget30:"30万ウォン以下",budget50:"50万ウォン以下",budget50p:"50万ウォン以上も検討可能",budgetAny:"予算なし"}
 };
 
 const zhSimplifier=(window.OpenCC&&OpenCC.Converter)
@@ -705,7 +715,8 @@ function renderQ(){
 
 function scoreProduct(p){
  let s=0;
- answers[0].forEach((k,i)=>{s+=(p.v[k]||0)*(i===0?3:2.2)});
+ const concernWeight=answers[0].length===1?3:2.6;
+ answers[0].forEach(k=>{s+=(p.v[k]||0)*concernWeight});
  const area=answers[1]; if(area)s+=(p.v[area]||0)*1.6;
  const style=answers[2]; if(style){
    if(style==="all")s+=(p.v.all||0)*2.5;
@@ -717,40 +728,35 @@ function scoreProduct(p){
  if(exp==="beginner")s+=(p.v.beginner||0)*1.8+(p.v.easy||0)*1.2;
  if(exp==="advanced")s+=(p.v.multi||0)*.9+(p.v.focus||0)*.7;
  const priority=answers[4]; if(priority)s+=(p.v[priority]||0)*2.2;
- const budget=answers[5]; if(budget)s+=budgetScore(p,budget);
  return s;
 }
 function productPriceNumber(p){
  const n=parseInt(String(p.price||"").replace(/[^0-9]/g,""),10);
  return Number.isFinite(n)?n:null;
 }
-function budgetScore(p,budget){
- const price=productPriceNumber(p);
- if(!price||budget==="budgetAny")return 0;
- if(budget==="budget15"){
-  if(price<=150000)return 10;
-  if(price<=200000)return 5;
-  if(price<=300000)return 0;
-  return -5;
- }
- if(budget==="budget30"){
-  if(price>=150000&&price<=300000)return 9;
-  if(price<150000)return 5;
-  if(price<=400000)return 2;
-  return -4;
- }
- if(budget==="budget50"){
-  if(price>=300000&&price<=500000)return 9;
-  if(price>=200000&&price<300000)return 4;
-  if(price>500000)return 3;
-  return 1;
- }
- if(budget==="budget50p"){
-  if(price>=500000)return 9;
-  if(price>=300000)return 5;
-  return 1;
- }
- return 0;
+function budgetLimit(budget=answers[5]){
+ return ({budget15:150000,budget30:300000,budget50:500000})[budget]??null;
+}
+function isWithinBudget(p){
+ const limit=budgetLimit(), price=productPriceNumber(p);
+ return limit===null||(price!==null&&price<=limit);
+}
+function isOverBudget(p){
+ const limit=budgetLimit(), price=productPriceNumber(p);
+ return limit!==null&&price!==null&&price>limit;
+}
+function selectAlso(ranked,main){
+ const best=ranked[0], mainScore=ranked.find(x=>x.p.id===main.id).s;
+ // Tolerate floating-point noise at the exact five-point boundary only.
+ const overBudget=best.p.id!==main.id&&isOverBudget(best.p)&&best.s-mainScore>=5-1e-9;
+ const choice=overBudget?best:ranked.find(x=>x.p.id!==main.id&&isWithinBudget(x.p));
+ return {p:choice.p,overBudget};
+}
+function getRecommendations(selectedId){
+ const ranked=products.map(p=>({p,s:scoreProduct(p)})).sort((a,b)=>b.s-a.s);
+ const main=products.find(p=>p.id===selectedId)||ranked.find(x=>isWithinBudget(x.p)).p;
+ const also=selectAlso(ranked,main);
+ return {ranked,main,also:also.p,alsoOverBudget:also.overBudget};
 }
 function pname(p){return (p.names&&p.names[lang])||p.name}
 function pdesc(p){return productDescriptions[lang][p.id]||""}
@@ -824,9 +830,7 @@ function resultType(){
  return c.map(x=>l[x]).join(" + ")+" タイプ";
 }
 function showResult(selectedId){
- const ranked=products.map(p=>({p,s:scoreProduct(p)})).sort((a,b)=>b.s-a.s);
- const main=products.find(p=>p.id===selectedId)||ranked[0].p;
- const also=ranked.find(x=>x.p.id!==main.id).p;
+ const {ranked,main,also}=getRecommendations(selectedId);
  $("#resultType").textContent=resultType();
  $("#resultSub").textContent=t("resultSub");
  $("#mainName").textContent=pname(main); $("#mainBrand").textContent=main.brand; $("#mainLink").href=purl(main); setProductPhoto($("#mainPhoto"),main); $("#mainPrice").textContent=pprice(main); $("#mainDesc").textContent=pdesc(main); $("#mainHow").textContent=pguide(main,"how"); $("#mainPair").textContent=pguide(main,"pair"); $("#mainFit").textContent=fitLine(main);
@@ -879,7 +883,11 @@ $("#guideClose").onclick=()=>{$("#guideModal").classList.add("hidden");document.
 $("#guideModal").onclick=e=>{if(e.target.id==="guideModal"){$("#guideModal").classList.add("hidden");document.body.style.overflow=""}};
 
 function renderSelectedProduct(p){
+ const recommendation=getRecommendations(p.id);
+ window.__ranked=recommendation.ranked.map(x=>x.p);
  window.__mainPick=p;
+ $("#mainBudgetNotice").classList.toggle("hidden",!isOverBudget(p));
+ $("#mainBudgetText").textContent=isOverBudget(p)?t("overBudget"):"";
  $("#mainName").textContent=pname(p);
  $("#mainBrand").textContent=p.brand;
  $("#mainLink").href=purl(p);
@@ -892,8 +900,10 @@ function renderSelectedProduct(p){
  $("#mainTags").innerHTML=translatedTags(p).map(x=>'<span class="tag">'+x+'</span>').join("");
  $("#mainReasons").innerHTML=reasonLines(p).map(x=>'<li>'+x+'</li>').join("");
  $("#staffMain").textContent=p.name;
- const also=window.__ranked.find(x=>x.id!==p.id);
+ const also=recommendation.also;
  window.__alsoPick=also;
+ $("#alsoBudgetNotice").classList.toggle("hidden",!recommendation.alsoOverBudget);
+ $("#alsoBudgetText").textContent=recommendation.alsoOverBudget?t("budgetAlternative"):"";
  $("#alsoName").textContent=pname(also); $("#alsoBrand").textContent=also.brand; $("#alsoLink").href=purl(also); setProductPhoto($("#alsoPhoto"),also); $("#alsoPrice").textContent=pprice(also); $("#alsoDesc").textContent=pdesc(also);
  $("#alsoTags").innerHTML=translatedTags(also).slice(0,2).map(x=>'<span class="tag">'+x+'</span>').join("");
  $("#alsoReason").textContent=t("also");
