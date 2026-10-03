@@ -76,6 +76,7 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 .price-row{display:flex;align-items:baseline;gap:7px;margin-top:10px;flex-wrap:wrap}
 .price-label{font-size:11px;color:var(--muted);font-weight:800}
 .price-value{font-size:18px;font-weight:950;letter-spacing:-.03em;color:var(--ink)}
+.price-value,.product-guide-price{white-space:pre-line}
 .price-note{font-size:10px;color:var(--muted)}
 .product-desc{font-size:13px;line-height:1.62;color:#5d5158;margin:12px 0 0}
 .care-guide{margin-top:15px;border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden}
@@ -188,7 +189,7 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
         <div class="tags" id="mainTags"></div>
         <div class="tags hidden" id="mainBudgetNotice"><span class="tag" id="mainBudgetText"></span></div>
         <div class="compare-tip hidden" id="mainEyeNotice" role="status"></div>
-        <div class="price-row"><span class="price-label" data-i="priceLabel">공식 정상가 · 2026.10.01</span><span class="price-value" id="mainPrice"></span></div>
+        <div class="price-row"><span class="price-label" data-i="priceLabel">공식 정상가</span><span class="price-value" id="mainPrice"></span></div>
         <p class="product-desc" id="mainDesc"></p>
         <div class="care-guide">
           <div class="guide-row"><span class="guide-label" data-i="howUse">HOW TO USE</span><p id="mainHow"></p></div>
@@ -212,7 +213,7 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
           <div class="tags" id="alsoTags" style="margin-top:8px"></div>
           <div class="tags hidden" id="alsoBudgetNotice"><span class="tag" id="alsoBudgetText"></span></div>
           <div class="compare-tip hidden" id="alsoEyeNotice"></div>
-          <div class="price-row"><span class="price-label" data-i="priceLabel">공식 정상가 · 2026.10.01</span><span class="price-value" id="alsoPrice" style="font-size:15px"></span></div>
+          <div class="price-row"><span class="price-label" data-i="priceLabel">공식 정상가</span><span class="price-value" id="alsoPrice" style="font-size:15px"></span></div>
           <p class="compare-desc" id="alsoDesc"></p>
           <div class="compare-tip" id="alsoReason"></div>
         </div>
@@ -233,7 +234,7 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
       <button class="secondary" id="guideBtn" data-i="guideAll">8개 제품 가이드 보기</button>
       <button class="secondary" id="restart" data-i="restart">다시 찾기</button>
     </div>
-    <div class="foot" data-i="priceFoot">가격은 2026.10.01 올리브영 공식 온라인몰에서 확인한 정상가 기준입니다. 확인이 어려운 제품은 ‘가격 확인’으로 표시하며, 행사·옵션·매장에 따라 실제 판매가는 달라질 수 있어요.</div><div class="foot" data-i="stockNotice">제품 정보·가격·재고는 실제 판매처 및 공식 상품 페이지에서 확인해주세요.</div><div class="foot" data-i="footer">제품 설명은 2026.10.01 기준 브랜드 공식 페이지 및 공식 사용 가이드를 바탕으로 요약했습니다. 제품 사용 전 동봉 사용설명서와 최신 공식 사용법·주의사항을 확인해주세요.</div>
+    <div class="foot" data-i="priceFoot">가격은 올리브영 공식 온라인몰의 정상가 기준이며, 행사·옵션·매장에 따라 실제 판매가는 달라질 수 있습니다.</div><div class="foot" data-i="stockNotice">제품 정보·가격·재고는 실제 판매처 및 공식 상품 페이지에서 확인해주세요.</div><div class="foot" data-i="footer">제품 설명은 2026.10.01 기준 브랜드 공식 페이지 및 공식 사용 가이드를 바탕으로 요약했습니다. 제품 사용 전 동봉 사용설명서와 최신 공식 사용법·주의사항을 확인해주세요.</div>
   </section>
 </div>
 
@@ -262,10 +263,10 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script>
 const I18N={
-ko:{kicker:"",heroTitle:"나에게 맞는<br>뷰티 디바이스 찾기",heroSub:"피부 고민과 홈케어 취향을 선택하면 나에게 잘 맞는 뷰티 디바이스를 찾아드려요.",pill1:"약 40초",pill2:"6 Questions",pill3:"맞춤 제품 추천",start:"START ✨",notice:"본 서비스는 고객이 선택한 고민과 사용 선호도를 바탕으로 제품 선택을 돕는 안내 서비스이며 의료적 피부 진단이 아닙니다.",quick:"약 40초면 끝나요",back:"이전",next:"다음",why:"왜 잘 맞나요?",howUse:"HOW TO USE",pairWith:"PAIR WITH",modeTitle:"MODES / CARE · 모드·케어 기능",modeNote:"브랜드 공식 안내에서 확인 가능한 모드·관리 목적만 요약했으며, 사용감은 개인에 따라 다를 수 있어요.",fitTitle:"BEST FOR",priceLabel:"공식 정상가 · 2026.10.01",priceDate:"2026.10.01 기준",priceFoot:"가격은 2026.10.01 올리브영 공식 온라인몰에서 확인한 정상가 기준입니다. 확인이 어려운 제품은 ‘가격 확인’으로 표시하며, 행사·옵션·매장에 따라 실제 판매가는 달라질 수 있어요.",myConcern:"MY CONCERN",share:"결과 카드 공유하기",guideAll:"8개 제품 가이드 보기",guideTitle:"PRODUCT GUIDE",guideNotice:"제품 이미지는 실제 올리브영 상품 이미지로만 표시합니다.",shopOlive:"올리브영에서 제품 보기 ↗",restart:"다시 찾기",stockNotice:"제품 정보·가격·재고는 실제 판매처 및 공식 상품 페이지에서 확인해주세요.",footer:"제품 설명은 2026.10.01 기준 브랜드 공식 페이지 및 공식 사용 가이드를 바탕으로 요약했습니다. 제품 사용 전 동봉 사용설명서와 최신 공식 사용법·주의사항을 확인해주세요.",resultSub:"선택한 고민, 홈케어 취향과 예산을 바탕으로 제품을 비교했어요.",also:"함께 비교해볼 만한 제품이에요.",shareText:"나의 뷰티 디바이스 추천 결과"},
-en:{kicker:"",heroTitle:"Find My<br>Beauty Device",heroSub:"Choose your skin concerns and home-care preferences to find beauty devices that may suit you.",pill1:"About 40 sec",pill2:"6 Questions",pill3:"Personalized picks",start:"START ✨",notice:"This service is a product-selection guide based on your answers and is not a medical skin diagnosis.",quick:"About 40 seconds",back:"Back",next:"Next",why:"Why this match?",howUse:"HOW TO USE",pairWith:"PAIR WITH",modeTitle:"MODES / CARE",modeNote:"Only modes and care purposes verifiable from official brand guidance are summarized; experience may vary by user.",fitTitle:"BEST FOR",priceLabel:"Official regular price · 2026-10-01",priceDate:"as of 2026-10-01",priceFoot:"Prices are regular prices verified on Olive Young's official online store as of 2026-10-01. Items that could not be verified are marked Check price. Actual prices may vary by promotion, option or store.",myConcern:"MY CONCERN",share:"Share result card",guideAll:"View all 8 product guides",guideTitle:"PRODUCT GUIDE",guideNotice:"Only actual product images from Olive Young are shown.",shopOlive:"View on Olive Young ↗",restart:"Start again",stockNotice:"Please verify product information, price and stock with the actual retailer and official product page.",footer:"Product descriptions were summarized from official brand pages and official usage guides checked as of 2026-10-01. Before use, check the included manual and the latest official instructions and precautions.",resultSub:"We compared beauty devices based on your concerns, home-care preferences and budget.",also:"Another device worth comparing.",shareText:"My Beauty Device Finder result"},
-zh:{kicker:"",heroTitle:"找到適合我的<br>美容儀",heroSub:"選擇你的肌膚困擾與居家保養偏好，我們會推薦適合你比較的美容儀。",pill1:"約40秒",pill2:"6個問題",pill3:"個人化推薦",start:"開始 ✨",notice:"本服務僅依照你的回答提供商品選擇參考，並非醫療性肌膚診斷。",quick:"約40秒完成",back:"上一步",next:"下一步",why:"為什麼適合？",howUse:"使用方式",pairWith:"搭配質地",modeTitle:"模式 / 護理功能",modeNote:"僅摘要整理品牌官方說明中可確認的模式與護理目的；實際使用感受可能因人而異。",fitTitle:"適合這樣的你",priceLabel:"官方正常售價 · 2026.10.01",priceDate:"截至 2026.10.01",priceFoot:"價格以 2026.10.01 在 Olive Young 官方線上商城確認的正常售價為準；無法確認的商品標示為「價格確認」。實際價格可能因活動、選項或門市而不同。",myConcern:"我的困擾",share:"分享結果卡片",guideAll:"查看8款產品指南",guideTitle:"產品指南",guideNotice:"商品圖片僅使用 Olive Young 的實際商品圖片。",shopOlive:"在 Olive Young 查看商品 ↗",restart:"重新測試",stockNotice:"商品資訊、價格與庫存請以實際販售通路及官方商品頁面為準。",footer:"商品說明依 2026.10.01 查核時的品牌官方頁面與官方使用指南摘要整理。使用前請確認商品隨附說明書及最新官方使用方式與注意事項。",resultSub:"我們依照你的肌膚困擾、居家保養偏好與預算比較了美容儀。",also:"也可以一起比較這款。",shareText:"我的美容儀推薦結果"},
-ja:{kicker:"",heroTitle:"私に合う<br>美容デバイスを探す",heroSub:"肌悩みとホームケアの好みを選ぶと、あなたに合う美容デバイスをご案内します。",pill1:"約40秒",pill2:"6 Questions",pill3:"パーソナル提案",start:"START ✨",notice:"本サービスは回答内容をもとに商品選びをサポートするもので、医療的な肌診断ではありません。",quick:"約40秒で完了",back:"戻る",next:"次へ",why:"おすすめの理由",howUse:"使い方",pairWith:"一緒に使いやすいテクスチャー",modeTitle:"MODES / CARE · モード・ケア機能",modeNote:"ブランド公式案内で確認できるモードとケア目的のみ要約しており、使用感には個人差があります。",fitTitle:"こんな方におすすめ",priceLabel:"公式通常価格 · 2026.10.01",priceDate:"2026.10.01時点",priceFoot:"価格は2026.10.01にOlive Young公式オンラインストアで確認した通常価格を基準に表示しています。確認できない商品は「価格確認」と表示し、実際の価格はキャンペーン・オプション・店舗により異なる場合があります。",myConcern:"MY CONCERN",share:"結果カードをシェア",guideAll:"8商品のガイドを見る",guideTitle:"PRODUCT GUIDE",guideNotice:"商品画像は Olive Young の実際の商品画像のみを使用しています。",shopOlive:"Olive Youngで商品を見る ↗",restart:"もう一度",stockNotice:"商品情報・価格・在庫は、実際の販売元および公式商品ページでご確認ください。",footer:"商品説明は2026.10.01時点で確認したブランド公式ページ・公式使用ガイドをもとに要約しています。使用前に同梱の取扱説明書と最新の公式使用方法・注意事項をご確認ください。",resultSub:"選択した悩み・ホームケアの好み・予算をもとに、美容デバイスを比較しました。",also:"あわせて比較しやすい商品です。",shareText:"私のビューティーデバイス診断結果"}
+ko:{kicker:"",heroTitle:"나에게 맞는<br>뷰티 디바이스 찾기",heroSub:"피부 고민과 홈케어 취향을 선택하면 나에게 잘 맞는 뷰티 디바이스를 찾아드려요.",pill1:"약 40초",pill2:"6 Questions",pill3:"맞춤 제품 추천",start:"START ✨",notice:"본 서비스는 고객이 선택한 고민과 사용 선호도를 바탕으로 제품 선택을 돕는 안내 서비스이며 의료적 피부 진단이 아닙니다.",quick:"약 40초면 끝나요",back:"이전",next:"다음",why:"왜 잘 맞나요?",howUse:"HOW TO USE",pairWith:"PAIR WITH",modeTitle:"MODES / CARE · 모드·케어 기능",modeNote:"브랜드 공식 안내에서 확인 가능한 모드·관리 목적만 요약했으며, 사용감은 개인에 따라 다를 수 있어요.",fitTitle:"BEST FOR",priceLabel:"공식 정상가",priceFoot:"가격은 올리브영 공식 온라인몰의 정상가 기준이며, 행사·옵션·매장에 따라 실제 판매가는 달라질 수 있습니다.",myConcern:"MY CONCERN",share:"결과 카드 공유하기",guideAll:"8개 제품 가이드 보기",guideTitle:"PRODUCT GUIDE",guideNotice:"제품 이미지는 실제 올리브영 상품 이미지로만 표시합니다.",shopOlive:"올리브영에서 제품 보기 ↗",restart:"다시 찾기",stockNotice:"제품 정보·가격·재고는 실제 판매처 및 공식 상품 페이지에서 확인해주세요.",footer:"제품 설명은 2026.10.01 기준 브랜드 공식 페이지 및 공식 사용 가이드를 바탕으로 요약했습니다. 제품 사용 전 동봉 사용설명서와 최신 공식 사용법·주의사항을 확인해주세요.",resultSub:"선택한 고민, 홈케어 취향과 예산을 바탕으로 제품을 비교했어요.",also:"함께 비교해볼 만한 제품이에요.",shareText:"나의 뷰티 디바이스 추천 결과"},
+en:{kicker:"",heroTitle:"Find My<br>Beauty Device",heroSub:"Choose your skin concerns and home-care preferences to find beauty devices that may suit you.",pill1:"About 40 sec",pill2:"6 Questions",pill3:"Personalized picks",start:"START ✨",notice:"This service is a product-selection guide based on your answers and is not a medical skin diagnosis.",quick:"About 40 seconds",back:"Back",next:"Next",why:"Why this match?",howUse:"HOW TO USE",pairWith:"PAIR WITH",modeTitle:"MODES / CARE",modeNote:"Only modes and care purposes verifiable from official brand guidance are summarized; experience may vary by user.",fitTitle:"BEST FOR",priceLabel:"Official regular price",priceFoot:"Prices are based on Olive Young's official online store regular prices. Actual prices may vary by promotion, option or store.",myConcern:"MY CONCERN",share:"Share result card",guideAll:"View all 8 product guides",guideTitle:"PRODUCT GUIDE",guideNotice:"Only actual product images from Olive Young are shown.",shopOlive:"View on Olive Young ↗",restart:"Start again",stockNotice:"Please verify product information, price and stock with the actual retailer and official product page.",footer:"Product descriptions were summarized from official brand pages and official usage guides checked as of 2026-10-01. Before use, check the included manual and the latest official instructions and precautions.",resultSub:"We compared beauty devices based on your concerns, home-care preferences and budget.",also:"Another device worth comparing.",shareText:"My Beauty Device Finder result"},
+zh:{kicker:"",heroTitle:"找到適合我的<br>美容儀",heroSub:"選擇你的肌膚困擾與居家保養偏好，我們會推薦適合你比較的美容儀。",pill1:"約40秒",pill2:"6個問題",pill3:"個人化推薦",start:"開始 ✨",notice:"本服務僅依照你的回答提供商品選擇參考，並非醫療性肌膚診斷。",quick:"約40秒完成",back:"上一步",next:"下一步",why:"為什麼適合？",howUse:"使用方式",pairWith:"搭配質地",modeTitle:"模式 / 護理功能",modeNote:"僅摘要整理品牌官方說明中可確認的模式與護理目的；實際使用感受可能因人而異。",fitTitle:"適合這樣的你",priceLabel:"官方正常售價",priceFoot:"價格以 Olive Young 官方線上商城的正常售價為準；實際價格可能因活動、選項或門市而不同。",myConcern:"我的困擾",share:"分享結果卡片",guideAll:"查看8款產品指南",guideTitle:"產品指南",guideNotice:"商品圖片僅使用 Olive Young 的實際商品圖片。",shopOlive:"在 Olive Young 查看商品 ↗",restart:"重新測試",stockNotice:"商品資訊、價格與庫存請以實際販售通路及官方商品頁面為準。",footer:"商品說明依 2026.10.01 查核時的品牌官方頁面與官方使用指南摘要整理。使用前請確認商品隨附說明書及最新官方使用方式與注意事項。",resultSub:"我們依照你的肌膚困擾、居家保養偏好與預算比較了美容儀。",also:"也可以一起比較這款。",shareText:"我的美容儀推薦結果"},
+ja:{kicker:"",heroTitle:"私に合う<br>美容デバイスを探す",heroSub:"肌悩みとホームケアの好みを選ぶと、あなたに合う美容デバイスをご案内します。",pill1:"約40秒",pill2:"6 Questions",pill3:"パーソナル提案",start:"START ✨",notice:"本サービスは回答内容をもとに商品選びをサポートするもので、医療的な肌診断ではありません。",quick:"約40秒で完了",back:"戻る",next:"次へ",why:"おすすめの理由",howUse:"使い方",pairWith:"一緒に使いやすいテクスチャー",modeTitle:"MODES / CARE · モード・ケア機能",modeNote:"ブランド公式案内で確認できるモードとケア目的のみ要約しており、使用感には個人差があります。",fitTitle:"こんな方におすすめ",priceLabel:"公式通常価格",priceFoot:"価格はOlive Young公式オンラインストアの通常価格を基準としています。実際の価格はキャンペーン・オプション・店舗により異なる場合があります。",myConcern:"MY CONCERN",share:"結果カードをシェア",guideAll:"8商品のガイドを見る",guideTitle:"PRODUCT GUIDE",guideNotice:"商品画像は Olive Young の実際の商品画像のみを使用しています。",shopOlive:"Olive Youngで商品を見る ↗",restart:"もう一度",stockNotice:"商品情報・価格・在庫は、実際の販売元および公式商品ページでご確認ください。",footer:"商品説明は2026.10.01時点で確認したブランド公式ページ・公式使用ガイドをもとに要約しています。使用前に同梱の取扱説明書と最新の公式使用方法・注意事項をご確認ください。",resultSub:"選択した悩み・ホームケアの好み・予算をもとに、美容デバイスを比較しました。",also:"あわせて比較しやすい商品です。",shareText:"私のビューティーデバイス診断結果"}
 };
 
 const budgetNotices={
@@ -282,6 +283,13 @@ const eyeNotices={
  ja:{eyeUnverified:"目元に使用できるか確認が必要です。",eyeConfirmed:"目元への使用を確認 · EYE モード"}
 };
 Object.keys(eyeNotices).forEach(l=>Object.assign(I18N[l],eyeNotices[l]));
+const rollerPriceLabels={
+ ko:{rollerHead:"헤드 단품",rollerBodyRequired:"미니플러스 본체 필요",rollerBundle:"미니플러스 포함 기획",priceCurrency:"원"},
+ en:{rollerHead:"Head only",rollerBodyRequired:"Booster Pro Mini Plus body required",rollerBundle:"Bundle including Mini Plus",priceCurrency:""},
+ zh:{rollerHead:"單售滾輪頭",rollerBodyRequired:"需搭配 Mini Plus 主機",rollerBundle:"含 Mini Plus 主機的套組",priceCurrency:"韓元"},
+ ja:{rollerHead:"ヘッド単品",rollerBodyRequired:"ミニプラス本体が必要",rollerBundle:"ミニプラス本体付きセット",priceCurrency:"ウォン"}
+};
+Object.keys(rollerPriceLabels).forEach(l=>Object.assign(I18N[l],rollerPriceLabels[l]));
 
 const Q={
 ko:[
@@ -351,14 +359,14 @@ ja:[
 ]};
 
 const products=[
- {id:"x2",price:"375,000원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0025/A00000025174506ko.jpg?l=ko",brand:"medicube AGE-R",name:"부스터 프로 X2",names:{en:"Booster Pro X2",zh:"Booster Pro X2",ja:"ブースタープロ X2"},v:{glow:4,absorb:5,texture:5,trouble:2,elastic:5,jaw:4,all:5,quick:3,target:3,beginner:3,easy:3,multi:5,focus:3,gentle:2,whole:5,cheek:4,jawarea:4,eye:2,spot:2},tags:["올인원","탄력","피부결"]},
- {id:"mini",price:"126,000원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0023/A00000023790172ko.jpg?l=ko",brand:"medicube AGE-R",name:"부스터 프로 미니 플러스",names:{en:"Booster Pro Mini Plus",zh:"Booster Pro Mini Plus",ja:"ブースタープロ ミニプラス"},v:{glow:4,absorb:4,texture:3,trouble:5,elastic:1,jaw:1,all:3,quick:5,target:4,beginner:5,easy:5,multi:2,focus:4,gentle:5,whole:4,cheek:3,jawarea:1,eye:2,spot:5},tags:["간편","컨디션","입문"]},
- {id:"vroller",price:"CHECK",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0024/A00000024757319ko.jpg?l=ko",brand:"medicube AGE-R",name:"부스터 브이 롤러",names:{en:"Booster V Roller",zh:"Booster V Roller",ja:"ブースター V ローラー"},v:{glow:1,absorb:1,texture:1,trouble:0,elastic:5,jaw:5,all:2,quick:4,target:5,beginner:3,easy:3,multi:1,focus:5,gentle:2,whole:2,cheek:4,jawarea:5,eye:1,spot:2},tags:["페이스라인","EMS","집중"]},
- {id:"glow",price:"388,500원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0025/A00000025287513ko.jpg?l=ko",brand:"medicube AGE-R",name:"부스터 글로우",names:{en:"Booster Glow",zh:"Booster Glow",ja:"ブースターグロウ"},v:{glow:5,absorb:5,texture:3,trouble:3,elastic:2,jaw:0,all:2,quick:1,target:4,beginner:5,easy:3,multi:2,focus:3,gentle:5,whole:5,cheek:3,jawarea:0,eye:2,spot:2},tags:["광채","스킨케어","간편"]},
- {id:"vsera",price:"109,000원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0024/A00000024879740ko.jpg?l=ko",brand:"MOMMYCARE",name:"EMS 브이쎄라",names:{en:"EMS V-SERA",zh:"EMS V-SERA",ja:"EMS V-SERA"},v:{glow:0,absorb:1,texture:0,trouble:0,elastic:4,jaw:5,all:1,quick:2,target:5,beginner:4,easy:4,multi:1,focus:5,gentle:2,whole:2,cheek:4,jawarea:5,eye:0,spot:1},tags:["페이스라인","EMS","집중"]},
- {id:"thome",price:"599,000원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0025/A00000025297522ko.jpg?l=ko",brand:"THOME",name:"더 글로우 시그니처",names:{en:"The Glow Signature",zh:"The Glow Signature",ja:"The Glow Signature"},v:{glow:5,absorb:4,texture:4,trouble:1,elastic:4,jaw:0,all:2,quick:1,target:5,beginner:3,easy:4,multi:2,focus:2,gentle:3,whole:5,cheek:3,jawarea:0,eye:1,spot:1},tags:["물방울초음파","스킨케어","앰플"]},
- {id:"therma",price:"599,000원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0024/A00000024433522ko.jpg?l=ko",brand:"LG Pra.L",name:"수퍼폼 써마샷 얼티밋",names:{en:"Superform Thermashot Ultimate",zh:"Superform Thermashot Ultimate",ja:"スーパーフォーム サーマショット アルティメット"},v:{glow:4,absorb:4,texture:5,trouble:1,elastic:5,jaw:5,all:5,quick:4,target:4,beginner:2,easy:2,multi:5,focus:4,gentle:1,whole:5,cheek:5,jawarea:5,eye:5,spot:2},tags:["탄력","피부결","올인원"]},
- {id:"galvanic",price:"108,000원",image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0023/A00000023910340ko.jpg?l=ko",brand:"LG Pra.L",name:"갈바닉 부스터",names:{en:"Galvanic Booster",zh:"Galvanic Booster",ja:"ガルバニック ブースター"},v:{glow:4,absorb:5,texture:2,trouble:1,elastic:1,jaw:0,all:1,quick:5,target:4,beginner:5,easy:5,multi:1,focus:3,gentle:5,whole:5,cheek:3,jawarea:0,eye:2,spot:5},tags:["스킨케어","간편","입문"]}
+ {id:"x2",price:"375,000원",budgetPrice:375000,image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0025/A00000025174506ko.jpg?l=ko",brand:"medicube AGE-R",name:"부스터 프로 X2",names:{en:"Booster Pro X2",zh:"Booster Pro X2",ja:"ブースタープロ X2"},v:{glow:4,absorb:5,texture:5,trouble:2,elastic:5,jaw:4,all:5,quick:3,target:3,beginner:3,easy:3,multi:5,focus:3,gentle:2,whole:5,cheek:4,jawarea:4,eye:2,spot:2},tags:["올인원","탄력","피부결"]},
+ {id:"mini",price:"126,000원",budgetPrice:126000,image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0023/A00000023790172ko.jpg?l=ko",brand:"medicube AGE-R",name:"부스터 프로 미니 플러스",names:{en:"Booster Pro Mini Plus",zh:"Booster Pro Mini Plus",ja:"ブースタープロ ミニプラス"},v:{glow:4,absorb:4,texture:3,trouble:5,elastic:1,jaw:1,all:3,quick:5,target:4,beginner:5,easy:5,multi:2,focus:4,gentle:5,whole:4,cheek:3,jawarea:1,eye:2,spot:5},tags:["간편","컨디션","입문"]},
+ {id:"vroller",price:"71,880원",budgetPrice:197880,image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0024/A00000024757319ko.jpg?l=ko",brand:"medicube AGE-R",name:"부스터 브이 롤러",names:{en:"Booster V Roller",zh:"Booster V Roller",ja:"ブースター V ローラー"},v:{glow:1,absorb:1,texture:1,trouble:0,elastic:5,jaw:5,all:2,quick:4,target:5,beginner:3,easy:3,multi:1,focus:5,gentle:2,whole:2,cheek:4,jawarea:5,eye:1,spot:2},tags:["페이스라인","EMS","집중"]},
+ {id:"glow",price:"388,500원",budgetPrice:388500,image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0025/A00000025287513ko.jpg?l=ko",brand:"medicube AGE-R",name:"부스터 글로우",names:{en:"Booster Glow",zh:"Booster Glow",ja:"ブースターグロウ"},v:{glow:5,absorb:5,texture:3,trouble:3,elastic:2,jaw:0,all:2,quick:1,target:4,beginner:5,easy:3,multi:2,focus:3,gentle:5,whole:5,cheek:3,jawarea:0,eye:2,spot:2},tags:["광채","스킨케어","간편"]},
+ {id:"vsera",price:"109,000원",budgetPrice:109000,image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0024/A00000024879740ko.jpg?l=ko",brand:"MOMMYCARE",name:"EMS 브이쎄라",names:{en:"EMS V-SERA",zh:"EMS V-SERA",ja:"EMS V-SERA"},v:{glow:0,absorb:1,texture:0,trouble:0,elastic:4,jaw:5,all:1,quick:2,target:5,beginner:4,easy:4,multi:1,focus:5,gentle:2,whole:2,cheek:4,jawarea:5,eye:0,spot:1},tags:["페이스라인","EMS","집중"]},
+ {id:"thome",price:"599,000원",budgetPrice:599000,image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0025/A00000025297522ko.jpg?l=ko",brand:"THOME",name:"더 글로우 시그니처",names:{en:"The Glow Signature",zh:"The Glow Signature",ja:"The Glow Signature"},v:{glow:5,absorb:4,texture:4,trouble:1,elastic:4,jaw:0,all:2,quick:1,target:5,beginner:3,easy:4,multi:2,focus:2,gentle:3,whole:5,cheek:3,jawarea:0,eye:1,spot:1},tags:["물방울초음파","스킨케어","앰플"]},
+ {id:"therma",price:"599,000원",budgetPrice:599000,image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0024/A00000024433522ko.jpg?l=ko",brand:"LG Pra.L",name:"수퍼폼 써마샷 얼티밋",names:{en:"Superform Thermashot Ultimate",zh:"Superform Thermashot Ultimate",ja:"スーパーフォーム サーマショット アルティメット"},v:{glow:4,absorb:4,texture:5,trouble:1,elastic:5,jaw:5,all:5,quick:4,target:4,beginner:2,easy:2,multi:5,focus:4,gentle:1,whole:5,cheek:5,jawarea:5,eye:5,spot:2},tags:["탄력","피부결","올인원"]},
+ {id:"galvanic",price:"108,000원",budgetPrice:108000,image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0023/A00000023910340ko.jpg?l=ko",brand:"LG Pra.L",name:"갈바닉 부스터",names:{en:"Galvanic Booster",zh:"Galvanic Booster",ja:"ガルバニック ブースター"},v:{glow:4,absorb:5,texture:2,trouble:1,elastic:1,jaw:0,all:1,quick:5,target:4,beginner:5,easy:5,multi:1,focus:3,gentle:5,whole:5,cheek:3,jawarea:0,eye:2,spot:5},tags:["스킨케어","간편","입문"]}
 ];
 
 
@@ -747,6 +755,7 @@ function scoreProduct(p){
  return s;
 }
 function productPriceNumber(p){
+ if(Number.isFinite(p.budgetPrice))return p.budgetPrice;
  const n=parseInt(String(p.price||"").replace(/[^0-9]/g,""),10);
  return Number.isFinite(n)?n:null;
 }
@@ -784,6 +793,12 @@ function pmodes(p){return (productModes[lang]&&productModes[lang][p.id])||[]}
 function renderModes(p){return pmodes(p).map(m=>'<div class="mode-item"><span class="mode-name">'+m.name+'</span><span class="mode-desc">'+m.desc+'</span></div>').join("")}
 function purl(p){return PRODUCT_URLS[p.id]||"https://www.oliveyoung.co.kr/store/main/main.do"}
 function pprice(p){
+ if(p.id==="vroller"){
+  const money=n=>lang==="en"?"₩"+n:n+t("priceCurrency");
+  const head=String(p.price).replace(/[^0-9,]/g,"");
+  const bundle=p.budgetPrice.toLocaleString("en-US");
+  return t("rollerHead")+" "+money(head)+"\n"+t("rollerBodyRequired")+"\n"+t("rollerBundle")+" "+money(bundle);
+ }
  if(p.price!=="CHECK") return p.price;
  return lang==="ko"?"가격 확인":lang==="en"?"Check price":lang==="zhs"?"价格确认":lang==="zh"?"價格確認":"価格確認";
 }
@@ -880,7 +895,7 @@ function renderProductGuides(){
    +'<div class="product-guide-body">'
    +'<div class="product-guide-brand">'+p.brand+'</div>'
    +'<button class="product-guide-name guide-select" data-product="'+p.id+'" type="button" style="border:0;background:transparent;padding:0;text-align:left;color:inherit;width:100%">'+pname(p)+'</button>'
-   +'<div class="product-guide-price">'+pprice(p)+' <small style="font-weight:600;color:var(--muted)">· '+t("priceDate")+'</small></div>'
+   +'<div class="product-guide-price">'+pprice(p)+'</div>'
    +'<div class="product-guide-section"><b>'+t("modeTitle")+'</b><div class="mode-list">'+renderModes(p)+'</div><div class="mode-note">'+t("modeNote")+'</div></div>'
    +'<div class="product-guide-section"><b>'+t("howUse")+'</b><p>'+guide.how+'</p></div>'
    +'<div class="product-guide-section"><b>'+t("pairWith")+'</b><p>'+guide.pair+'</p></div>'
