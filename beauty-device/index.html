@@ -674,7 +674,7 @@ function setLang(l){
  $("#langBtn").textContent=({ko:"한국어",en:"English",zhs:"简体中文",zh:"繁體中文",ja:"日本語"})[l]+" ▾";
  $("#langSheet").classList.add("hidden");
  if(!$("#quiz").classList.contains("hidden")) renderQ();
- if(!$("#result").classList.contains("hidden")) showResult();
+ if(!$("#result").classList.contains("hidden")) showResult(window.__mainPick&&window.__mainPick.id);
 }
 function show(id){["home","quiz","result"].forEach(x=>$("#"+x).classList.toggle("hidden",x!==id));window.scrollTo({top:0,behavior:"smooth"})}
 
@@ -823,9 +823,10 @@ function resultType(){
  if(lang==="zhs"||lang==="zh") return c.map(x=>l[x]).join(" + ")+" 型";
  return c.map(x=>l[x]).join(" + ")+" タイプ";
 }
-function showResult(){
+function showResult(selectedId){
  const ranked=products.map(p=>({p,s:scoreProduct(p)})).sort((a,b)=>b.s-a.s);
- const main=ranked[0].p, also=ranked[1].p;
+ const main=products.find(p=>p.id===selectedId)||ranked[0].p;
+ const also=ranked.find(x=>x.p.id!==main.id).p;
  $("#resultType").textContent=resultType();
  $("#resultSub").textContent=t("resultSub");
  $("#mainName").textContent=pname(main); $("#mainBrand").textContent=main.brand; $("#mainLink").href=purl(main); setProductPhoto($("#mainPhoto"),main); $("#mainPrice").textContent=pprice(main); $("#mainDesc").textContent=pdesc(main); $("#mainHow").textContent=pguide(main,"how"); $("#mainPair").textContent=pguide(main,"pair"); $("#mainFit").textContent=fitLine(main);
@@ -891,16 +892,17 @@ function renderSelectedProduct(p){
  $("#mainTags").innerHTML=translatedTags(p).map(x=>'<span class="tag">'+x+'</span>').join("");
  $("#mainReasons").innerHTML=reasonLines(p).map(x=>'<li>'+x+'</li>').join("");
  $("#staffMain").textContent=p.name;
+ const also=window.__ranked.find(x=>x.id!==p.id);
+ window.__alsoPick=also;
+ $("#alsoName").textContent=pname(also); $("#alsoBrand").textContent=also.brand; $("#alsoLink").href=purl(also); setProductPhoto($("#alsoPhoto"),also); $("#alsoPrice").textContent=pprice(also); $("#alsoDesc").textContent=pdesc(also);
+ $("#alsoTags").innerHTML=translatedTags(also).slice(0,2).map(x=>'<span class="tag">'+x+'</span>').join("");
+ $("#alsoReason").textContent=t("also");
 }
-$("#mainName").onclick=()=>{const p=window.__mainPick;if(p)renderSelectedProduct(p)};
+$("#mainName").onclick=()=>{};
 $("#alsoName").onclick=()=>{
  const p=window.__alsoPick;
  if(!p)return;
- const previous=window.__mainPick;
  renderSelectedProduct(p);
- window.__alsoPick=previous;
- $("#alsoName").textContent=pname(previous); $("#alsoBrand").textContent=previous.brand; $("#alsoLink").href=purl(previous); setProductPhoto($("#alsoPhoto"),previous); $("#alsoPrice").textContent=pprice(previous); $("#alsoDesc").textContent=pdesc(previous);
- $("#alsoTags").innerHTML=translatedTags(previous).slice(0,2).map(x=>'<span class="tag">'+x+'</span>').join("");
  window.scrollTo({top:document.querySelector(".result-head").offsetTop,behavior:"smooth"});
 };
 $("#mainShop").onclick=()=>{
@@ -931,16 +933,7 @@ function applySharedMainProduct(id){
  if(!id)return;
  const p=products.find(x=>x.id===id);
  if(!p||!window.__mainPick||p.id===window.__mainPick.id)return;
- const previous=window.__mainPick;
  renderSelectedProduct(p);
- window.__alsoPick=previous;
- $("#alsoName").textContent=pname(previous);
- $("#alsoBrand").textContent=previous.brand;
- $("#alsoLink").href=purl(previous);
- setProductPhoto($("#alsoPhoto"),previous);
- $("#alsoPrice").textContent=pprice(previous);
- $("#alsoDesc").textContent=pdesc(previous);
- $("#alsoTags").innerHTML=translatedTags(previous).slice(0,2).map(x=>'<span class="tag">'+x+'</span>').join("");
 }
 function restoreSharedResult(){
  try{
