@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Concept C — Focus Symbol</title>
+  <desc id="desc">An open rounded diamond frames a single point, representing a focused personal match.</desc>
+  <path d="M147 62Q128 43 109 62L62 109Q43 128 62 147L109 194Q128 213 147 194L194 147Q213 128 194 109" stroke="currentColor" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="128" cy="128" r="17" fill="currentColor"/>
+</svg>

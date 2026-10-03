@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#fff8fb">
+  <title>Beauty Device Finder · 모바일 로고 시안</title>
+  <style>
+    :root{color-scheme:light;--pink:#ff5c9d;--ink:#241b22;--muted:#796f77;--line:#f0dbe4;--app:#fff8fb}
+    *{box-sizing:border-box}
+    body{margin:0;background:#faf8f9;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif}
+    main{max-width:1440px;margin:auto;padding:32px 24px 64px}
+    header{max-width:780px;margin-bottom:28px}
+    .eyebrow{font-size:12px;font-weight:750;letter-spacing:.12em;color:var(--muted)}
+    h1{font-size:clamp(26px,4vw,38px);letter-spacing:-.045em;margin:10px 0 12px;line-height:1.2}
+    header p{font-size:14px;color:var(--muted);line-height:1.7;margin:0}
+    .concepts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}
+    article{background:white;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+    .intro{padding:24px 24px 18px;min-height:214px}
+    .tag{font-size:11px;color:#b32867;letter-spacing:.08em;font-weight:800}
+    h2{font-size:24px;letter-spacing:-.04em;margin:8px 0 10px}
+    .intro p{font-size:13px;line-height:1.7;color:var(--muted);margin:0 0 12px}
+    a{color:#9a245a;text-underline-offset:3px;font-size:12px}
+    .mode{border-top:1px solid var(--line);padding:20px 20px 24px}
+    h3{font-size:13px;margin:0 0 16px}
+    .sizes{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+    figure{margin:0;display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+    figcaption{font-size:11px;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums}
+    .tile{width:var(--size);height:var(--size);display:grid;place-items:center}
+    .mark{width:100%;height:100%;color:var(--symbol,#000)}
+    .mark svg{display:block;width:100%;height:100%}
+    .pink{--symbol:var(--pink)}
+    .app{--symbol:var(--pink)}
+    .app .tile{background:var(--app);border-radius:24%;outline:1px solid #f5e6ed;outline-offset:-1px}
+    .large{border-top:1px dashed var(--line);margin-top:20px;padding-top:20px;display:grid;gap:18px}
+    .large summary{cursor:pointer;font-size:12px;color:var(--muted);font-weight:600}
+    .large details[open] summary{margin-bottom:18px}
+    .large .sizes{justify-content:center;flex-wrap:wrap;gap:20px}
+    .pwa{margin-top:18px;padding-top:18px;border-top:1px dashed var(--line)}
+    .pwa h4{font-size:12px;margin:0 0 14px;color:var(--muted)}
+    .pwa figure+figure{margin-top:22px}
+    .native512{width:100%;overflow:auto;padding:4px 0 12px;overscroll-behavior-x:contain}
+    .native512 figure{width:512px}
+    .context{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;padding:12px;margin:0 20px 22px;background:#fff8fb}
+    .context strong{font-size:14px;letter-spacing:-.02em}
+    .context small{display:block;font-size:11px;color:var(--muted);margin-top:3px}
+    footer{font-size:12px;line-height:1.7;color:var(--muted);margin-top:24px}
+    @media(max-width:1100px){.concepts{grid-template-columns:repeat(2,minmax(0,1fr))}.intro{min-height:200px}}
+    @media(max-width:720px){main{padding:24px 16px 40px}.concepts{grid-template-columns:1fr}.intro{min-height:0}.sizes{justify-content:space-around}.mode{padding:20px 18px 24px}}
+    @media(prefers-reduced-motion:no-preference){a:hover{color:#241b22}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">BEAUTY DEVICE FINDER · LOGO EXPLORATION</div>
+    <h1>작은 화면에서 먼저 읽히는 심볼</h1>
+    <p>실제 크기 32·40·48·64px를 우선 비교하세요. 모든 시안은 검정 단색 원본 SVG이며, 핑크는 현재 사이트의 #ff5c9d입니다. 앱 아이콘 배경은 현재 PWA 배경색 #fff8fb을 사용했습니다.</p>
+  </header>
+  <div class="concepts" id="concepts"></div>
+  <footer>기존 사이트에는 적용하지 않은 비교용 시안입니다. SVG는 글꼴·외부 이미지·그라데이션 없이 구성했습니다. 512px는 축소하지 않은 실제 크기로 표시하며, 좁은 화면에서는 해당 영역을 가로로 스크롤할 수 있습니다.</footer>
+</main>
+<template id="symbol-a"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M66 40H124C167 40 188 58 188 86C188 104 179 118 164 125C184 132 196 146 196 169C196 199 173 216 128 216H66V40ZM98 70V110H123C145 110 156 103 156 90C156 77 145 70 123 70H98ZM98 140V186H127C151 186 164 179 164 163C164 148 151 140 127 140H98Z"/></svg></template>
+<template id="symbol-b"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M64 52Q64 40 76 40H128C164 40 188 63 188 94C188 109 181 122 169 131C187 138 198 152 198 171C198 198 177 216 143 216H76Q64 216 64 204V52ZM104 94A24 24 0 1 0 152 94A24 24 0 1 0 104 94ZM98 148V186H142C157 186 166 179 166 167C166 155 157 148 142 148H98Z"/></svg></template>
+<template id="symbol-c"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M147 62Q128 43 109 62L62 109Q43 128 62 147L109 194Q128 213 147 194L194 147Q213 128 194 109" stroke="currentColor" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/><circle cx="128" cy="128" r="17" fill="currentColor"/></svg></template>
+<script>
+  const concepts=[
+    {id:"a",name:"Minimal B",tag:"A · 가시성 우선",copy:"곧은 기둥과 두 개의 넓은 내부 공간으로 대문자 B가 즉시 읽히게 했습니다. 아래 곡선을 조금 더 넓게 잡아 작은 크기에서도 안정적인 균형을 유지합니다.",intent:"앱 이름을 기억시키는 가장 단순한 방향"},
+    {id:"b",name:"Beauty Tech B",tag:"B · 형태 안에 통합",copy:"위쪽의 원형 내부 공간이 디바이스 헤드를 은근히 떠올리게 합니다. 별도 그림을 붙이지 않고 B의 구조 안에서만 기술적인 인상을 만들었습니다.",intent:"둥근 B와 원형 헤드의 간결한 결합"},
+    {id:"c",name:"Focus Symbol",tag:"C · 독립 심볼",copy:"열린 둥근 마름모와 중앙의 점으로 원하는 제품 하나에 초점을 맞추는 과정을 표현했습니다. 기기나 얼굴을 그리지 않고 찾기·맞춤 추천의 인상을 담았습니다.",intent:"B 레터마크와 비교하는 자유 심볼 방향"}
+  ];
+  const sizes=[32,40,48,64];
+  function sample(id,size,caption=size+"px"){
+    return '<figure><div class="tile" style="--size:'+size+'px"><div class="mark" role="img" aria-label="시안 '+id.toUpperCase()+', '+caption+'">'+document.getElementById('symbol-'+id).innerHTML+'</div></div><figcaption>'+caption+'</figcaption></figure>';
+  }
+  function mode(id,title,style){
+    return '<section class="mode '+style+'"><h3>'+title+'</h3><div class="sizes">'+sizes.map(s=>sample(id,s)).join('')+'</div><details class="large" open><summary>128·256px 확대 비교</summary><div class="sizes">'+[128,256].map(s=>sample(id,s)).join('')+'</div></details></section>';
+  }
+  document.getElementById('concepts').innerHTML=concepts.map(c=>
+    '<article><div class="intro"><div class="tag">'+c.tag+'</div><h2>'+c.name+'</h2><p>'+c.copy+'</p><a href="concept-'+c.id+'.svg" target="_blank" rel="noopener">SVG 원본 보기 ↗</a></div>'+
+    mode(c.id,'01 · 검정 단색','black')+mode(c.id,'02 · 핑크 단색','pink')+mode(c.id,'03 · 앱 아이콘 배경','app')+
+    '<section class="mode app"><h3>PWA 홈 화면 아이콘</h3><div class="pwa"><h4>180px · 실제 크기</h4>'+sample(c.id,180)+'<details class="large" open><summary>512px · 실제 크기 보기</summary><div class="native512">'+sample(c.id,512)+'</div></details></div></section>'+
+    '<div class="context pink">'+sample(c.id,40,'헤더 40px')+'<div><strong>Beauty Device Finder</strong><small>'+c.intent+'</small></div></div></article>'
+  ).join('');
+</script>
+</body>
+</html>
