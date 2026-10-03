@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" role="img" aria-labelledby="title desc">
+  <title id="title">Soft Capsule</title>
+  <desc id="desc">A smooth tapered capsule combines the treatment head and body without a narrow neck.</desc>
+  <path fill-rule="evenodd" d="M128 30C102 30 88 48 88 78L92 200C92 218 107 230 128 230C149 230 164 218 164 200L168 78C168 48 154 30 128 30ZM128 50C116 50 108 60 108 74V80C108 94 116 102 128 102C140 102 148 94 148 80V74C148 60 140 50 128 50ZM120 158A8 8 0 1 0 136 158A8 8 0 1 0 120 158Z"/>
+</svg>

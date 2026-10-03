@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" role="img" aria-labelledby="title desc">
+  <title id="title">Round Head</title>
+  <desc id="desc">A circular treatment head joins a long rounded body with one simple control.</desc>
+  <path fill-rule="evenodd" d="M128 30C106 30 88 48 88 70C88 89 98 103 100 110V198C100 214 112 226 128 226C144 226 156 214 156 198V110C158 103 168 89 168 70C168 48 150 30 128 30ZM108 90Q128 102 148 90V104Q128 116 108 104ZM120 158A8 8 0 1 0 136 158A8 8 0 1 0 120 158Z"/>
+</svg>
