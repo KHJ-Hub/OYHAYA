@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0f5f73">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>부산 크루즈 캘린더 | OYHAYA</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">OYHAYA · BUSAN CRUISE</p>
+        <h1>크루즈 입항 캘린더</h1>
+      </div>
+      <a class="source-link" href="https://www.chainportal.co.kr/nexacro/index.html?screenid=screen_main&params=cruise:0" target="_blank" rel="noopener">원본 보기</a>
+    </header>
+
+    <section class="status-card" id="statusCard">
+      <strong>월간 캘린더 준비 완료</strong>
+      <span>실시간 일정은 공공데이터 API 연결 후 자동 표시됩니다.</span>
+    </section>
+
+    <section class="stats" aria-label="월간 요약">
+      <article class="stat primary">
+        <span>이번 달 입항</span>
+        <div><strong id="monthCount">0</strong><small>척</small></div>
+      </article>
+      <article class="stat">
+        <span>가장 많은 날</span>
+        <div><strong id="busiestDay">-</strong><small id="busiestCount">일정 없음</small></div>
+      </article>
+      <article class="stat">
+        <span>선택 날짜</span>
+        <div><strong id="selectedCount">0</strong><small>척</small></div>
+      </article>
+    </section>
+
+    <section class="calendar-card">
+      <div class="calendar-nav">
+        <button id="prevMonth" class="nav-btn" type="button" aria-label="이전 달">‹</button>
+        <button id="monthTitle" class="month-title" type="button" aria-label="이번 달로 이동"></button>
+        <button id="nextMonth" class="nav-btn" type="button" aria-label="다음 달">›</button>
+      </div>
+
+      <div class="weekdays" aria-hidden="true">
+        <span class="sun">일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span class="sat">토</span>
+      </div>
+      <div id="calendarGrid" class="calendar-grid"></div>
+      <button id="todayBtn" class="today-btn" type="button">오늘</button>
+    </section>
+
+    <section class="day-detail" aria-live="polite">
+      <div class="detail-head">
+        <div>
+          <p id="selectedWeekday" class="detail-kicker">선택한 날짜</p>
+          <h2 id="selectedDate">-</h2>
+        </div>
+        <span id="selectedPill" class="count-pill">0척</span>
+      </div>
+      <div id="eventList" class="event-list"></div>
+    </section>
+
+    <footer>
+      일정은 변경될 수 있습니다. 최종 정보는 부산항만공사 체인포털에서 확인하세요.
+    </footer>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
