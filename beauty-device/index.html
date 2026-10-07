@@ -242,7 +242,7 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 
     <div class="actions">
       <button class="primary" id="share" data-i="share">결과 공유하기</button>
-      <button class="secondary" id="guideBtn" data-i="guideAll">8개 제품 가이드 보기</button>
+      <button class="secondary" id="guideBtn" data-i="guideAll">9개 제품 가이드 보기</button>
       <button class="secondary" id="restart" data-i="restart">다시 찾기</button>
     </div>
     <div class="foot" data-i="priceFoot">가격은 올리브영 공식몰 정상가이며, 행사·옵션·매장에 따라 달라질 수 있어요.</div><div class="foot" data-i="stockNotice">제품 정보·가격·재고는 공식 상품 페이지에서 확인해주세요.</div><div class="foot" data-i="footer">사용 전 동봉 설명서와 브랜드의 최신 사용법·주의사항을 확인해주세요.</div>
@@ -261,7 +261,7 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
       </div>
       <div class="guide-grid" id="guideGrid" tabindex="0" role="region" aria-labelledby="guideTitle"></div>
     </div>
-    <div class="guide-position" id="guidePosition" role="status" aria-live="polite" aria-atomic="true">1 / 8</div>
+    <div class="guide-position" id="guidePosition" role="status" aria-live="polite" aria-atomic="true">1 / 9</div>
   </div>
 </div>
 
@@ -282,10 +282,10 @@ h1{font-size:34px;line-height:1.07;letter-spacing:-.055em;margin:18px 0 12px;pos
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script>
 const I18N={
-ko:{kicker:"",heroTitle:"나에게 맞는<br>뷰티 디바이스 찾기",heroSub:"피부 고민과 홈케어 취향을 선택하면 나에게 잘 맞는 뷰티 디바이스를 찾아드려요.",pill1:"약 1분",pill2:"6 Questions",pill3:"맞춤 제품 추천",start:"START ✨",notice:"본 서비스는 고객이 선택한 고민과 사용 선호도를 바탕으로 제품 선택을 돕는 안내 서비스이며 의료적 피부 진단이 아닙니다.",quick:"약 1분이면 끝나요",back:"이전",next:"다음",why:"왜 잘 맞나요?",howUse:"HOW TO USE",pairWith:"PAIR WITH",modeTitle:"MODES / CARE · 모드·케어 기능",modeNote:"브랜드 공식 안내에서 확인 가능한 모드·관리 목적만 요약했으며, 사용감은 개인에 따라 다를 수 있어요.",fitTitle:"BEST FOR",priceLabel:"공식 정상가",priceFoot:"가격은 올리브영 공식 온라인몰의 정상가 기준이며, 행사·옵션·매장에 따라 실제 판매가는 달라질 수 있습니다.",myConcern:"MY CONCERN",share:"결과 카드 공유하기",guideAll:"8개 제품 가이드 보기",guideTitle:"PRODUCT GUIDE",guideNotice:"제품 이미지는 실제 올리브영 상품 이미지로만 표시합니다.",shopOlive:"올리브영에서 제품 보기 ↗",restart:"다시 찾기",stockNotice:"제품 정보·가격·재고는 실제 판매처 및 공식 상품 페이지에서 확인해주세요.",footer:"제품 설명은 2026.10.01 기준 브랜드 공식 페이지 및 공식 사용 가이드를 바탕으로 요약했습니다. 제품 사용 전 동봉 사용설명서와 최신 공식 사용법·주의사항을 확인해주세요.",resultSub:"선택한 고민, 홈케어 취향과 예산을 바탕으로 제품을 비교했어요.",also:"함께 비교해볼 만한 제품이에요.",shareText:"나의 뷰티 디바이스 추천 결과"},
-en:{kicker:"",heroTitle:"Find My<br>Beauty Device",heroSub:"Choose your skin concerns and home-care preferences to find beauty devices that may suit you.",pill1:"About 1 minute",pill2:"6 Questions",pill3:"Personalized picks",start:"START ✨",notice:"This service is a product-selection guide based on your answers and is not a medical skin diagnosis.",quick:"Takes about 1 minute",back:"Back",next:"Next",why:"Why this match?",howUse:"HOW TO USE",pairWith:"PAIR WITH",modeTitle:"MODES / CARE",modeNote:"Only modes and care purposes verifiable from official brand guidance are summarized; experience may vary by user.",fitTitle:"BEST FOR",priceLabel:"Official regular price",priceFoot:"Prices are based on Olive Young's official online store regular prices. Actual prices may vary by promotion, option or store.",myConcern:"MY CONCERN",share:"Share result card",guideAll:"View all 8 product guides",guideTitle:"PRODUCT GUIDE",guideNotice:"Only actual product images from Olive Young are shown.",shopOlive:"View on Olive Young ↗",restart:"Start again",stockNotice:"Please verify product information, price and stock with the actual retailer and official product page.",footer:"Product descriptions were summarized from official brand pages and official usage guides checked as of 2026-10-01. Before use, check the included manual and the latest official instructions and precautions.",resultSub:"We compared beauty devices based on your concerns, home-care preferences and budget.",also:"Another device worth comparing.",shareText:"My Beauty Device Finder result"},
-zh:{kicker:"",heroTitle:"找到適合我的<br>美容儀",heroSub:"選擇你的肌膚困擾與居家保養偏好，我們會推薦適合你比較的美容儀。",pill1:"約1分鐘",pill2:"6個問題",pill3:"個人化推薦",start:"開始 ✨",notice:"本服務僅依照你的回答提供商品選擇參考，並非醫療性肌膚診斷。",quick:"約1分鐘完成",back:"上一步",next:"下一步",why:"為什麼適合？",howUse:"使用方式",pairWith:"搭配質地",modeTitle:"模式 / 護理功能",modeNote:"僅摘要整理品牌官方說明中可確認的模式與護理目的；實際使用感受可能因人而異。",fitTitle:"適合這樣的你",priceLabel:"官方正常售價",priceFoot:"價格以 Olive Young 官方線上商城的正常售價為準；實際價格可能因活動、選項或門市而不同。",myConcern:"我的困擾",share:"分享結果卡片",guideAll:"查看8款產品指南",guideTitle:"產品指南",guideNotice:"商品圖片僅使用 Olive Young 的實際商品圖片。",shopOlive:"在 Olive Young 查看商品 ↗",restart:"重新測試",stockNotice:"商品資訊、價格與庫存請以實際販售通路及官方商品頁面為準。",footer:"商品說明依 2026.10.01 查核時的品牌官方頁面與官方使用指南摘要整理。使用前請確認商品隨附說明書及最新官方使用方式與注意事項。",resultSub:"我們依照你的肌膚困擾、居家保養偏好與預算比較了美容儀。",also:"也可以一起比較這款。",shareText:"我的美容儀推薦結果"},
-ja:{kicker:"",heroTitle:"私に合う<br>美容デバイスを探す",heroSub:"肌悩みとホームケアの好みを選ぶと、あなたに合う美容デバイスをご案内します。",pill1:"約1分",pill2:"6 Questions",pill3:"パーソナル提案",start:"START ✨",notice:"本サービスは回答内容をもとに商品選びをサポートするもので、医療的な肌診断ではありません。",quick:"約1分で完了",back:"戻る",next:"次へ",why:"おすすめの理由",howUse:"使い方",pairWith:"一緒に使いやすいテクスチャー",modeTitle:"MODES / CARE · モード・ケア機能",modeNote:"ブランド公式案内で確認できるモードとケア目的のみ要約しており、使用感には個人差があります。",fitTitle:"こんな方におすすめ",priceLabel:"公式通常価格",priceFoot:"価格はOlive Young公式オンラインストアの通常価格を基準としています。実際の価格はキャンペーン・オプション・店舗により異なる場合があります。",myConcern:"MY CONCERN",share:"結果カードをシェア",guideAll:"8商品のガイドを見る",guideTitle:"PRODUCT GUIDE",guideNotice:"商品画像は Olive Young の実際の商品画像のみを使用しています。",shopOlive:"Olive Youngで商品を見る ↗",restart:"もう一度",stockNotice:"商品情報・価格・在庫は、実際の販売元および公式商品ページでご確認ください。",footer:"商品説明は2026.10.01時点で確認したブランド公式ページ・公式使用ガイドをもとに要約しています。使用前に同梱の取扱説明書と最新の公式使用方法・注意事項をご確認ください。",resultSub:"選択した悩み・ホームケアの好み・予算をもとに、美容デバイスを比較しました。",also:"あわせて比較しやすい商品です。",shareText:"私のビューティーデバイス診断結果"}
+ko:{kicker:"",heroTitle:"나에게 맞는<br>뷰티 디바이스 찾기",heroSub:"피부 고민과 홈케어 취향을 선택하면 나에게 잘 맞는 뷰티 디바이스를 찾아드려요.",pill1:"약 1분",pill2:"6 Questions",pill3:"맞춤 제품 추천",start:"START ✨",notice:"본 서비스는 고객이 선택한 고민과 사용 선호도를 바탕으로 제품 선택을 돕는 안내 서비스이며 의료적 피부 진단이 아닙니다.",quick:"약 1분이면 끝나요",back:"이전",next:"다음",why:"왜 잘 맞나요?",howUse:"HOW TO USE",pairWith:"PAIR WITH",modeTitle:"MODES / CARE · 모드·케어 기능",modeNote:"브랜드 공식 안내에서 확인 가능한 모드·관리 목적만 요약했으며, 사용감은 개인에 따라 다를 수 있어요.",fitTitle:"BEST FOR",priceLabel:"공식 정상가",priceFoot:"가격은 올리브영 공식 온라인몰의 정상가 기준이며, 행사·옵션·매장에 따라 실제 판매가는 달라질 수 있습니다.",myConcern:"MY CONCERN",share:"결과 카드 공유하기",guideAll:"9개 제품 가이드 보기",guideTitle:"PRODUCT GUIDE",guideNotice:"제품 이미지는 실제 올리브영 상품 이미지로만 표시합니다.",shopOlive:"올리브영에서 제품 보기 ↗",restart:"다시 찾기",stockNotice:"제품 정보·가격·재고는 실제 판매처 및 공식 상품 페이지에서 확인해주세요.",footer:"제품 설명은 2026.10.01 기준 브랜드 공식 페이지 및 공식 사용 가이드를 바탕으로 요약했습니다. 제품 사용 전 동봉 사용설명서와 최신 공식 사용법·주의사항을 확인해주세요.",resultSub:"선택한 고민, 홈케어 취향과 예산을 바탕으로 제품을 비교했어요.",also:"함께 비교해볼 만한 제품이에요.",shareText:"나의 뷰티 디바이스 추천 결과"},
+en:{kicker:"",heroTitle:"Find My<br>Beauty Device",heroSub:"Choose your skin concerns and home-care preferences to find beauty devices that may suit you.",pill1:"About 1 minute",pill2:"6 Questions",pill3:"Personalized picks",start:"START ✨",notice:"This service is a product-selection guide based on your answers and is not a medical skin diagnosis.",quick:"Takes about 1 minute",back:"Back",next:"Next",why:"Why this match?",howUse:"HOW TO USE",pairWith:"PAIR WITH",modeTitle:"MODES / CARE",modeNote:"Only modes and care purposes verifiable from official brand guidance are summarized; experience may vary by user.",fitTitle:"BEST FOR",priceLabel:"Official regular price",priceFoot:"Prices are based on Olive Young's official online store regular prices. Actual prices may vary by promotion, option or store.",myConcern:"MY CONCERN",share:"Share result card",guideAll:"View all 9 product guides",guideTitle:"PRODUCT GUIDE",guideNotice:"Only actual product images from Olive Young are shown.",shopOlive:"View on Olive Young ↗",restart:"Start again",stockNotice:"Please verify product information, price and stock with the actual retailer and official product page.",footer:"Product descriptions were summarized from official brand pages and official usage guides checked as of 2026-10-01. Before use, check the included manual and the latest official instructions and precautions.",resultSub:"We compared beauty devices based on your concerns, home-care preferences and budget.",also:"Another device worth comparing.",shareText:"My Beauty Device Finder result"},
+zh:{kicker:"",heroTitle:"找到適合我的<br>美容儀",heroSub:"選擇你的肌膚困擾與居家保養偏好，我們會推薦適合你比較的美容儀。",pill1:"約1分鐘",pill2:"6個問題",pill3:"個人化推薦",start:"開始 ✨",notice:"本服務僅依照你的回答提供商品選擇參考，並非醫療性肌膚診斷。",quick:"約1分鐘完成",back:"上一步",next:"下一步",why:"為什麼適合？",howUse:"使用方式",pairWith:"搭配質地",modeTitle:"模式 / 護理功能",modeNote:"僅摘要整理品牌官方說明中可確認的模式與護理目的；實際使用感受可能因人而異。",fitTitle:"適合這樣的你",priceLabel:"官方正常售價",priceFoot:"價格以 Olive Young 官方線上商城的正常售價為準；實際價格可能因活動、選項或門市而不同。",myConcern:"我的困擾",share:"分享結果卡片",guideAll:"查看9款產品指南",guideTitle:"產品指南",guideNotice:"商品圖片僅使用 Olive Young 的實際商品圖片。",shopOlive:"在 Olive Young 查看商品 ↗",restart:"重新測試",stockNotice:"商品資訊、價格與庫存請以實際販售通路及官方商品頁面為準。",footer:"商品說明依 2026.10.01 查核時的品牌官方頁面與官方使用指南摘要整理。使用前請確認商品隨附說明書及最新官方使用方式與注意事項。",resultSub:"我們依照你的肌膚困擾、居家保養偏好與預算比較了美容儀。",also:"也可以一起比較這款。",shareText:"我的美容儀推薦結果"},
+ja:{kicker:"",heroTitle:"私に合う<br>美容デバイスを探す",heroSub:"肌悩みとホームケアの好みを選ぶと、あなたに合う美容デバイスをご案内します。",pill1:"約1分",pill2:"6 Questions",pill3:"パーソナル提案",start:"START ✨",notice:"本サービスは回答内容をもとに商品選びをサポートするもので、医療的な肌診断ではありません。",quick:"約1分で完了",back:"戻る",next:"次へ",why:"おすすめの理由",howUse:"使い方",pairWith:"一緒に使いやすいテクスチャー",modeTitle:"MODES / CARE · モード・ケア機能",modeNote:"ブランド公式案内で確認できるモードとケア目的のみ要約しており、使用感には個人差があります。",fitTitle:"こんな方におすすめ",priceLabel:"公式通常価格",priceFoot:"価格はOlive Young公式オンラインストアの通常価格を基準としています。実際の価格はキャンペーン・オプション・店舗により異なる場合があります。",myConcern:"MY CONCERN",share:"結果カードをシェア",guideAll:"9商品のガイドを見る",guideTitle:"PRODUCT GUIDE",guideNotice:"商品画像は Olive Young の実際の商品画像のみを使用しています。",shopOlive:"Olive Youngで商品を見る ↗",restart:"もう一度",stockNotice:"商品情報・価格・在庫は、実際の販売元および公式商品ページでご確認ください。",footer:"商品説明は2026.10.01時点で確認したブランド公式ページ・公式使用ガイドをもとに要約しています。使用前に同梱の取扱説明書と最新の公式使用方法・注意事項をご確認ください。",resultSub:"選択した悩み・ホームケアの好み・予算をもとに、美容デバイスを比較しました。",also:"あわせて比較しやすい商品です。",shareText:"私のビューティーデバイス診断結果"}
 };
 
 const resultFootnotes={
@@ -402,6 +402,7 @@ const products=[
  {id:"thome",price:"678,000원",budgetPrice:678000,image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0025/A00000025297522ko.jpg?l=ko",brand:"톰",name:"더 글로우 시그니처",names:{en:"The Glow Signature",zh:"The Glow Signature",ja:"The Glow Signature"},v:{glow:5,absorb:4,texture:4,trouble:1,elastic:4,jaw:0,all:2,quick:1,target:5,beginner:3,easy:4,multi:2,focus:2,gentle:3,whole:5,cheek:3,jawarea:0,eye:1,spot:1},tags:["물방울초음파","스킨케어","앰플"]},
  {id:"therma",price:"599,000원",budgetPrice:599000,image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0024/A00000024433522ko.jpg?l=ko",brand:"LG 프라엘",name:"써마샷 얼티밋",names:{en:"Superform Thermashot Ultimate",zh:"Superform Thermashot Ultimate",ja:"スーパーフォーム サーマショット アルティメット"},v:{glow:4,absorb:4,texture:5,trouble:1,elastic:5,jaw:5,all:5,quick:4,target:4,beginner:2,easy:2,multi:5,focus:4,gentle:1,whole:5,cheek:5,jawarea:5,eye:5,spot:2},tags:["탄력","피부결","올인원"]},
  {id:"galvanic",price:"108,000원",budgetPrice:108000,image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0023/A00000023910340ko.jpg?l=ko",brand:"LG 프라엘",name:"갈바닉 부스터",names:{en:"Galvanic Booster",zh:"Galvanic Booster",ja:"ガルバニック ブースター"},v:{glow:4,absorb:5,texture:2,trouble:1,elastic:1,jaw:0,all:1,quick:5,target:4,beginner:5,easy:5,multi:1,focus:3,gentle:5,whole:5,cheek:3,jawarea:0,eye:2,spot:5},tags:["스킨케어","간편","입문"]}
+ ,{id:"bioheal",price:"137,700원",budgetPrice:137700,image:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0022/A00000022488214ko.jpg?l=ko",brand:"바이오힐보",name:"프로바이오덤 콜라겐 세럼+슈링크기기",names:{en:"Probioderm Collagen Serum + SHURINK Device",zh:"Probioderm 膠原蛋白精華＋SHURINK 美容儀",ja:"プロバイオダーム コラーゲンセラム＋SHURINKデバイス"},v:{glow:1,absorb:2,texture:5,trouble:0,elastic:4,jaw:0,all:2,quick:2,target:5,beginner:2,easy:2,multi:1,focus:4,gentle:0,whole:3,cheek:3,jawarea:0,eye:0,spot:3},tags:["모공·피부결","탄력","세럼 포함"]}
 ];
 
 
@@ -409,7 +410,7 @@ const products=[
 // Unverified means further confirmation is needed, not that use is prohibited.
 const eyeUsage={
  x2:"unverified",mini:"unverified",vroller:"unverified",glow:"unverified",
- vsera:"unverified",thome:"unverified",therma:"confirmed",galvanic:"unverified"
+ vsera:"unverified",thome:"unverified",therma:"confirmed",galvanic:"unverified",bioheal:"unverified"
 };
 
 const PRODUCT_URLS={
@@ -420,7 +421,8 @@ const PRODUCT_URLS={
  vsera:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000248797",
  thome:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000252975",
  therma:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000244335",
- galvanic:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000239103"
+ galvanic:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000239103",
+ bioheal:"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000224882"
 };
 
 const productDescriptions={
@@ -708,6 +710,20 @@ zh:{glow:"乾燥・光澤",absorb:"保養品吸收",texture:"毛孔・膚質",tr
 ja:{glow:"乾燥・ツヤ",absorb:"スキンケアなじみ",texture:"毛穴・キメ",trouble:"肌コンディション",elastic:"ハリ",jaw:"フェイスライン",whole:"顔全体",cheek:"頬",jawarea:"フェイスライン",eye:"目元",spot:"特定部位",quick:"簡単ルーティン",target:"集中ケア",all:"多機能",care:"丁寧なケア",beginner:"初心者",some:"使用経験あり",advanced:"経験豊富",easy:"使いやすさ",multi:"多機能",focus:"集中ケア",gentle:"やさしい使用感",budget15:"15万ウォン以下",budget30:"30万ウォン以下",budget50:"50万ウォン以下",budget50p:"50万ウォン以上も検討可能",budgetAny:"予算なし"}
 };
 
+// Serum + device set: summarize care purposes without assuming technology,
+// session duration or verified eye-area use. See Olive Young A000000224882.
+const biohealCopy={
+ ko:{desc:"모공·피부결과 탄력 고민을 중심으로 비교하는 콜라겐 세럼과 슈링크기기 구성입니다. 세럼을 함께 사용하는 홈케어를 원하는 고객에게 비교하기 좋아요.",how:"함께 구성된 세럼과 기기의 동봉 설명서를 확인한 뒤 안내된 순서에 따라 사용해 주세요. 사용 부위·강도·시간·횟수는 최신 공식 사용법을 확인해 주세요.",pair:"프로바이오덤 콜라겐 세럼이 함께 판매되는 구성입니다. 다른 제형의 사용 가능 여부는 기기 설명서를 확인해 주세요.",care:"모공·피부결 및 탄력 중심 홈케어 구성. 세부 모드와 사용 설정은 공식 상품 안내 및 동봉 설명서를 확인해 주세요.",tags:["모공·피부결","탄력","세럼 포함"]},
+ en:{desc:"A collagen serum and SHURINK device set to compare for pore, texture and firmness concerns, suited to customers looking for home care with a companion serum.",how:"Read the instructions supplied with both the serum and device and follow the stated sequence. Check the latest official guidance for treatment areas, intensity, session length and frequency.",pair:"Includes Probioderm Collagen Serum. Check the device manual before using other skincare textures.",care:"Home-care set focused on pores, texture and firmness. Check the official product information and included manual for specific modes and settings.",tags:["Pores & texture","Firmness","Serum included"]},
+ zh:{desc:"膠原蛋白精華與 SHURINK 美容儀組合，適合想針對毛孔、膚質與彈力需求，搭配精華進行居家保養的顧客比較。",how:"先閱讀精華與美容儀隨附說明書，再依指定順序使用。使用部位、強度、時間與頻率請確認最新官方使用說明。",pair:"組合包含 Probioderm 膠原蛋白精華。其他保養品質地是否適用，請確認美容儀說明書。",care:"以毛孔、膚質與彈力為主的居家保養組合。詳細模式與設定請確認官方商品資訊及隨附說明書。",tags:["毛孔・膚質","彈力","含精華"]},
+ ja:{desc:"毛穴・キメ・ハリの悩みを中心に比較できる、コラーゲンセラムとSHURINKデバイスのセットです。セラムと一緒にホームケアをしたい方に比較しやすい商品です。",how:"セラムとデバイスに付属する説明書を確認し、指定された順序で使用してください。使用部位・強度・時間・頻度は最新の公式使用方法をご確認ください。",pair:"プロバイオダーム コラーゲンセラムが含まれるセットです。他のテクスチャーを使用できるかはデバイスの説明書をご確認ください。",care:"毛穴・キメ・ハリを中心としたホームケアセットです。詳しいモードや設定は公式商品情報と付属の説明書をご確認ください。",tags:["毛穴・キメ","ハリ","セラム付き"]}
+};
+Object.entries(biohealCopy).forEach(([l,copy])=>{
+ productDescriptions[l].bioheal=copy.desc;
+ productGuides[l].bioheal={how:copy.how,pair:copy.pair};
+ productModes[l].bioheal=[{name:l==="ko"?"모공·탄력 케어":l==="en"?"PORES / FIRMNESS CARE":l==="zh"?"毛孔・彈力保養":"毛穴・ハリケア",desc:copy.care}];
+});
+
 const zhSimplifier=(window.OpenCC&&OpenCC.Converter)
  ? OpenCC.Converter({from:"tw",to:"cn"})
  : (text=>String(text));
@@ -853,6 +869,7 @@ function fitLine(p){
  return "「"+labels.ja[top]+"」を重視し、「"+labels.ja[style]+"」を希望する方に比較しやすい商品です。";
 }
 function translatedTags(p){
+ if(p.id==="bioheal")return lang==="zhs"?biohealCopy.zh.tags.map(zhSimplifier):biohealCopy[lang].tags;
  const map={
   ko:p.tags,
   en:p.id==="x2"?["All-in-one","Firmness","Texture"]:p.id==="mini"?["Easy","Condition","Beginner"]:p.id==="vroller"?["Jawline","EMS","Focused"]:p.id==="glow"?["Glow","Skincare","Easy"]:p.id==="vsera"?["Jawline","EMS","Focused"]:p.id==="thome"?["Microdroplet ultrasound","Skincare","Ampoule"]:p.id==="therma"?["Firmness","Texture","All-in-one"]:["Skincare","Easy","Beginner"],
