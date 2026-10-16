@@ -1,111 +1,86 @@
 import fs from "node:fs";
+import { pathToFileURL } from "node:url";
 
-const key = process.env.CRUISE_SERVICE_KEY?.trim();
-if (!key) {
-  console.error("Missing GitHub Actions secret: CRUISE_SERVICE_KEY");
-  process.exit(1);
-}
-const url = new URL("https://apis.data.go.kr/6260000/CruiseBerthScheduleService/getCruiseBerthSchedule");
-url.searchParams.set("serviceKey", key);
-url.searchParams.set("resultType", "json");
-if (!url.searchParams.has("numOfRows")) url.searchParams.set("numOfRows", "1000");
-if (!url.searchParams.has("pageNo")) url.searchParams.set("pageNo", "1");
-if (!url.searchParams.has("_type") && !url.searchParams.has("resultType")) {
-  url.searchParams.set("_type", "json");
-}
+const ENDPOINT = "https://apis.data.go.kr/6260000/CruiseBerthScheduleService/getCruiseBerthSchedule";
 
-const res = await fetch(url, {
-  headers: { "User-Agent": "OYHAYA-CruiseCalendar/1.0" }
-});
-if (!res.ok) throw new Error(`API HTTP ${res.status}`);
-
-const text = await res.text();
-let payload;
-try {
-  payload = JSON.parse(text);
-} catch {
-  throw new Error("API did not return JSON. Check the request URL and JSON response option.");
-}
-
-function objectArrays(value, found = []) {
-  if (Array.isArray(value)) {
-    if (value.length && value.every(v => v && typeof v === "object" && !Array.isArray(v))) found.push(value);
-    for (const v of value) objectArrays(v, found);
-  } else if (value && typeof value === "object") {
-    for (const v of Object.values(value)) objectArrays(v, found);
+export function normalizeRow(row, index) {
+  const arrival = String(row.ptentPrnmntDt ?? "").trim();
+  const match = arrival.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/) || arrival.match(/^(\d{4})(\d{2})(\d{2})/);
+  if (!match) throw new Error(`Invalid arrival date in schedule row ${index + 1}; existing data preserved.`);
+  const date = `${match[1]}-${match[2].padStart(2, "0")}-${match[3].padStart(2, "0")}`;
+  const parsed = new Date(`${date}T00:00:00Z`);
+  if (!Number.isFinite(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== date) {
+    throw new Error(`Invalid arrival date in schedule row ${index + 1}; existing data preserved.`);
   }
-  return found;
-}
-
-const arrays = objectArrays(payload);
-if (!arrays.length) {
-  const msg = JSON.stringify(payload).slice(0, 1200);
-  throw new Error("No schedule item array found in API response: " + msg);
-}
-const rows = arrays.sort((a,b) => b.length - a.length)[0];
-
-const normKey = k => String(k).toLowerCase().replace(/[_\-\s]/g, "");
-const entries = obj => Object.entries(obj ?? {});
-function pick(obj, aliases) {
-  const wanted = aliases.map(normKey);
-  for (const [k,v] of entries(obj)) {
-    const nk = normKey(k);
-    if (wanted.includes(nk)) return v;
-  }
-  for (const [k,v] of entries(obj)) {
-    const nk = normKey(k);
-    if (wanted.some(a => nk.includes(a) || a.includes(nk))) return v;
-  }
-  return "";
-}
-function firstDateLike(obj, rejectWords = []) {
-  for (const [k,v] of entries(obj)) {
-    const nk = normKey(k);
-    if (rejectWords.some(w => nk.includes(normKey(w)))) continue;
-    if (/\d{4}[-/.]?\d{2}[-/.]?\d{2}/.test(String(v ?? ""))) return v;
-  }
-  return "";
-}
-function isoDate(v) {
-  const s = String(v ?? "").trim();
-  let m = s.match(/(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/);
-  if (m) return `${m[1]}-${String(m[2]).padStart(2,"0")}-${String(m[3]).padStart(2,"0")}`;
-  m = s.match(/(\d{4})(\d{2})(\d{2})/);
-  return m ? `${m[1]}-${m[2]}-${m[3]}` : "";
-}
-
-const aliases = {
-  ship: ["선박명","선명","shipNm","shipName","vsslNm","vesselNm","vesselName","cruiseNm"],
-  arrival: ["입항예정일시","입항일시","arrivalDt","arrivalDate","arrivalTime","arrPlanDt","arvlPrarDt","etb","eta"],
-  departure: ["출항예정일시","출항일시","departureDt","departureDate","departureTime","depPlanDt","dprtPrarDt","etd"],
-  terminal: ["입항지","터미널","부두","선석","berth","berthNm","terminal","terminalNm","portNm"],
-  passengers: ["승객정원","승객수","여객정원","passengerCapacity","passengers","pax","psngrCnt","psggrCapa"],
-  previousPort: ["이전기항지","전항지","previousPort","prevPort","previousPortNm","prevPortNm"],
-  nextPort: ["다음기항지","차항지","nextPort","nextPortNm"],
-};
-
-const out = rows.map((r, i) => {
-  const arrival = pick(r, aliases.arrival) || firstDateLike(r, ["출항","departure","dprt","dep","etd"]);
-  const departure = pick(r, aliases.departure);
+  const value = key => String(row[key] ?? "").trim();
+  if (!value("vslNm")) throw new Error(`Missing vessel name in schedule row ${index + 1}.`);
   return {
-    id: pick(r, ["id","seq","순번"]) || i + 1,
-    date: isoDate(arrival),
-    ship: String(pick(r, aliases.ship) || "선박명 미상").trim(),
-    arrival: String(arrival ?? "").trim(),
-    departure: String(departure ?? "").trim(),
-    terminal: String(pick(r, aliases.terminal) ?? "").trim(),
-    passengers: String(pick(r, aliases.passengers) ?? "").trim(),
-    previousPort: String(pick(r, aliases.previousPort) ?? "").trim(),
-    nextPort: String(pick(r, aliases.nextPort) ?? "").trim()
+    id: index + 1, date, ship: value("vslNm"), arrival,
+    departure: value("dfptPrnmntDt"), terminal: value("poent"),
+    passengers: value("psngPscp"), previousPort: value("bfrPrt"), nextPort: value("nextPrt"),
+    dataDate: value("dataCrtrYmd")
   };
-}).filter(r => /^\d{4}-\d{2}-\d{2}$/.test(r.date));
-
-if (!out.length) {
-  console.error("Raw item keys:", Object.keys(rows[0] ?? {}));
-  throw new Error("Schedule items were found, but arrival dates could not be normalized.");
 }
 
-out.sort((a,b) => a.date.localeCompare(b.date) || a.arrival.localeCompare(b.arrival) || a.ship.localeCompare(b.ship));
+export async function fetchSchedules(key, fetcher = fetch) {
+  if (!key?.trim()) throw new Error("Missing GitHub Actions secret: CRUISE_SERVICE_KEY");
+  // Accept either the original key or the portal's percent-encoded copy.
+  let decoded;
+  try { decoded = decodeURIComponent(key.trim()); }
+  catch { throw new Error("Invalid service-key encoding."); }
+  const rows = [];
+  let expectedTotal;
+  for (let page = 1; page <= 100; page++) {
+    const url = new URL(ENDPOINT);
+    url.search = new URLSearchParams({ serviceKey: decoded, resultType: "json", numOfRows: "100", pageNo: String(page) });
+    let response;
+    try {
+      response = await fetcher(url, { signal: AbortSignal.timeout(30000) });
+    } catch {
+      throw new Error("Official API connection failed or timed out; existing data preserved.");
+    }
+    let payload;
+    try { payload = JSON.parse(await response.text()); }
+    catch { throw new Error(`Official API returned non-JSON (HTTP ${response.status}); existing data preserved.`); }
+    const gateway = payload.OpenAPI_ServiceResponse?.cmmMsgHeader;
+    const result = payload.response ?? payload;
+    const header = result.header;
+    const code = String(gateway?.returnReasonCode ?? header?.resultCode ?? "");
+    // Do not print response bodies, request URLs, or errors that may echo the key.
+    if (gateway || (header && !["0", "00", "0000"].includes(code))) {
+      const safeCode = /^[\w-]{1,30}$/.test(code) ? code : "unknown";
+      throw new Error(`Official API error code ${safeCode} (HTTP ${response.status}); existing data preserved.`);
+    }
+    if (!response.ok) throw new Error(`Official API HTTP ${response.status}; existing data preserved.`);
+    const body = result.body;
+    if (!body || !header) throw new Error("Unrecognized official API response; existing data preserved.");
+    const total = Number(body.totalCount);
+    if (!Number.isSafeInteger(total) || total < 0) throw new Error("Invalid API totalCount.");
+    expectedTotal ??= total;
+    if (total !== expectedTotal) throw new Error("API changed during pagination; retry on the next run.");
+    const items = body.items?.item ?? (Array.isArray(body.items) ? body.items : null);
+    const batch = items == null || items === "" ? [] : Array.isArray(items) ? items : [items];
+    if (!batch.every(item => item && typeof item === "object" && !Array.isArray(item))) throw new Error("Invalid schedule items.");
+    rows.push(...batch);
+    if (rows.length === total) {
+      // A new empty result must not silently erase a previously populated calendar.
+      if (!rows.length) throw new Error("Official API returned zero schedules; existing data preserved.");
+      return rows.map(normalizeRow).sort((a, b) => a.date.localeCompare(b.date) || a.arrival.localeCompare(b.arrival) || a.ship.localeCompare(b.ship));
+    }
+    if (!batch.length || rows.length > total) throw new Error("Incomplete API pagination; existing data preserved.");
+  }
+  throw new Error("API pagination limit exceeded; existing data preserved.");
+}
 
-fs.writeFileSync("cruise/data.json", JSON.stringify(out, null, 2) + "\n");
-console.log(`Saved ${out.length} cruise schedule rows.`);
+async function main() {
+  const rows = await fetchSchedules(process.env.CRUISE_SERVICE_KEY);
+  const target = new URL("./data.json", import.meta.url);
+  const temporary = new URL("./data.json.tmp", import.meta.url);
+  fs.writeFileSync(temporary, JSON.stringify(rows, null, 2) + "\n");
+  fs.renameSync(temporary, target);
+  console.log(`Saved ${rows.length} official cruise schedule rows (${rows[0].date} to ${rows.at(-1).date}).`);
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch(error => { console.error(error.message); process.exitCode = 1; });
+}
