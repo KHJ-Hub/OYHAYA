@@ -17,7 +17,7 @@ jobs:
 
       - name: Fetch official cruise schedule
         env:
-          CRUISE_API_URL: ${{ secrets.CRUISE_API_URL }}
+          CRUISE_SERVICE_KEY: ${{ secrets.CRUISE_SERVICE_KEY }}
         run: node cruise/fetch-data.mjs
 
       - name: Commit updated data
