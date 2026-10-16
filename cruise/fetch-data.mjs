@@ -1,13 +1,13 @@
 import fs from "node:fs";
 
-const sourceUrl = process.env.CRUISE_API_URL?.trim();
-if (!sourceUrl) {
-  console.error("CRUISE_API_URL secret is missing.");
-  console.error("Add the official data.go.kr request URL as a GitHub Actions secret named CRUISE_API_URL.");
+const key = process.env.CRUISE_SERVICE_KEY?.trim();
+if (!key) {
+  console.error("Missing GitHub Actions secret: CRUISE_SERVICE_KEY");
   process.exit(1);
 }
-
-const url = new URL(sourceUrl);
+const url = new URL("https://apis.data.go.kr/6260000/CruiseBerthScheduleService/getCruiseBerthSchedule");
+url.searchParams.set("serviceKey", key);
+url.searchParams.set("resultType", "json");
 if (!url.searchParams.has("numOfRows")) url.searchParams.set("numOfRows", "1000");
 if (!url.searchParams.has("pageNo")) url.searchParams.set("pageNo", "1");
 if (!url.searchParams.has("_type") && !url.searchParams.has("resultType")) {
