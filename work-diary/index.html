@@ -48,9 +48,9 @@ button.nav{width:42px;height:42px;font-size:23px;background:#f9f0f6;color:#a56d9
 textarea:focus,input:focus,select:focus{outline:2px solid #d7a6c9;outline-offset:1px}
 @media(max-width:370px){.panel{padding:15px 12px}.calendar,.week{gap:3px}.day{min-height:65px}.day b{font-size:13px}.day small{font-size:10px}}
 @media(min-width:600px){.day{min-height:87px}}
-</style></head><body><main><div class="eyebrow">OY HAYA / WORK DIARY</div><h1>하야의 업무 다이어리 💗</h1><p>해운대엘시티점 · 오늘의 업무부터 월간 기록까지</p>
+.rain-control{display:flex;align-items:center;gap:9px;background:#f0f6fc;color:#466b8d;border-radius:13px;padding:12px;margin:12px 0 5px;font-size:13px;font-weight:700;flex-wrap:wrap}.rain-control input{accent-color:#6b9ec5;width:19px;height:19px}.rain-control small{font-weight:400;color:#71899c;font-size:11px}</style></head><body><main><div class="eyebrow">OY HAYA / WORK DIARY</div><h1>하야의 업무 다이어리 💗</h1><p>해운대엘시티점 · 오늘의 업무부터 월간 기록까지</p>
 <section class="panel"><div class="head"><button class="nav" id="prev">‹</button><h2 id="month" style="margin:0;font-size:20px"></h2><button class="nav" id="next">›</button></div><div class="week"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="calendar" id="calendar"></div><div class="calendar-legend"><span><i class="legend-a"></i>A 오픈</span><span><i class="legend-b"></i>B 마감</span><span><i class="legend-off"></i>휴무</span><span>아래 막대 = 업무 완료율</span></div><div class="actions"><button class="muted-btn" id="today">오늘로 이동</button><button class="muted-btn" id="export">기록 백업 ↓</button><label class="muted-btn" style="cursor:pointer">백업 불러오기 <input id="import" type="file" accept=".json,application/json" hidden></label></div></section>
-<section class="panel"><div class="head"><h2 id="date-title" class="section-title"></h2><span id="shift" class="pill"></span></div><div class="notice" id="shift-note"></div><label class="small" for="shift-input">근무 변경 (선택한 날짜)</label><select id="shift-input"><option value="">미등록</option><option value="A">A · 오픈 09:30~18:30</option><option value="B">B · 마감 13:30~22:30</option><option value="OFF">휴무</option></select></section>
+<section class="panel"><div class="head"><h2 id="date-title" class="section-title"></h2><span id="shift" class="pill"></span></div><div class="notice" id="shift-note"></div><label class="rain-control"><input id="rain-input" type="checkbox"> ☔ 오늘 비 오는 날 업무 표시 <small>직접 체크 · 자동 날씨 연동 전</small></label><label class="small" for="shift-input">근무 변경 (선택한 날짜)</label><select id="shift-input"><option value="">미등록</option><option value="A">A · 오픈 09:30~18:30</option><option value="B">B · 마감 13:30~22:30</option><option value="OFF">휴무</option></select></section>
 <section class="panel"><h2 class="section-title">🎯 오늘의 TOP 3</h2><div id="top"></div></section>
 <section class="panel"><div class="head"><h2 class="section-title">📋 전체 체크리스트</h2><span id="count" class="meta"></span></div><div class="progress"><span id="bar"></span></div><div id="tasks"></div><div class="actions"><input type="text" id="newtask" placeholder="추가 업무 입력" aria-label="추가 업무" style="flex:1;min-width:150px"><button class="primary" id="add">추가</button></div></section>
 <section class="panel"><h2 class="section-title">📔 오늘의 업무 기록</h2><p>완료한 업무·인계사항·고객 동향을 자유롭게 기록해요.</p><label class="small" for="memo">오늘의 메모 (자동 저장)</label><textarea id="memo" placeholder="오늘 있었던 일을 적어보세요..."></textarea><label class="small" for="entry">업무일지 한 줄 추가</label><div class="actions"><input type="text" id="entry" placeholder="예: 삼양 보수 접수 완료 (보민님)" style="flex:1;min-width:160px"><button class="primary" id="addentry">기록</button></div><div id="entries"></div></section>
@@ -58,14 +58,14 @@ textarea:focus,input:focus,select:focus{outline:2px solid #d7a6c9;outline-offset
 (function(){
 const KEY="oyhaya.workdiary.v1",today=new Date(),pad=n=>String(n).padStart(2,"0"),dateKey=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()),parse=k=>{let [y,m,d]=k.split("-").map(Number);return new Date(y,m-1,d)},monthEnd=(y,m)=>new Date(y,m,0).getDate(),esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])),id=(a,b)=>a+"|"+b;
 const shifts={A:[5,6,12,16,26,30],B:[1,2,7,9,10,13,14,17,18,19,21,22,27,28],OFF:[3,4,8,11,15,20,23,24,25,29]};
-let state={shifts:{},done:{},extra:{},memos:{},entries:{}};
+let state={shifts:{},done:{},extra:{},memos:{},entries:{},rain:{}};
 try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&typeof x==="object")state={...state,...x}}catch(e){}
 let selected=dateKey(today),view=new Date(today.getFullYear(),today.getMonth(),1);
 function save(){localStorage.setItem(KEY,JSON.stringify(state))}
 function shiftFor(k){if(Object.prototype.hasOwnProperty.call(state.shifts,k))return state.shifts[k];let d=parse(k);if(d.getFullYear()===2026&&d.getMonth()===10){return Object.keys(shifts).find(s=>shifts[s].includes(d.getDate()))||""}return ""}
 function add(arr,key,title,priority=2,detail=""){arr.push({key,title,priority,detail})}
 function generate(k){let d=parse(k),w=d.getDay(),day=d.getDate(),end=monthEnd(d.getFullYear(),d.getMonth()+1),sh=shiftFor(k),off=sh==="OFF",arr=[];
-if(!off){if(sh==="A")add(arr,"soc","09:30 오픈 SOC 체크",1,"오픈 직후");if(sh==="B")add(arr,"soc","22:20 마감 SOC 체크",1,"퇴근 10분 전");
+if(!off){if(state.rain?.[k]===true){if(sh==="A")add(arr,"rain-open","☔ 비 오는 날: 오픈 시 간판불 켜기",1,"우천 시 오픈 담당 업무");if(sh==="B")add(arr,"rain-close","☔ 비 오는 날: 마감 시 간판불 자동 모드 전환",1,"우천 시 마감 담당 업무")}if(sh==="A")add(arr,"soc","09:30 오픈 SOC 체크",1,"오픈 직후");if(sh==="B")add(arr,"soc","22:20 마감 SOC 체크",1,"퇴근 10분 전");
 if(w===1)add(arr,"safety","매장안전관리 올리브원 체크"+(sh!=="A"?" · 오픈 담당자 확인":""),1,"월요일 오픈 업무");
 if(w===2)add(arr,"medical","의료기기 파일 점검"+(sh!=="A"?" · 오픈 담당자 확인":""),1,"화요일 오픈 업무");
 if([1,3,5].includes(w)){add(arr,"bank","은행 송금 (영업일·공휴일 확인)",1,"공휴일이면 직전 은행 영업일에 선처리");add(arr,"supplies","소모품 발주",2)}
@@ -90,7 +90,7 @@ for(let i=0;i<Math.ceil((first+total)/7)*7;i++){let n=i-first+1;if(n<1||n>total)
 document.getElementById("calendar").innerHTML=cells;document.querySelectorAll("[data-date]").forEach(b=>b.onclick=()=>{selected=b.dataset.date;render()});
 document.getElementById("date-title").textContent=d.getFullYear()+"."+pad(d.getMonth()+1)+"."+pad(d.getDate())+" ("+"일월화수목금토"[d.getDay()]+")";
 document.getElementById("shift").textContent=sh==="A"?"🌞 A 오픈":sh==="B"?"🌙 B 마감":sh==="OFF"?"🌿 휴무":"근무 미등록";
-document.getElementById("shift-input").value=sh;
+document.getElementById("shift-input").value=sh;document.getElementById("rain-input").checked=state.rain?.[selected]===true;
 document.getElementById("shift-note").textContent=sh==="OFF"?"휴무일이에요. 현장 업무 대신 필요한 인계사항만 확인해요.":sh==="A"?"09:30~18:30 · SOC는 오픈 직후":sh==="B"?"13:30~22:30 · SOC는 22:20":"이 날짜의 근무표가 아직 없어요. A/B/휴무를 선택해 주세요.";
 let sorted=arr.slice().sort((a,b)=>a.priority-b.priority);document.getElementById("top").innerHTML=sorted.slice(0,3).map((t,i)=>'<div class="rank"><em>'+pad(i+1)+'</em><span><b>'+esc(t.title)+'</b><br><small class="meta">'+esc(t.detail|| (t.priority===0?"오늘 최종 마감":t.priority===1?"시간·운영상 우선 확인":"정기·사전 준비 업무"))+'</small></span></div>').join("")||'<p>오늘 예정된 업무가 없어요.</p>';
 let n=arr.filter(t=>done[t.key]).length;document.getElementById("count").textContent=n+"/"+arr.length+" 완료";document.getElementById("bar").style.width=(arr.length?100*n/arr.length:0)+"%";
@@ -102,7 +102,7 @@ document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{state.entri
 document.getElementById("prev").onclick=()=>{view.setMonth(view.getMonth()-1);selected=dateKey(new Date(view.getFullYear(),view.getMonth(),1));render()};
 document.getElementById("next").onclick=()=>{view.setMonth(view.getMonth()+1);selected=dateKey(new Date(view.getFullYear(),view.getMonth(),1));render()};
 document.getElementById("today").onclick=()=>{selected=dateKey(today);view=new Date(today.getFullYear(),today.getMonth(),1);render()};
-document.getElementById("shift-input").onchange=e=>{state.shifts[selected]=e.target.value;save();render()};
+document.getElementById("rain-input").onchange=e=>{(state.rain??={})[selected]=e.target.checked;save();render()};document.getElementById("shift-input").onchange=e=>{state.shifts[selected]=e.target.value;save();render()};
 document.getElementById("memo").oninput=e=>{state.memos[selected]=e.target.value;save()};
 document.getElementById("add").onclick=()=>{let el=document.getElementById("newtask"),v=el.value.trim();if(!v)return;(state.extra[selected]??=[]).push(v);el.value="";save();render()};
 document.getElementById("addentry").onclick=()=>{let el=document.getElementById("entry"),v=el.value.trim();if(!v)return;(state.entries[selected]??=[]).push(v);el.value="";save();render()};
