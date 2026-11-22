@@ -1,7 +1,55 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>OY HAYA · 업무 다이어리</title><style>
 :root{font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;color:#272634;background:#faf8fb}*{box-sizing:border-box}body{margin:0}main{max-width:780px;margin:auto;padding:24px 16px 100px}.eyebrow{font-size:12px;color:#9b7397;font-weight:750;letter-spacing:1.5px}h1{font-size:27px;margin:8px 0 4px}p{margin:0;color:#7a7380;font-size:13px}.panel{background:white;border:1px solid #eee6ee;border-radius:22px;padding:18px;margin-top:16px;box-shadow:0 5px 25px #49344708}.head{display:flex;align-items:center;justify-content:space-between;gap:10px}button{cursor:pointer;font:inherit}button.nav{border:0;background:#f6f0f7;border-radius:11px;padding:8px 12px;color:#55435b}.week,.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.week{margin:20px 0 8px;text-align:center;font-size:12px;color:#aaa}.day{min-height:65px;border:1px solid transparent;background:#faf8fb;border-radius:12px;padding:8px 2px;text-align:center;color:#34303a;position:relative}.day.muted{opacity:.25}.day.selected{background:#f5e7f2;border-color:#d89fc9}.day.today:after{content:"";width:5px;height:5px;background:#ca83b5;position:absolute;top:5px;right:6px;border-radius:50%}.day b{display:block;font-size:14px}.day small{display:block;font-size:10px;margin-top:5px;color:#8b818f}.day .off{color:#ae9bb3}.section-title{font-size:17px;margin:0 0 12px}.pill{display:inline-block;padding:5px 10px;border-radius:30px;background:#f5e9f1;color:#a65c91;font-size:12px;font-weight:700}.meta{font-size:12px;color:#888}.progress{height:7px;border-radius:10px;background:#f0ebef;overflow:hidden;margin:12px 0 18px}.progress span{display:block;height:100%;background:#ca88b7;transition:width .2s}.task{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #f2edf2}.task:last-child{border:0}.task input{accent-color:#bf80b1;width:18px;height:18px;flex-shrink:0;margin:2px 0}.task strong{font-size:14px;font-weight:600}.task .sub{font-size:11px;color:#948c96;margin-top:4px}.task.done strong{text-decoration:line-through;color:#9b949b}.rank{display:flex;gap:12px;margin:11px 0}.rank em{font-style:normal;font-size:18px;color:#b874a7;font-weight:800}.rank span{font-size:13px}textarea,input[type=text],select{font:inherit;border:1px solid #e8dfe9;border-radius:12px;padding:11px;width:100%;background:#fff}textarea{min-height:85px;resize:vertical}label.small{display:block;font-size:12px;font-weight:700;margin:12px 0 7px}.primary{border:0;border-radius:12px;background:#a9689d;color:white;padding:12px 15px;font-weight:700}.muted-btn{border:0;border-radius:12px;background:#f3edf4;color:#775d77;padding:11px}.actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.entry{border-bottom:1px solid #eee;padding:10px 0;font-size:13px}.entry:last-child{border:0}.entry button{float:right;border:0;background:none;color:#b26a9c}.notice{font-size:12px;line-height:1.6;color:#7f7380;background:#f8f1f7;padding:12px;border-radius:12px}.footer{margin-top:22px;text-align:center;color:#aaa;font-size:11px}@media(min-width:600px){.day{min-height:82px}}
+
+/* OY HAYA diary visual refresh */
+:root{color:#302c35;background:#fcf9fb}
+body{background:radial-gradient(ellipse 85% 340px at 50% -90px,#f9e5f0 0%,transparent 100%),#fcf9fb}
+main{padding:calc(24px + env(safe-area-inset-top,0px)) 16px 105px}
+.eyebrow{color:#ac6c98;font-size:11px;letter-spacing:2px}
+h1{font-size:clamp(25px,6vw,32px);letter-spacing:-1px;line-height:1.3}
+.panel{border:1px solid #f0e6ee;border-radius:24px;padding:19px 17px;box-shadow:0 10px 28px rgba(101,64,89,.045)}
+.head h2{letter-spacing:-.4px}
+button.nav{width:42px;height:42px;font-size:23px;background:#f9f0f6;color:#a56d97}
+.week,.calendar{gap:5px}
+.week{margin:18px 0 10px;font-weight:700;color:#a09aa4}
+.week span:first-child{color:#d57e95}
+.week span:last-child{color:#7990c2}
+.day{min-height:70px;border-radius:13px;background:#f9f8fa;border:1.5px solid transparent;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;padding:9px 1px 5px;transition:transform .12s}
+.day:active{transform:scale(.96)}
+.day b{font-size:15px}
+.day small{margin:0;font-size:11px;line-height:1.2}
+.day .completion{font-size:10px;font-weight:650;color:#8e8390}
+.day.shift-a{background:#eaf0ff}.day.shift-a .shift-label{color:#5c79b8;font-weight:800}
+.day.shift-b{background:#eef8dc}.day.shift-b .shift-label{color:#688c36;font-weight:800}
+.day.shift-off{background:#fff0f6}.day.shift-off .shift-label{color:#c079a2;font-weight:700}
+.day.selected{border:2px solid #b96e9f;box-shadow:0 2px 8px #bd8baa30}
+.day.today:after{background:#b8689d;width:6px;height:6px}
+.day .mini-progress{width:64%;height:4px;background:#ffffffaa;border-radius:99px;overflow:hidden;margin-top:1px}
+.day .mini-progress i{display:block;height:100%;background:#b46b9b;border-radius:99px}
+.calendar-legend{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:14px 0 2px;color:#857986;font-size:11px}
+.calendar-legend span{display:inline-flex;align-items:center;gap:5px}
+.calendar-legend i{width:9px;height:9px;border-radius:3px;display:inline-block}
+.legend-a{background:#a9c2f3}.legend-b{background:#b8db83}.legend-off{background:#efb2d0}
+.section-title{font-size:18px;letter-spacing:-.4px}
+.pill{padding:7px 12px;background:#f9e9f3}
+.notice{background:#faf3f8;color:#7c6879}
+.rank{background:#fcf8fb;padding:12px;border-radius:14px;align-items:flex-start}
+.rank em{font-size:14px;background:#f2e3ee;border-radius:9px;padding:7px;color:#a65f92}
+.rank span{line-height:1.6}
+.task{padding:13px 2px}
+.task input{width:20px;height:20px}
+.task strong{font-size:14px}
+.task .sub{font-size:12px;line-height:1.5}
+.progress{height:8px}
+.primary{background:#ae6b9d}
+.muted-btn{background:#f8eef5;font-size:13px;font-weight:650}
+.actions{gap:7px}
+.actions .muted-btn{flex-grow:1;text-align:center}
+textarea:focus,input:focus,select:focus{outline:2px solid #d7a6c9;outline-offset:1px}
+@media(max-width:370px){.panel{padding:15px 12px}.calendar,.week{gap:3px}.day{min-height:65px}.day b{font-size:13px}.day small{font-size:10px}}
+@media(min-width:600px){.day{min-height:87px}}
 </style></head><body><main><div class="eyebrow">OY HAYA / WORK DIARY</div><h1>하야의 업무 다이어리 💗</h1><p>해운대엘시티점 · 오늘의 업무부터 월간 기록까지</p>
-<section class="panel"><div class="head"><button class="nav" id="prev">‹</button><h2 id="month" style="margin:0;font-size:20px"></h2><button class="nav" id="next">›</button></div><div class="week"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="calendar" id="calendar"></div><div class="actions"><button class="muted-btn" id="today">오늘로 이동</button><button class="muted-btn" id="export">기록 백업 ↓</button><label class="muted-btn" style="cursor:pointer">백업 불러오기 <input id="import" type="file" accept=".json,application/json" hidden></label></div></section>
+<section class="panel"><div class="head"><button class="nav" id="prev">‹</button><h2 id="month" style="margin:0;font-size:20px"></h2><button class="nav" id="next">›</button></div><div class="week"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="calendar" id="calendar"></div><div class="calendar-legend"><span><i class="legend-a"></i>A 오픈</span><span><i class="legend-b"></i>B 마감</span><span><i class="legend-off"></i>휴무</span><span>아래 막대 = 업무 완료율</span></div><div class="actions"><button class="muted-btn" id="today">오늘로 이동</button><button class="muted-btn" id="export">기록 백업 ↓</button><label class="muted-btn" style="cursor:pointer">백업 불러오기 <input id="import" type="file" accept=".json,application/json" hidden></label></div></section>
 <section class="panel"><div class="head"><h2 id="date-title" class="section-title"></h2><span id="shift" class="pill"></span></div><div class="notice" id="shift-note"></div><label class="small" for="shift-input">근무 변경 (선택한 날짜)</label><select id="shift-input"><option value="">미등록</option><option value="A">A · 오픈 09:30~18:30</option><option value="B">B · 마감 13:30~22:30</option><option value="OFF">휴무</option></select></section>
 <section class="panel"><h2 class="section-title">🎯 오늘의 TOP 3</h2><div id="top"></div></section>
 <section class="panel"><div class="head"><h2 class="section-title">📋 전체 체크리스트</h2><span id="count" class="meta"></span></div><div class="progress"><span id="bar"></span></div><div id="tasks"></div><div class="actions"><input type="text" id="newtask" placeholder="추가 업무 입력" aria-label="추가 업무" style="flex:1;min-width:150px"><button class="primary" id="add">추가</button></div></section>
@@ -38,7 +86,7 @@ if(k==="2026-11-22"){add(arr,"samyang","라이트밀 하부장 삼양 보수 접
 return off?arr.filter(x=>["new-rota","clear-prepare","next-workbook","fixtures","waste","o-first","t-all","o-last","expiry-last","expiry-first","clear-register"].includes(x.key)).map(x=>({...x,title:x.title+" · 인계/진행 여부 확인"})):arr}
 function render(){let d=parse(selected),sh=shiftFor(selected),arr=generate(selected).concat((state.extra[selected]||[]).map((t,i)=>({key:"custom-"+i,title:t,priority:2}))),done=state.done[selected]||{};
 document.getElementById("month").textContent=view.getFullYear()+"년 "+(view.getMonth()+1)+"월";let first=new Date(view.getFullYear(),view.getMonth(),1).getDay(),total=monthEnd(view.getFullYear(),view.getMonth()+1),cells="";
-for(let i=0;i<Math.ceil((first+total)/7)*7;i++){let n=i-first+1;if(n<1||n>total){cells+='<div class="day muted"></div>';continue}let k=dateKey(new Date(view.getFullYear(),view.getMonth(),n)),s=shiftFor(k),items=generate(k),count=items.filter(t=>state.done[k]?.[t.key]).length;cells+='<button class="day '+(k===selected?"selected ":"")+(k===dateKey(today)?"today":"")+'" data-date="'+k+'"><b>'+n+'</b><small class="'+(s==="OFF"?"off":"")+'">'+(s==="OFF"?"휴무":s||"—")+'</small><small>'+(items.length?count+"/"+items.length:"")+'</small></button>'}
+for(let i=0;i<Math.ceil((first+total)/7)*7;i++){let n=i-first+1;if(n<1||n>total){cells+='<div class="day muted"></div>';continue}let k=dateKey(new Date(view.getFullYear(),view.getMonth(),n)),s=shiftFor(k),items=generate(k),count=items.filter(t=>state.done[k]?.[t.key]).length;cells+='<button class="day '+(s==="A"?"shift-a ":s==="B"?"shift-b ":s==="OFF"?"shift-off ":"")+(k===selected?"selected ":"")+(k===dateKey(today)?"today":"")+'" data-date="'+k+'" aria-label="'+k+' '+(s==="OFF"?"휴무":s||"근무 미등록")+'"><b>'+n+'</b><small class="shift-label">'+(s==="OFF"?"휴무":s||"—")+'</small>'+(items.length?'<div class="mini-progress"><i style="width:'+(count/items.length*100)+'%"></i></div><small class="completion">'+count+'/'+items.length+'</small>':"")+'</button>'}
 document.getElementById("calendar").innerHTML=cells;document.querySelectorAll("[data-date]").forEach(b=>b.onclick=()=>{selected=b.dataset.date;render()});
 document.getElementById("date-title").textContent=d.getFullYear()+"."+pad(d.getMonth()+1)+"."+pad(d.getDate())+" ("+"일월화수목금토"[d.getDay()]+")";
 document.getElementById("shift").textContent=sh==="A"?"🌞 A 오픈":sh==="B"?"🌙 B 마감":sh==="OFF"?"🌿 휴무":"근무 미등록";
